@@ -1,0 +1,40 @@
+<ion-side-menus enable-menu-with-back-views="false">
+
+    <ion-pane ion-side-menu-content>
+       <ion-nav-bar class="bar-light" id="headerBar">
+               <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+        <ion-nav-back-button>
+      </ion-nav-back-button>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+    </ion-pane>
+
+
+
+
+    <ion-side-menu side="left">
+        <header class="bar bar-header bar-dark">
+
+            <h1 class="title">Your <span class="logoStyle">TuneCoop</span></h1>
+        </header>
+        <ion-content class="has-header">
+            <ion-list>
+                <ion-item nav-clear menu-close ng-click="showFindFriends()">
+                  <i class="ion-person-stalker item-avatar-left"></i>&nbspFind Friends
+                </ion-item>
+                <ion-item nav-clear menu-close ng-click="showFriends()">
+                  <i class="icon ion-ios7-people"></i>&nbspYour Friends
+                </ion-item>
+                <ion-item nav-clear menu-close ng-click="showAccount()">
+                  <i class="icon ion-person"></i>&nbspYour Account
+                </ion-item>
+                <ion-item item-type="item-icon-left" nav-clear menu-close ng-click="logout()">
+                <i class="icon ion-log-out"></i>
+                    Logout
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+
+</ion-side-menus>

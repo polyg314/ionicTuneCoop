@@ -1,0 +1,69 @@
+<ion-view hide-back-button="true">
+
+
+     <div id="artDiv">
+     <div id="overlay">
+        <div class="col-sm-1" id="soundCloudImageLinkDiv">  <a id="soundCloudImageLink" href="" target="_blank"> <img src="https://developers.soundcloud.com/assets/logo_white-8bf7615eb575eeb114fc65323068e1e4.png"></a>
+       </div>
+   
+    <div id="logo">TuneCoop</div>
+<!--     <div ng-hide="user" id="soundCloudLogin">
+        <a ng-click="soundCloudLogin()"><img id="soundCloudConnectButton" src="http://connect.soundcloud.com/2/btn-connect-sc-m.png"></a>
+    </div>
+ -->
+      <div>
+        <div class="col-sm-12" id="player">
+               <div class="row" id="playerButtons">
+                  <button id="officialReverseButton" class="col"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
+                  <button id="officialPlayButton" class="col"><span id="playerPlayButtonGlyphicon" class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
+                  <button id="officialNextButton" class="col"><span class="glyphicon glyphicon-forward" aria-hidden="true" ng-click="practice()"></span></button>
+                  <button id="officialHeartButton" class="col" ng-click="sayHello()"><span class="glyphicon glyphicon-heart favoriteButtons" aria-hidden="true" ></span></button>
+                  <button id="officialDetailsButton" class="col" ng-click="sayHello()"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>
+            <div id="volumeDiv">
+                  <section>   
+                      <span class="tooltip"></span>   
+                      <div id="slider"></div>  
+                      <span class="volume"></span>  
+                  </section>
+            </div> 
+
+            
+         </div> 
+         
+         <div class="col-sm-12" id="progressBarDiv">
+                      <div class="col-sm-3" id="playerSongTitle">OMG THIS IS THE BEST SONG EVER, like, EVERRRR</div>
+            <div id="progressBarTimer">0:00:00 &nbsp&nbsp&nbsp<span id="playerSongUploader">Uploaded by Epic MuthaFuckaa</span>   
+            </div>
+        
+            <div id="progressBarTime">0:00:00</div>
+           <div id="progressbar" class="col-sm-12"></div>
+         </div>
+       </div>
+       </div>
+      </div>
+     </div>
+
+              <iframe id="soundcloud_widget"
+                      src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/12797441&color=111111&show_artwork=true&liking=true&sharing=false&auto_play=false"
+                      width="0px"
+                      height="0px"
+                      frameborder="no">
+              </iframe>
+
+  <div class="tabs-striped" id="mainTabDiv">
+    <div class="tabs">
+      <a class="tab-item active feedTab" href="#/app/feed" ng-click="checkActive('.feedTab')">
+        Song Feed
+      </a>
+      <a class="tab-item favoritesTab" href="#/app/favorites" ng-click="checkActive('.favoritesTab')">
+        Favorites
+      </a>
+      <a class="tab-item searchTab" href="#/app/search" ng-click="checkActive('.searchTab')">
+        Search & Share
+      </a>
+    </div>
+  </div>
+
+  
+
+</ion-view>
