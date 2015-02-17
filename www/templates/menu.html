@@ -1,4 +1,4 @@
-<ion-side-menus enable-menu-with-back-views="false">
+<ion-side-menus enable-menu-with-back-views="t">
 
     <ion-pane ion-side-menu-content>
        <ion-nav-bar class="bar-light" id="headerBar">
@@ -14,19 +14,22 @@
 
 
     <ion-side-menu side="left">
-        <header class="bar bar-header bar-dark">
+<!--         <header class="bar bar-header bar-dark">
 
             <h1 class="title">Your <span class="logoStyle">TuneCoop</span></h1>
         </header>
-        <ion-content class="has-header">
+ -->        <ion-content>
             <ion-list>
-                <ion-item nav-clear menu-close ng-click="showFindFriends()">
+                 <ion-item nav-clear menu-close href="/#/app/home">
+                  <h2 class="title">Your <span class="logoStyle">TuneCoop</span></h2>
+                </ion-item>
+                <ion-item nav-clear menu-close href="/#/app/findFriends">
                   <i class="ion-person-stalker item-avatar-left"></i>&nbspFind Friends
                 </ion-item>
-                <ion-item nav-clear menu-close ng-click="showFriends()">
+                <ion-item nav-clear menu-close href="/#/app/friends">
                   <i class="icon ion-ios7-people"></i>&nbspYour Friends
                 </ion-item>
-                <ion-item nav-clear menu-close ng-click="showAccount()">
+                <ion-item nav-clear menu-close href="/#/app/account">
                   <i class="icon ion-person"></i>&nbspYour Account
                 </ion-item>
                 <ion-item item-type="item-icon-left" nav-clear menu-close ng-click="logout()">

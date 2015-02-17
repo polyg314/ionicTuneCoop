@@ -13,6 +13,8 @@
  -->
       <div>
         <div class="col-sm-12" id="player">
+              <div class="col-sm-3" id="playerSongTitle">OMG THIS IS THE BEST SONG EVER, like, EVERRRR</div>
+              <div id="playerSongUploader">Uploaded by Epic MuthaFuckaa</div>  
                <div class="row" id="playerButtons">
                   <button id="officialReverseButton" class="col"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
                   <button id="officialPlayButton" class="col"><span id="playerPlayButtonGlyphicon" class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
@@ -31,12 +33,10 @@
          </div> 
          
          <div class="col-sm-12" id="progressBarDiv">
-                      <div class="col-sm-3" id="playerSongTitle">OMG THIS IS THE BEST SONG EVER, like, EVERRRR</div>
-            <div id="progressBarTimer">0:00:00 &nbsp&nbsp&nbsp<span id="playerSongUploader">Uploaded by Epic MuthaFuckaa</span>   
-            </div>
-        
+            <div id="progressbar" class="col-sm-12"></div>
+            <div id="progressBarTimer">0:00:00</div>
             <div id="progressBarTime">0:00:00</div>
-           <div id="progressbar" class="col-sm-12"></div>
+           
          </div>
        </div>
        </div>
@@ -49,20 +49,27 @@
                       height="0px"
                       frameborder="no">
               </iframe>
-
+<!-- 
   <div class="tabs-striped" id="mainTabDiv">
-    <div class="tabs">
-      <a class="tab-item active feedTab" href="#/app/feed" ng-click="checkActive('.feedTab')">
+    <div class="tabs" ng-class="{ active:tab.isSet(1) }">
+      <a class="tab-item active feedTab" ng-click="checkActive('.feedTab')">
         Song Feed
       </a>
-      <a class="tab-item favoritesTab" href="#/app/favorites" ng-click="checkActive('.favoritesTab')">
+      <a class="tab-item favoritesTab" ng-click="checkActive('.favoritesTab')">
         Favorites
       </a>
-      <a class="tab-item searchTab" href="#/app/search" ng-click="checkActive('.searchTab')">
+      <a class="tab-item searchTab" g-click="checkActive('.searchTab')">
         Search & Share
       </a>
     </div>
   </div>
+ -->
+
+  <main-tabs></main-tabs>
+
+  <song-feed ng-show="tab.isSet(1)"></song-feed>
+  <favorites ng-show="tab.isSet(2)"></favorites> 
+  <search ng-show="tab.isSet(3)"></search>
 
   
 

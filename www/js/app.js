@@ -1,4 +1,4 @@
-angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers'])
+angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers', 'tab-directives'])
 
     .run(function ($rootScope, $state, $ionicPlatform, $window, OpenFB) {
 
@@ -23,7 +23,7 @@ angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers'])
 
     })
 
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
 
             .state('app', {
@@ -32,6 +32,9 @@ angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers'])
                 templateUrl: "templates/menu.html",
                 controller: "AppCtrl"
             })
+
+
+
 
             .state('app.login', {
                 url: "/login",
@@ -91,6 +94,34 @@ angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers'])
                     }
                 }
             })
+            .state('app.findFriends', {
+                url: "/findFriends",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/findFriends.html",
+                        controller: "HomeCtrl"
+                    }
+                }
+            })
+
+            .state('app.friends', {
+                url: "/friends",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/friends.html",
+                        controller: "HomeCtrl"
+                    }
+            }})
+
+            .state('app.account', {
+                url: "/account",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/account.html",
+                        controller: "HomeCtrl"
+                    }
+            }})
+
             .state('app.home', {
                 url: "/home",
                 views: {
@@ -98,8 +129,7 @@ angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers'])
                         templateUrl: "templates/home.html",
                         controller: "HomeCtrl"
                     }
-                }
-
+            }
 
 
     });
