@@ -85,24 +85,23 @@ angular.module('tunecoop.controllers', [])
 
         $scope.searchSoundCloud= function(){
           var searchString = $('#searchForm').find('input[name="searchString"]').val()
-           SC.initialize({
+          SC.initialize({
             client_id: 'db523f5c45b7bf73b211240583378c16'
             });
-            SC.get('/tracks', { q: searchString, limit: 25 }, function(tracks) {
-              console.log(tracks)
-            // $(tracks).each(function(index, track) {
-            // var identity= track.id;
-            // var art = track.artwork_url;
-            // if(!art){
-            //   art= 'https://upload.wikimedia.org/wikipedia/en/thumb/a/af/Squarepusher_Enstrobia.jpg/220px-Squarepusher_Enstrobia.jpg';
-            // };
-            //   $('#searchResults').append($('<img>',{ class: 'searchImages col-sm-3', src: art})).append($('<div class="searchTexts col-sm-7"></div>').html(track.user.username + '<br>' + '<br>'  + '<span class="searchSongTitle"><strong>' + track.title + '</strong></span>')).append($('<button type="button" class="button addToPlaylist col-sm-1"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></button>').attr({name : track.permalink_url, artwork: track.artwork_url, value: track.user.username, title : track.title})).append($('<button type="button" class="share addToPlaylist col-sm-1"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>').attr({ trackId: track.id,url: track.permalink_url, artwork: track.artwork_url, title : track.title, username : track.user.username})).append($('<button id="searchHeartButton"><span class="glyphicon glyphicon-heart col-sm-1 playlistbuttons searchFavoriteButtons" aria-hidden="true"></span></button>').attr({ trackId: track.id, url: track.permalink_url, artwork: track.artwork_url, title : track.title, username : track.user.username})).append($('<div class="row songSearchRow"></div>'));
-            //    });
+          SC.get('/tracks', { q: searchString, limit: 25 }, function(tracks) {
+              for(i=0; i<tracks.length; i++){
+                if(!tracks[i].artwork_url){
+                  tracks[i].artwork_url= 'https://upload.wikimedia.org/wikipedia/en/thumb/a/af/Squarepusher_Enstrobia.jpg/220px-Squarepusher_Enstrobia.jpg';
+                };
+              }
+              $scope.$apply(function() {
+                $scope.tracks = tracks;
+              });
             });
-
         };
 
     })
+
 
     .controller('LoginCtrl', function ($scope, $location, OpenFB) {
 

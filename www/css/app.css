@@ -308,7 +308,7 @@
   margin: 0 auto;
 	margin-top: -60px;
   margin-left: -2%;
-  width: 105%;
+  width: 104%;
 }
 
 .tabs{
@@ -340,6 +340,34 @@
 
   height: 100%;
   width: 100%;
+}
+
+a.item:after, button.item:after{
+  display: none;
+}
+
+#searchDiv{
+  height: 50%;
+  overflow-y: scroll;
+}
+
+.searchButtons{
+  float: right;
+  background: transparent;
+  border: none;
+  padding: 0px 0px 0px 40px;
+  font-size: 20px;
+  z-index: 10;
+}
+
+/*.searchPlay{
+  margin-top: -20px;
+  font-size: 25px;
+
+}*/
+
+.list{
+  margin-bottom: 0px;
 }
 
 /*.view-container{
