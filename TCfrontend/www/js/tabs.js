@@ -1,6 +1,14 @@
 (function(){
     var app = angular.module('tab-directives', []);
 
+    app.directive("usernameForm", function() {
+      return {
+        restrict: 'E',
+        templateUrl: "templates/username.html",
+        controller: 'AppCtrl'
+      };
+    })
+
     app.directive("songFeed", function() {
       return {
         restrict: 'E',

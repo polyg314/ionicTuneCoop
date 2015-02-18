@@ -2,7 +2,7 @@ angular.module('tunecoop.controllers', [])
 
 
 
-    .controller('AppCtrl', function ($scope, $state, OpenFB, $ionicModal, $timeout) {
+    .controller('AppCtrl', function ($scope, $state, OpenFB, $ionicModal, $timeout, $http) {
 
      $ionicModal.fromTemplateUrl('templates/findFriends.html', {
         scope: $scope, 
@@ -66,8 +66,6 @@ angular.module('tunecoop.controllers', [])
         }
       };
 
-
-
         $scope.logout = function () {
             OpenFB.logout();
             $state.go('app.login');
@@ -100,10 +98,22 @@ angular.module('tunecoop.controllers', [])
             });
         };
 
+        $scope.practice = function(){
+        $http.jsonp('http://localhost:8000/practice').
+          success(function(data, status, headers, config) {
+          var yup = data;
+          console.log(yup)
+          // console.log(data)
+        }).
+        error(function(data, status, headers, config) {
+         console.log(data)
+        });
+        }
+
     })
 
 
-    .controller('LoginCtrl', function ($scope, $location, OpenFB) {
+    .controller('LoginCtrl', function ($scope, $location, OpenFB, $http, $rootScope) {
 
         $scope.facebookLogin = function () {
 
@@ -111,15 +121,26 @@ angular.module('tunecoop.controllers', [])
                 function () {
                     $location.path('/app/person/me/feed');
                  OpenFB.get('/me').success(function (user) {
-                    $scope.user = user;
-                    console.log($scope.user);
+                    $rootScope.user = user;
+                    // console.log($scope.user)
+                    var req = {
+                     method: 'POST',
+                     url: 'http://localhost:8000/login',
+                     headers: {
+                       'Content-Type': "application/json"
+                     },
+                     data: { fbid: $scope.user.id, fullName: $scope.user.first_name + ' ' + $scope.user.last_name, email: $scope.user.email },
+                    }
+                    $http(req).success(function(res){
+                      $rootScope.user.username = res.username;
+                    })
+                    .error(function(res){console.log(res)});
                     });
                 },
                 function () {
                     alert('OpenFB login failed');
-                });
-        };
-
+            });
+        }; 
     })
 
     .controller('ShareCtrl', function ($scope, OpenFB) {
