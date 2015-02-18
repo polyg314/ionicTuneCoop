@@ -61,11 +61,6 @@ app.use(function (req, res, next) {
 
 
 
-
-app.get('/practice', function(req, res){
-  res.send('hey YO whats your Name???')
-})
-
 app.post('/login', function(req, res){
   var fbid= req.body.fbid;
   var fullname= req.body.fullName;
@@ -88,6 +83,20 @@ app.post('/login', function(req, res){
       });
     }
   });
+});
+
+app.post('/updateUsername', function(req, res){
+  var fbid= req.body.fbid;
+  var username = req.body.username;
+  db.query('UPDATE users SET username = $1 WHERE facebookid = $2', [username, fbid], function(err, dbRes){
+    if(!err){
+        db.query('SELECT * FROM users WHERE facebookid = $1', [fbid], function(err, user) {
+          if (user.rows[0]) {
+            res.send(user.rows[0])
+          } 
+      })
+    }
+  })
 });
 
 

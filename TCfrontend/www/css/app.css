@@ -370,6 +370,12 @@ a.item:after, button.item:after{
   margin-bottom: 0px;
 }
 
+#welcomeUsernameDiv{
+  margin-top: 50px;
+  background: url('https://upload.wikimedia.org/wikipedia/en/thumb/a/af/Squarepusher_Enstrobia.jpg/220px-Squarepusher_Enstrobia.jpg');
+  background-size: 32.75%;
+}
+
 /*.view-container{
 	background-color: transparent !important;
 }*/

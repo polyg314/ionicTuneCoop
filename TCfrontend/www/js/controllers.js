@@ -1,8 +1,9 @@
 angular.module('tunecoop.controllers', [])
 
-
-
+  
+  
     .controller('AppCtrl', function ($scope, $state, OpenFB, $ionicModal, $timeout, $http) {
+
 
      $ionicModal.fromTemplateUrl('templates/findFriends.html', {
         scope: $scope, 
@@ -133,6 +134,7 @@ angular.module('tunecoop.controllers', [])
                     }
                     $http(req).success(function(res){
                       $rootScope.user.username = res.username;
+                      $rootScope.user.tcid = res.id;
                     })
                     .error(function(res){console.log(res)});
                     });
@@ -141,6 +143,36 @@ angular.module('tunecoop.controllers', [])
                     alert('OpenFB login failed');
             });
         }; 
+    })
+
+    .controller('UsernameController', function($scope, $rootScope, $http) {
+      // $scope.master = {};
+
+      $scope.update = function(username) {
+        console.log(username)
+            var req = {
+               method: 'POST',
+               url: 'http://localhost:8000/updateUsername',
+               headers: {
+                 'Content-Type': "application/json"
+               },
+               data: { fbid: $rootScope.user.id, username: username },
+              }
+              $http(req).success(function(res){
+                console.log(res);
+                $rootScope.user.username = res.username;
+                $rootScope.user.tcid = res.id;
+                console.log($rootScope.user.username);
+                console.log($rootScope.user.tcid);
+              })
+        // $scope.master = angular.copy(user);
+      };
+
+      // $scope.reset = function() {
+      //   $scope.user = angular.copy($scope.master);
+      // };
+
+      // $scope.reset();
     })
 
     .controller('ShareCtrl', function ($scope, OpenFB) {

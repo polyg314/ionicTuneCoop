@@ -1,6 +1,5 @@
 <ion-view hide-back-button="true">
-  
-  <username-form></username-form>
+
   
   <container ng-show="user.username">
      <div id="artDiv">
@@ -16,7 +15,7 @@
       <div>
         <div class="col-sm-12" id="player">
               <div class="col-sm-3" id="playerSongTitle">OMG THIS IS THE BEST SONG EVER, like, EVERRRR</div>
-              <div id="playerSongUploader">Uploaded by Epic MuthaFuckaa</div>  
+              <div id="playerSongUploader">Epic MuthaFuckaa</div>  
                <div class="row" id="playerButtons">
                   <button id="officialReverseButton" class="col"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
                   <button id="officialPlayButton" class="col"><span id="playerPlayButtonGlyphicon" class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
@@ -75,4 +74,7 @@
 
   
 </container>
+
+  
+  <username-form ng-hide="user.username"></username-form>
 </ion-view>

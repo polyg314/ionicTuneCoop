@@ -1,2 +1,13 @@
 <br><br>
-<h3>Welcome {{user.first_name}}, please pick a username:</h3>
+<div>
+<h3>Welcome {{user.first_name}}, please choose a username:</h3>
+</div>
+
+<div ng-controller="UsernameController">
+  <form novalidate class="simple-form">
+    Username: <input type="text" ng-model="username" /><br />
+    <input type="submit" ng-click="update(username)" value="Save" />
+  </form>
+<!--   <pre>form = {{user | json}}</pre>
+  <pre>master = {{master | json}}</pre> -->
+</div>
