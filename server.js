@@ -105,19 +105,52 @@ app.post('/songFeedAndFavorites', function(req, res){
   var tcid= req.body.tcid;
   console.log(tcid);
   db.query('SELECT DISTINCT songs.trackid, songs.url, songs.title, songs.picurl, songs.uploader, shares.date, shares.isplayed, shares.messages, users.username, shares.id FROM shares INNER JOIN songs ON songs.trackid = shares.trackid INNER JOIN users ON shares.fromuserid = users.id WHERE shares.touserid = $1 ORDER BY date DESC', [tcid], function(err, dbRes){
-    if(!err){
-      console.log(dbRes.row)
+    if(!err){      
       var songFeed = dbRes.rows;     
       db.query('SELECT DISTINCT songs.trackid, songs.url, songs.title, songs.picurl, songs.uploader, favorites.date, favorites.id FROM favorites INNER JOIN songs ON songs.trackid = favorites.favorite_trackid WHERE favorites.userid = $1 ORDER BY date DESC', [tcid], function(err, dbRes){
         var favorites = dbRes.rows;
           if(!err){
-            console.log(dbRes.rows);
-            res.send({songFeed: songFeed, favorites: favorites})
+              db.query('SELECT users.username, users.id FROM users INNER JOIN friends ON friends.user1id = users.id AND friends.user2id = $1 UNION SELECT users.username, users.id FROM users INNER JOIN friends ON friends.user1id = $2 AND friends.user2id = users.id', [tcid, tcid], function(err, dbRes){
+              var friends = dbRes.rows
+                res.send({songFeed: songFeed, favorites: favorites, friends: friends})
+            });            
           }
        });
     }
   });
 });
+
+
+app.post('/favorites', function(req, res){
+  var tcid = req.body.tcid;
+  var trackid = req.body.trackid;
+  var url = req.body.url;
+  var picurl = req.body.picurl;
+  var title = req.body.title; 
+  var uploader = req.body.uploader;
+  var date= new Date();
+  db.query('INSERT INTO songs (trackid, url, picurl, title, uploader) (SELECT $1, $2, $3, $4, $5 WHERE NOT EXISTS (SELECT 1 FROM songs WHERE trackid= $1))', [trackid, url, picurl, title, uploader], function(err, dbRes){   
+    if(!err){
+        db.query('INSERT INTO favorites (userid, favorite_trackid, date) VALUES ($1, $2, $3)', [tcid, trackid, date], function(err, dbRes){   
+        if(!err){
+          db.query('SELECT favorites.id FROM favorites WHERE date = $1', [date], function(err, dbRes){
+            res.send(dbRes.rows[0]);
+          })
+        }
+        });
+      };
+    })
+});
+
+app.delete('/deleteFromFavorites', function(req, res){
+  var id = req.body.id; 
+  db.query('DELETE FROM favorites WHERE id = $1', [id], function(err, dbRes){
+    if(!err){
+      res.send('success!')
+    }
+  });
+});
+
 
 
 

@@ -7,7 +7,7 @@
         <p>{{feedSong.messages}}</p>
         <p class="fromUsername">from&nbsp{{feedSong.username}}</p>
         <button type="button" class="searchButtons"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
-        <button type="button" class="searchButtons"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></button>
+        <heart url="{{ feedSong.url }}" picUrl= "{{ feedSong.picurl }}"  uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}" tcid="{{user.tcid}}" ><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
         <play link="{{ feedSong.url }}" artUrl="{{ feedSong.picurl }}" uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></play>
       </ion-item>
   </div>

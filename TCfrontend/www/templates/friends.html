@@ -1,20 +1,17 @@
-<h3>Omg it's your friends</h3>
-
-
-<!-- <ion-modal-view> -->
-<!-- 
-	add in controller? -->
-<!--   <ion-header-bar class='modals'>
-    <h1 class="title">Friends</h1>
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Omg. Its your friiieeenndsss</h1>
     <div class="buttons">
-      <button class="button button-clear" ng-click="closeFriends()">Home</button>
+      <button class="button button-clear" ng-click="closeFriends()">Close</button>
     </div>
-    <br><br>
-    <h3>Look at all the Frieennndsss you haveee</h3>
   </ion-header-bar>
   <ion-content>
-
+  <div class="yourFriendsDiv">
+    <ion-list>
+      <ion-item ng-repeat="friend in friends | orderBy:'username'">
+        {{friend.username}}
+      </ion-item>
+    </ion-list>
+  </div>
   </ion-content>
 </ion-modal-view>
-
- -->

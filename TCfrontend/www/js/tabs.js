@@ -78,14 +78,100 @@
                            widget.play();
                       });
               };
-              $('#artDiv').css({'background-image' : 'url(' + art + ')'});
-              $('#playerSongTitle').html(title);
-              $('#playerSongUploader').html(uploader);
-              $('#playerPlayButtonGlyphicon').attr("class", "glyphicon glyphicon-pause")
+              jQuery('#artDiv').css({'background-image' : 'url(' + art + ')'});
+              jQuery('#playerSongTitle').html(title);
+              jQuery('#playerSongUploader').html(uploader);
+              jQuery('#playerPlayButtonGlyphicon').attr("class", "glyphicon glyphicon-pause")
               playSelectTrack();
              });
            }
         };
     });
+
+    app.directive('heart', ['$http', '$rootScope', function($http, $rootScope) {
+      return {
+        restrict: 'E',
+        templateUrl: 'templates/heart.html',
+        scope: {
+          trackid: '@',
+          url: '@',
+          picUrl: '@',
+          title: '@',
+          uploader: '@',
+          tcid: '@'
+        },
+        link: function($scope, element, attrs) {
+          element.bind('click', function() {
+            console.log('you clicked a heart!!');
+            console.log(attrs);
+
+              var postToFavorites= function(){
+                  var req = {
+                       method: 'POST',
+                       url: 'http://localhost:8000/favorites',
+                       headers: {
+                         'Content-Type': "application/json"
+                       },
+                       data: { trackid: attrs.trackid, url: attrs.url, picurl: attrs.picurl, title: attrs.title, uploader: attrs.uploader, tcid: attrs.tcid  },
+                      } 
+                  // console.log($rootScope.favorites);
+                    $http(req).success(function(res){
+                        console.log(res.id);
+                        attrs.id = res.id;
+                        var newTrack= attrs;
+                        $rootScope.favorites.unshift(newTrack);
+                        console.log($rootScope.favorites);
+                                          
+                    })
+                  .error(function(res){console.log(res)})         
+                                      
+              };
+              postToFavorites();
+
+             });
+           }
+        };
+    }]);
+
+          app.directive('delete', ['$http', '$rootScope', '$timeout', function($http, $rootScope, $timeout) {
+        return {
+        restrict: 'E',
+        templateUrl: 'templates/delete.html',
+        scope: {
+          favid: '@'
+        },
+        link: function($scope, element, attrs) {
+          element.bind('click', function() {
+            console.log('you clicked delete!!');
+            console.log(attrs);
+
+              var deleteFromFavorites= function(){
+                  var req = {
+                       method: 'DELETE',
+                       url: 'http://localhost:8000/deleteFromFavorites',
+                       headers: {
+                         'Content-Type': "application/json"
+                       },
+                       data: { id: attrs.favid },
+                      } 
+
+                    $http(req).success(function(res){
+                      console.log(res);
+                      for(i=0; i < $rootScope.favorites.length; i++){
+                        if(Number($rootScope.favorites[i].id) === Number(attrs.favid)){
+                               $rootScope.favorites.splice(i, 1);
+                        }
+                      }
+
+                    })
+                    .error(function(res){console.log(res)})         
+                                      
+              };
+              deleteFromFavorites();
+
+             });
+           }
+        };
+    }]);
 
 })();

@@ -302,6 +302,7 @@
       background: transparent;
       color: white;
       font-family: 'PT Sans Narrow', sans-serif;
+      margin-top: -20px;
     }
 
 #mainTabDiv{
@@ -395,3 +396,9 @@ a.item:after, button.item:after{
     pointer-events: auto !important;
 }
 
+.yourFriendsDiv{
+  margin: 10px;
+  margin-top: 50px;
+  height: 500px;
+  overflow-y: scroll;
+}

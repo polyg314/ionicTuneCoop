@@ -143,8 +143,8 @@ angular.module('tunecoop.controllers', [])
                             $scope.$apply(function() {
                               $rootScope.feedSongs= res.songFeed;
                               $rootScope.favorites= res.favorites;
-                              console.log($rootScope.feedSongs);
-                              console.log($rootScope.favorites);
+                              $rootScope.friends = res.friends;
+                              console.log($rootScope.friends);
                             })
                           })   
                         })

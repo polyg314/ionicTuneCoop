@@ -11,7 +11,7 @@
         <h2>{{track.title}}</h2>
         <p>{{track.user.username}}</p>       
         <button type="button" class="searchButtons"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
-        <button type="button" class="searchButtons"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></button>
+        <heart url="{{ track.permalink_url }}" picUrl="{{ track.artwork_url }}" uploader="{{ track.user.username }}" title="{{ track.title }}" trackId="{{ track.id }}" tcid="{{ user.tcid }}"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
         <play link="{{ track.permalink_url }}" artUrl="{{ track.artwork_url }}" uploader="{{ track.user.username }}" title="{{ track.title }}" trackId="{{ track.id }}"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></play>
       </ion-item>
   </div>

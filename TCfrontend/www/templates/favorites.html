@@ -13,7 +13,7 @@
         <h2>{{favorite.title}}</h2>
         <p>{{favorite.uploader}}</p>
         <button type="button" class="searchButtons"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
-        <button type="button" class="searchButtons"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+        <delete favid="{{ favorite.id }}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></delete>
         <play link="{{ favorite.url }}" artUrl="{{ favorite.picurl }}" uploader="{{ favorite.uploader }}" title="{{ favorite.title }}" trackId="{{ favorite.trackid }}"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></play>
       </ion-item>
   </div>
