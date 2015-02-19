@@ -391,14 +391,7 @@ a.item:after, button.item:after{
   padding-top: 10px;
 }
 
-/*.view-container{
-	background-color: transparent !important;
-}*/
+.modal-open .modal, .modal-open .modal-backdrop {
+    pointer-events: auto !important;
+}
 
-/*.pane{
-	margin-top: 0px;
-}*/
-
-/*.modals{
-	height: 500px;
-}*/

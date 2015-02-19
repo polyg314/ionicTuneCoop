@@ -1,5 +1,13 @@
+<div class="col-md-2">
+      <!--Sidebar content-->
+
+      <input placeholder="search" ng-model="query">
+
+</div>
+
+
 <div class="mainDiv">
-  <div class="list" ng-repeat="favorite in favorites">
+  <div class="list" ng-repeat="favorite in favorites | filter:query">
       <ion-item class="item item-thumbnail-left">
         <img class="favoriteImgs" src={{favorite.picurl}}>
         <h2>{{favorite.title}}</h2>
