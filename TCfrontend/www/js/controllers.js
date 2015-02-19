@@ -114,7 +114,7 @@ angular.module('tunecoop.controllers', [])
     })
 
 
-    .controller('LoginCtrl', function ($scope, $location, OpenFB, $http, $rootScope) {
+    .controller('LoginCtrl', function ($scope, $location, OpenFB, $http, $rootScope, $timeout) {
 
         $scope.facebookLogin = function () {
 
@@ -124,26 +124,62 @@ angular.module('tunecoop.controllers', [])
                  OpenFB.get('/me').success(function (user) {
                     $rootScope.user = user;
                     // console.log($scope.user)
-                    var req = {
-                     method: 'POST',
-                     url: 'http://localhost:8000/login',
-                     headers: {
-                       'Content-Type': "application/json"
-                     },
-                     data: { fbid: $scope.user.id, fullName: $scope.user.first_name + ' ' + $scope.user.last_name, email: $scope.user.email },
+                    
+
+                    var getSongFeedAndFavorites= function(){
+                      console.log('but.... ' + $scope.user.tcid);
+                      var req = {
+                           method: 'POST',
+                           url: 'http://localhost:8000/songFeedAndFavorites',
+                           headers: {
+                             'Content-Type': "application/json"
+                           },
+                           data: { tcid: $scope.user.tcid },
+                          }                     
+                        $http(req).success(function(res){
+                          // songFeed = res.songFeed;
+                          // favorites = res.favorites;
+                          $timeout(function() {
+                            $scope.$apply(function() {
+                              $rootScope.feedSongs= res.songFeed;
+                              $rootScope.favorites= res.favorites;
+                              console.log($rootScope.feedSongs);
+                              console.log($rootScope.favorites);
+                            })
+                          })   
+                        })
+                      .error(function(res){console.log(res)})                                       
+                    };
+
+
+                    var getUsername= function(){
+                      var req = {
+                       method: 'POST',
+                       url: 'http://localhost:8000/login',
+                       headers: {
+                         'Content-Type': "application/json"
+                       },
+                       data: { fbid: $scope.user.id, fullName: $scope.user.first_name + ' ' + $scope.user.last_name, email: $scope.user.email },
+                      }
+                      $http(req).success(function(res){
+                        $rootScope.user.username = res.username;
+                        $rootScope.user.tcid = res.id;
+                        var tcid = res.id;
+                        console.log('could it be... ' + tcid);
+                        getSongFeedAndFavorites();
+                      })
+                      .error(function(res){console.log(res)});
                     }
-                    $http(req).success(function(res){
-                      $rootScope.user.username = res.username;
-                      $rootScope.user.tcid = res.id;
+
+                    getUsername();
+
                     })
-                    .error(function(res){console.log(res)});
-                    });
+                  })
                 },
                 function () {
                     alert('OpenFB login failed');
-            });
-        }; 
-    })
+                };
+        })
 
     .controller('UsernameController', function($scope, $rootScope, $http) {
       // $scope.master = {};

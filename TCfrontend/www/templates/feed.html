@@ -1,2 +1,14 @@
-<h3>Your song feed</h3>
-
+<div class="mainDiv">
+  <div class="list" ng-repeat="feedSong in feedSongs">
+      <ion-item class="item item-thumbnail-left">
+        <img class="feedImgs" src={{feedSong.picurl}}>
+        <h2>{{feedSong.title}}</h2>
+        <p>{{feedSong.uploader}}</p>
+        <p>{{feedSong.messages}}</p>
+        <p class="fromUsername">from&nbsp{{feedSong.username}}</p>
+        <button type="button" class="searchButtons"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
+        <button type="button" class="searchButtons"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></button>
+        <play link="{{ feedSong.url }}" artUrl="{{ feedSong.picurl }}" uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></play>
+      </ion-item>
+  </div>
+</div>

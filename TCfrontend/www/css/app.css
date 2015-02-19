@@ -346,7 +346,7 @@ a.item:after, button.item:after{
   display: none;
 }
 
-#searchDiv{
+.mainDiv{
   height: 50%;
   overflow-y: scroll;
 }
@@ -374,6 +374,21 @@ a.item:after, button.item:after{
   margin-top: 50px;
   background: url('https://upload.wikimedia.org/wikipedia/en/thumb/a/af/Squarepusher_Enstrobia.jpg/220px-Squarepusher_Enstrobia.jpg');
   background-size: 32.75%;
+}
+
+.feedImgs{
+  margin-top: 3px;
+  height: 250px !important;
+  width: 250px !important;
+}
+
+.fromUsername{
+  margin-bottom: 0px;
+}
+
+.item-thumbnail-left, .item-thumbnail-left .item-content {
+  padding-left: 100px;
+  padding-top: 10px;
 }
 
 /*.view-container{

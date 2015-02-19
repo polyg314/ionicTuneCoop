@@ -1,1 +1,12 @@
-<h3>Your favorites</h3>
+<div class="mainDiv">
+  <div class="list" ng-repeat="favorite in favorites">
+      <ion-item class="item item-thumbnail-left">
+        <img class="favoriteImgs" src={{favorite.picurl}}>
+        <h2>{{favorite.title}}</h2>
+        <p>{{favorite.uploader}}</p>
+        <button type="button" class="searchButtons"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
+        <button type="button" class="searchButtons"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+        <play link="{{ favorite.url }}" artUrl="{{ favorite.picurl }}" uploader="{{ favorite.uploader }}" title="{{ favorite.title }}" trackId="{{ favorite.trackid }}"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></play>
+      </ion-item>
+  </div>
+</div>

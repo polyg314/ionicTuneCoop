@@ -100,6 +100,28 @@ app.post('/updateUsername', function(req, res){
 });
 
 
+
+app.post('/songFeedAndFavorites', function(req, res){
+  var tcid= req.body.tcid;
+  console.log(tcid);
+  db.query('SELECT DISTINCT songs.trackid, songs.url, songs.title, songs.picurl, songs.uploader, shares.date, shares.isplayed, shares.messages, users.username, shares.id FROM shares INNER JOIN songs ON songs.trackid = shares.trackid INNER JOIN users ON shares.fromuserid = users.id WHERE shares.touserid = $1 ORDER BY date DESC', [tcid], function(err, dbRes){
+    if(!err){
+      console.log(dbRes.row)
+      var songFeed = dbRes.rows;     
+      db.query('SELECT DISTINCT songs.trackid, songs.url, songs.title, songs.picurl, songs.uploader, favorites.date, favorites.id FROM favorites INNER JOIN songs ON songs.trackid = favorites.favorite_trackid WHERE favorites.userid = $1 ORDER BY date DESC', [tcid], function(err, dbRes){
+        var favorites = dbRes.rows;
+          if(!err){
+            console.log(dbRes.rows);
+            res.send({songFeed: songFeed, favorites: favorites})
+          }
+       });
+    }
+  });
+});
+
+
+
+
 app.set('port', process.env.PORT || 8000);
 
 app.listen(app.get('port'), function () {
