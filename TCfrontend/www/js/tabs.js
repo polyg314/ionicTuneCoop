@@ -154,7 +154,6 @@
                        },
                        data: { id: attrs.favid },
                       } 
-
                     $http(req).success(function(res){
                       console.log(res);
                       for(i=0; i < $rootScope.favorites.length; i++){

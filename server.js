@@ -1,3 +1,4 @@
+
 var express        = require('express'),
     bodyParser     = require('body-parser'),
     methodOverride = require('method-override'),
@@ -7,6 +8,8 @@ var express        = require('express'),
     cookieParser   = require('cookie-parser'),
     pg             = require('pg'),
     methodOverride = require('method-override'),
+    soundcloud     = require('soundcloud'),
+    http           = require('http-get'),
     db             = {};
 
 
@@ -58,6 +61,22 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+
+
+app.post('/soundCloudSearch', function(req, resp){
+    var searchString = req.body.searchString;
+    http.get("https://api.soundcloud.com/tracks.json?client_id=db523f5c45b7bf73b211240583378c16&q=" + searchString + "&limit=25", function (err, res) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      if(!err){
+       var tracks = res.buffer;
+       resp.send(tracks);
+      }
+    });   
+});
+
 
 
 

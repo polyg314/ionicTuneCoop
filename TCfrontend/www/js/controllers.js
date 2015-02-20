@@ -82,34 +82,58 @@ angular.module('tunecoop.controllers', [])
                 });
         };
 
+        // $scope.searchSoundCloud= function(){
+        //   var searchString = $('#searchForm').find('input[name="searchString"]').val()
+        //   SC.initialize({
+        //     client_id: 'db523f5c45b7bf73b211240583378c16'
+        //     });
+        //   SC.get('/tracks', { q: searchString, limit: 25 }, function(tracks) {
+        //       for(i=0; i<tracks.length; i++){
+        //         if(!tracks[i].artwork_url){
+        //           tracks[i].artwork_url= 'https://upload.wikimedia.org/wikipedia/en/thumb/a/af/Squarepusher_Enstrobia.jpg/220px-Squarepusher_Enstrobia.jpg';
+        //         };
+        //       }
+        //       $scope.$apply(function() {
+        //         $scope.tracks = tracks;
+        //       });
+        //     });
+        // };
+
         $scope.searchSoundCloud= function(){
           var searchString = $('#searchForm').find('input[name="searchString"]').val()
-          SC.initialize({
-            client_id: 'db523f5c45b7bf73b211240583378c16'
-            });
-          SC.get('/tracks', { q: searchString, limit: 25 }, function(tracks) {
+          var req = {
+               method: 'POST',
+               url: 'http://localhost:8000/soundCloudSearch',
+               headers: {
+                 'Content-Type': "application/json"
+               },
+               data: { searchString: searchString },
+              }                     
+            $http(req).success(function(res){
+              var tracks = res;
               for(i=0; i<tracks.length; i++){
                 if(!tracks[i].artwork_url){
                   tracks[i].artwork_url= 'https://upload.wikimedia.org/wikipedia/en/thumb/a/af/Squarepusher_Enstrobia.jpg/220px-Squarepusher_Enstrobia.jpg';
                 };
               }
-              $scope.$apply(function() {
-                $scope.tracks = tracks;
-              });
-            });
+              $scope.tracks = tracks;
+            })
+          .error(function(res){console.log(res)})                                       
         };
 
-        $scope.practice = function(){
-        $http.jsonp('http://localhost:8000/practice').
-          success(function(data, status, headers, config) {
-          var yup = data;
-          console.log(yup)
-          // console.log(data)
-        }).
-        error(function(data, status, headers, config) {
-         console.log(data)
-        });
-        }
+
+
+        // $scope.practice = function(){
+        // $http.jsonp('http://localhost:8000/practice').
+        //   success(function(data, status, headers, config) {
+        //   var yup = data;
+        //   console.log(yup)
+        //   // console.log(data)
+        // }).
+        // error(function(data, status, headers, config) {
+        //  console.log(data)
+        // });
+        // }
 
     })
 

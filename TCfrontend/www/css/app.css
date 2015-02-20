@@ -57,7 +57,7 @@
 }
 
 #artDiv{
-	padding: 10px;
+	padding: 0px;
 	margin-bottom: 30px;
 	height: 250px;
 	width: 100%;
@@ -307,9 +307,9 @@
 
 #mainTabDiv{
   margin: 0 auto;
-	margin-top: -60px;
-  margin-left: -2%;
-  width: 104%;
+	margin-top: -50px;
+/*  width: 100%;*/
+  padding: 0px;
 }
 
 .tabs{
@@ -317,9 +317,30 @@
   font-size: 18px;
 }
 
-/*.tabs a{
+
+.tabs a{
   color: black;
-}*/
+}
+
+.tabs .active{
+  color: black;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
 
 
 #playerSongTitle{
@@ -401,4 +422,8 @@ a.item:after, button.item:after{
   margin-top: 50px;
   height: 500px;
   overflow-y: scroll;
+}
+
+.tabs-striped .row{
+  padding: 0px !important;
 }
