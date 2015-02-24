@@ -2,7 +2,7 @@ angular.module('tunecoop.controllers', [])
 
   
   
-    .controller('AppCtrl', function ($scope, $state, OpenFB, $ionicModal, $timeout, $http) {
+    .controller('AppCtrl', function ($scope, $state, OpenFB, $ionicModal, $timeout, $http, $rootScope) {
 
 
      $ionicModal.fromTemplateUrl('templates/findFriends.html', {
@@ -24,14 +24,33 @@ angular.module('tunecoop.controllers', [])
         $scope.modal3 = modal;
       });
 
-      // Open the login modal
+      $ionicModal.fromTemplateUrl('templates/share.html', {
+        scope: $scope
+      }).then(function(modal) {
+        $scope.shareModal = modal;
+      });
+
+      $ionicModal.fromTemplateUrl('templates/username.html', {
+        scope: $scope
+      }).then(function(modal) {
+        $scope.usernameModal = modal;
+      });
+
+      $rootScope.showShareForm = function() {
+        $scope.shareModal.show();
+      };
+
+     $rootScope.closeShareForm = function() {
+        $scope.shareModal.hide();
+      };
+
+      // Open the modal
       $scope.showFindFriends= function() {
         $scope.modal.show();
       };
 
       //And close it
      $scope.closeFindFriends = function() {
-        alert('sooo you got me... ')
         $scope.modal.hide();
       };
 
@@ -49,6 +68,14 @@ angular.module('tunecoop.controllers', [])
 
       $scope.closeAccount = function() {
         $scope.modal3.hide();
+      };
+
+      $scope.showUpdateUsername = function(){
+        $scope.usernameModal.show();
+      };
+
+      $scope.hideUpdateUsername = function(){
+        $scope.usernameModal.hide();
       };
 
 
@@ -189,7 +216,9 @@ angular.module('tunecoop.controllers', [])
                         $rootScope.user.username = res.username;
                         $rootScope.user.tcid = res.id;
                         var tcid = res.id;
-                        console.log('could it be... ' + tcid);
+                        if(!res.username){
+                          $scope.showUpdateUsername();
+                        }
                         getSongFeedAndFavorites();
                       })
                       .error(function(res){console.log(res)});
@@ -224,6 +253,7 @@ angular.module('tunecoop.controllers', [])
                 $rootScope.user.tcid = res.id;
                 console.log($rootScope.user.username);
                 console.log($rootScope.user.tcid);
+                $scope.hideUpdateUsername();
               })
         // $scope.master = angular.copy(user);
       };

@@ -133,7 +133,7 @@
         };
     }]);
 
-          app.directive('delete', ['$http', '$rootScope', '$timeout', function($http, $rootScope, $timeout) {
+    app.directive('delete', ['$http', '$rootScope', '$timeout', function($http, $rootScope, $timeout) {
         return {
         restrict: 'E',
         templateUrl: 'templates/delete.html',
@@ -172,5 +172,52 @@
            }
         };
     }]);
+
+    app.directive('shareButton', ['$http', '$rootScope', function($http, $rootScope) {
+      return {
+        restrict: 'E',
+        templateUrl: 'templates/share-button.html',
+        scope: {
+          trackid: '@',
+          url: '@',
+          picUrl: '@',
+          title: '@',
+          uploader: '@'
+        },
+        link: function($scope, element, attrs) {
+          element.bind('click', function() {
+            console.log('you clicked share!');
+            console.log(attrs);
+            $rootScope.showShareForm();
+            jQuery('#shareSongTitle').text(attrs.title);
+
+              // var postToFavorites= function(){
+              //     var req = {
+              //          method: 'POST',
+              //          url: 'http://localhost:8000/favorites',
+              //          headers: {
+              //            'Content-Type': "application/json"
+              //          },
+              //          data: { trackid: attrs.trackid, url: attrs.url, picurl: attrs.picurl, title: attrs.title, uploader: attrs.uploader, tcid: attrs.tcid  },
+              //         } 
+              //     // console.log($rootScope.favorites);
+              //       $http(req).success(function(res){
+              //           console.log(res.id);
+              //           attrs.id = res.id;
+              //           var newTrack= attrs;
+              //           $rootScope.favorites.unshift(newTrack);
+              //           console.log($rootScope.favorites);
+                                          
+              //       })
+              //     .error(function(res){console.log(res)})         
+                                      
+              // };
+              // postToFavorites();
+
+             });
+           }
+        };
+    }]);
+
 
 })();

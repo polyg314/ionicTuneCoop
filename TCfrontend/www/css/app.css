@@ -419,11 +419,66 @@ a.item:after, button.item:after{
 
 .yourFriendsDiv{
   margin: 10px;
-  margin-top: 50px;
-  height: 500px;
+  margin-top: 0px;
+  height: 450px;
   overflow-y: scroll;
+
 }
 
 .tabs-striped .row{
   padding: 0px !important;
 }
+
+#shareForm{
+  background-color: white;
+  border-radius: 5px;
+  padding-bottom: 10px;
+}
+
+#closeShareFormDiv{
+  float: right;
+}
+
+#shareSong{
+  padding: 10px;
+}
+
+#updateUsernameDiv{
+  text-align: center;
+  margin-top: 40%;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  padding-top: 0px;
+}
+
+#updateUsernameDiv input{
+  margin: 0 auto;
+  width: 95%;
+  margin-top: 30px;
+  padding: 20px;
+  border: 1px solid black;
+  font-size: 20px;
+}
+
+/*.shareCheckboxes{
+ border-radius: none !important;
+}*/
+
+/*div.item .item-complex .item-swipeable{
+  background-color: black;
+}*/
+
+#usernameSubmitButton{
+  margin-top: 10px !important;
+  margin-bottom: 30px !important;
+  font-size: 20px;
+  text-align: center;
+  border: none;
+  color: white;
+  background-color: #552bdf;
+  padding: 10px !important;
+}
+
+
+
