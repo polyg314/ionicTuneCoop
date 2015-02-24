@@ -189,30 +189,32 @@
             console.log('you clicked share!');
             console.log(attrs);
             $rootScope.showShareForm();
+            $rootScope.currentShareTrack = attrs.trackid;
             jQuery('#shareSongTitle').text(attrs.title);
 
-              // var postToFavorites= function(){
-              //     var req = {
-              //          method: 'POST',
-              //          url: 'http://localhost:8000/favorites',
-              //          headers: {
-              //            'Content-Type': "application/json"
-              //          },
-              //          data: { trackid: attrs.trackid, url: attrs.url, picurl: attrs.picurl, title: attrs.title, uploader: attrs.uploader, tcid: attrs.tcid  },
-              //         } 
-              //     // console.log($rootScope.favorites);
-              //       $http(req).success(function(res){
-              //           console.log(res.id);
-              //           attrs.id = res.id;
-              //           var newTrack= attrs;
-              //           $rootScope.favorites.unshift(newTrack);
-              //           console.log($rootScope.favorites);
+              var postToSongs= function(){
+                  var req = {
+                       method: 'POST',
+                       url: 'http://localhost:8000/songs',
+                       headers: {
+                         'Content-Type': "application/json"
+                       },
+                       data: { trackid: attrs.trackid, url: attrs.url, picurl: attrs.picurl, title: attrs.title, uploader: attrs.uploader, tcid: attrs.tcid  },
+                      } 
+                  // console.log($rootScope.favorites);
+                    $http(req).success(function(res){
+                        // console.log(res.id);
+                        // attrs.id = res.id;
+                        // var newTrack= attrs;
+                        // $rootScope.favorites.unshift(newTrack);
+                        // console.log($rootScope.favorites);
                                           
-              //       })
-              //     .error(function(res){console.log(res)})         
+                    })
+                  .error(function(res){console.log(res)})         
                                       
-              // };
-              // postToFavorites();
+              };
+              
+              postToSongs();
 
              });
            }

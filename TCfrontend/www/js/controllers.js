@@ -126,7 +126,7 @@ angular.module('tunecoop.controllers', [])
         //     });
         // };
 
-        $scope.searchSoundCloud= function(){
+        $scope.searchSoundCloud = function(){
           var searchString = $('#searchForm').find('input[name="searchString"]').val()
           var req = {
                method: 'POST',
@@ -146,6 +146,55 @@ angular.module('tunecoop.controllers', [])
               $scope.tracks = tracks;
             })
           .error(function(res){console.log(res)})                                       
+        };
+
+        $scope.shareWithFriends = function(){
+          
+
+          var postToShares = function(){
+          var message = $('#shareMessageBox').val();
+          var friendSelection = $scope.selection;
+          console.log(friendSelection);
+              var req = {
+               method: 'POST',
+               url: 'http://localhost:8000/addToShares',
+               headers: {
+                 'Content-Type': "application/json"
+               },
+               data: { message: message, friendSelection: friendSelection, tcid: $rootScope.user.tcid, trackid: $rootScope.currentShareTrack },
+              }
+            $http(req).success(function(res){
+              console.log(res)
+              $('#shareMessageBox').empty();
+              $scope.shareModal.hide();
+              })
+              .error(function(res){console.log(res)});
+            }
+
+          postToShares()
+
+        }
+
+        $scope.selection = [];
+
+         // toggle selection for a given fruit by name
+        $scope.toggleSelection = function toggleSelection(friendId) {
+
+            console.log(friendId);
+          
+            var idx = $scope.selection.indexOf(friendId);
+
+            // is currently selected
+            if (idx > -1) {
+              $scope.selection.splice(idx, 1);
+            }
+
+            // is newly selected
+            else {
+                $scope.selection.push(friendId);
+            }
+
+
         };
 
 
@@ -212,7 +261,7 @@ angular.module('tunecoop.controllers', [])
                        },
                        data: { fbid: $scope.user.id, fullName: $scope.user.first_name + ' ' + $scope.user.last_name, email: $scope.user.email },
                       }
-                      $http(req).success(function(res){
+                    $http(req).success(function(res){
                         $rootScope.user.username = res.username;
                         $rootScope.user.tcid = res.id;
                         var tcid = res.id;

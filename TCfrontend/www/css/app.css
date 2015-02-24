@@ -422,8 +422,13 @@ a.item:after, button.item:after{
   margin-top: 0px;
   height: 450px;
   overflow-y: scroll;
-
+  border-bottom: solid 2px hsl(37,0%,75%);
+  border-left: solid 2px hsl(37,0%,76%);
+  border-right: solid 2px hsl(37,0%,73%);
+  border-top: solid 2px hsl(37,0%,71%);
 }
+
+
 
 .tabs-striped .row{
   padding: 0px !important;
@@ -461,9 +466,6 @@ a.item:after, button.item:after{
   font-size: 20px;
 }
 
-/*.shareCheckboxes{
- border-radius: none !important;
-}*/
 
 /*div.item .item-complex .item-swipeable{
   background-color: black;
@@ -476,9 +478,60 @@ a.item:after, button.item:after{
   text-align: center;
   border: none;
   color: white;
-  background-color: #552bdf;
+  background-color: #8a6de9;
   padding: 10px !important;
 }
 
+
+
+.shareCheckboxes{
+ position: relative !important;
+ float: right !important;
+ margin-top: -15px !important;
+}
+
+
+.insideShareCheckboxes{
+  float: right !important;
+  background-color: #8a6de9 !important;
+  border-radius: 5px;
+}
+
+.insideShareCheckboxes:before{
+  border-radius: none !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.shareFriends{
+  font-size: 20px;
+  padding-left: 10px;
+}
+
+.finalShareButton{
+  margin: 0 auto;
+  margin-top: 20px !important;
+  width: 97% !important;
+}
+
+#shareMessageBox{
+  height: 80px;
+  width: 96%;
+  margin: 0 auto;
+  border: 1px solid hsl(0,0%,55%);
+  font-size: 19px;
+}
+
+.friendsShareDiv{
+  margin: 10px;
+  margin-top: 0px;
+  height: 320px;
+  width: 96%;
+  overflow-y: scroll;
+  border-bottom: solid 2px hsl(37,0%,75%);
+  border-left: solid 2px hsl(37,0%,76%);
+  border-right: solid 2px hsl(37,0%,73%);
+  border-top: solid 2px hsl(37,0%,71%);
+}
 
 

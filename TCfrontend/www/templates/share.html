@@ -2,10 +2,10 @@
   <ion-content>
   <div id="shareForm">
     <div class="buttons" id="closeShareFormDiv" >
-      <button class="button button-clear" ng-click="closeShareForm()">Close</button>
+      <button class="button button-clear" ng-click="closeShareForm()">Cancel</button>
     </div>
-    <h4 id="shareSong" class="title"><strong>Share </strong><span id="shareSongTitle"></span></h4>
-  <div class="yourFriendsDiv">
+    <h4 id="shareSong" class="title"><strong>Share: </strong><span id="shareSongTitle"></span></h4>
+  <div class="friendsShareDiv">
 <!--     <ion-list>
     <ion-item item-checkbox ng-repeat="friend in friends | orderBy:'username'">
         {{friend.username}}
@@ -16,18 +16,26 @@
     </ion-list> -->
 <ul class="list" ng-repeat="friend in friends | orderBy:'username'">
 
-  <li class="item item-checkbox">
-    {{friend.username}}
-     <label class="checkbox shareCheckboxes checkbox-royal">
-       <input type="checkbox">
+  <li class="item item-checkbox shareFriends"> 
+      {{friend.username}}
+       <label class="checkbox shareCheckboxes checkbox-royal">
+          <input
+          type="checkbox"
+          class="insideShareCheckboxes"
+          value= {{friend.id}}
+          ng-checked="selection.indexOf(friend.id) > -1"
+          ng-click="toggleSelection(friend.id)">
      </label>
   </li>
 
 
 </ul>
+  
+
 
   </div>
-    <button class="button button-block button-royal">
+  <textarea rows="2" id="shareMessageBox" name="message" placeholder="write a message (max characters = 80)" maxlength="80"></textarea>
+    <button class="button button-block button-royal finalShareButton" ng-click="shareWithFriends()">
       Share
     </button>
   </div>

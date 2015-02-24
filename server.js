@@ -171,6 +171,37 @@ app.delete('/deleteFromFavorites', function(req, res){
 });
 
 
+app.post('/songs', function(req, res){
+  var trackid = req.body.trackid;
+  var url = req.body.url;
+  var picurl = req.body.picurl;
+  var title = req.body.title; 
+  var uploader = req.body.uploader;
+  db.query('INSERT INTO songs (trackid, url, picurl, title, uploader) (SELECT $1, $2, $3, $4, $5 WHERE NOT EXISTS (SELECT 1 FROM songs WHERE trackid= $1))', [trackid, url, picurl, title, uploader], function(err, dbRes){   
+    if(!err){
+      // console.log('heyooo')
+    }
+  })
+});
+
+
+
+app.post('/addToShares', function(req, res){
+    var touserid = req.body.friendSelection;
+    var trackid = req.body.trackid;
+    var message = req.body.message;
+    var tcid = req.body.tcid;
+    var date= new Date();
+    // console.log(trackid);
+    // console.log(message);
+    // console.log(touserid);
+    // res.send('did it')
+    for (i=0; i<touserid.length; i++){
+      db.query('INSERT INTO shares (fromuserid, touserid, trackid, date, isplayed, messages) VALUES ($1, $2, $3, $4, $5, $6)', [tcid, touserid[i], trackid, date, false, message], function(err, dbRes){    
+    })};
+    res.send('did it');
+});;
+
 
 
 
