@@ -369,6 +369,7 @@ a.item:after, button.item:after{
 }
 
 .mainDiv{
+/*  margin-top: 100px !important;*/
   height: 50%;
   overflow-y: scroll;
 }
@@ -534,4 +535,54 @@ a.item:after, button.item:after{
   border-top: solid 2px hsl(37,0%,71%);
 }
 
+.tabs{ 
+  background-color: white !important;
+}
 
+.tabs p{
+  font-family: 'Limelight', cursive;
+  font-size: 20px;
+}
+
+.onBaby{
+  padding-top: 0px !important;
+/*  background-color: hsl(276, 47%, 95%) !important;*/
+/*  border-bottom: solid 4px hsl(270,0%,95%) !important;*/
+  border-right: solid 3px hsl(270,0%,85%) !important;
+  border-left: solid 3px hsl(270,0%,90%) !important;
+  border-top: solid 3px hsl(270,0%,77%) !important;
+}
+
+/*.onBaby a{
+  color: hsl(276, 45%, 25%)  !important;
+}
+*/
+.offBaby{
+  padding-top: 0px !important;
+  border-top: solid 3px hsl(270,0%,95%) !important;
+  border-right: solid 3px hsl(270,0%,85%) !important;
+  border-left: solid 3px hsl(270,0%,90%) !important;
+  border-bottom: solid 3px hsl(270,0%,77%) !important;
+}
+
+#friendSearchDiv{
+  border-radius: 5px;
+  margin-top: 125px;
+  background-color: white;
+  height: 500px;
+  padding: 10px;
+}
+
+.closeFriendSearch{
+  margin-top: -50px;
+  float: right;
+}
+
+.addFriendButton{
+  float: right;
+}
+
+.friendSearchUsernameDiv{
+  padding-top: 10px;
+  font-size: 20px;
+}

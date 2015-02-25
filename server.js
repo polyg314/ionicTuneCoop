@@ -192,16 +192,58 @@ app.post('/addToShares', function(req, res){
     var message = req.body.message;
     var tcid = req.body.tcid;
     var date= new Date();
-    // console.log(trackid);
-    // console.log(message);
-    // console.log(touserid);
-    // res.send('did it')
     for (i=0; i<touserid.length; i++){
       db.query('INSERT INTO shares (fromuserid, touserid, trackid, date, isplayed, messages) VALUES ($1, $2, $3, $4, $5, $6)', [tcid, touserid[i], trackid, date, false, message], function(err, dbRes){    
     })};
     res.send('did it');
-});;
+});
 
+app.post('/friendSearch', function(req, res){
+    var searchString = req.body.searchString;
+    var tcid = req.body.tcid;
+    db.query('SELECT * FROM users WHERE username = $1', [searchString], function(err, dbRes){
+    if(!err){
+        //exist? 
+        if(dbRes.rowCount > 0){
+            var friendId = dbRes.rows[0].id
+            var friendUsername = dbRes.rows[0].username;
+            console.log(friendId);
+              //friends?
+              db.query('SELECT * from friends WHERE  friends.user1id = $2 AND friends.user2id = $1 OR friends.user1id = $1 AND friends.user2id = $2', [tcid, friendId], function(err, dbRes){                  
+                  if(dbRes.rowCount > 0){
+                  res.send({username: friendUsername + ' is already your friend'});
+                  }
+                  else{
+                    //friend request already sent?
+                    db.query('SELECT * FROM friendrequests WHERE user1Id = $1 AND user2Id = $2', [tcid, friendId], function(err, dbRes){
+                      if(dbRes.rowCount > 0){
+                        res.send({username: 'request already sent to ' + friendUsername})
+                      }
+                      else{
+                        res.send({username: friendUsername, tcid: friendId})
+                      }
+                    })
+                  }          
+              });
+        }      
+        else{
+          res.send({username: 'no such user'});
+        }
+    }
+  })
+});
+
+app.post('/addFriend', function(req, res){
+  var userOne= req.body.tcid; 
+  var userTwo= req.body.ftcid;
+  console.log(userTwo);
+  db.query('INSERT INTO friendRequests (user1id, user2id, viewed) VALUES ($1, $2, $3)',[userOne, userTwo, false], function(err, dbRes){  
+    if(!err){
+      console.log(dbRes)
+      res.send('friend request sent!')
+    }   
+  });
+});
 
 
 

@@ -45,6 +45,30 @@
 
           this.setTab = function(activeTab) {
             this.tab = activeTab;
+            if (activeTab === 1){
+              $('#songFeedTab').removeClass('offBaby');
+              $('#searchTab').removeClass('onBaby');
+              $('#favoriteTab').removeClass('onBaby');
+              $('#songFeedTab').addClass('onBaby');
+              $('#searchTab').addClass('offBaby');
+              $('#favoriteTab').addClass('offBaby');
+            }
+            if (activeTab === 2){
+              $('#songFeedTab').removeClass('onBaby');
+              $('#searchTab').removeClass('onBaby');
+              $('#favoriteTab').removeClass('offBaby');
+              $('#songFeedTab').addClass('offBaby');
+              $('#searchTab').addClass('offBaby');
+              $('#favoriteTab').addClass('onBaby');
+            }
+            if (activeTab === 3){
+              $('#songFeedTab').removeClass('onBaby');
+              $('#searchTab').removeClass('offBaby');
+              $('#favoriteTab').removeClass('onBaby');
+              $('#songFeedTab').addClass('offBaby');
+              $('#searchTab').addClass('onBaby');
+              $('#favoriteTab').addClass('offBaby');
+            }
           };
         },
         controllerAs: "tab"
@@ -215,6 +239,41 @@
               };
               
               postToSongs();
+
+             });
+           }
+        };
+    }]);
+
+    app.directive('addFriend', ['$http', '$rootScope', '$timeout', function($http, $rootScope) {
+        return {
+        restrict: 'E',
+        templateUrl: 'templates/add-friend.html',
+        scope: {
+          ftcid: '@',
+          tcid: '@'
+        },
+        link: function($rootScope, element, attrs) {
+          element.bind('click', function() {
+            console.log(attrs.ftcid);
+            console.log(attrs.tcid);
+
+              var addFriend= function(){
+                  var req = {
+                       method: 'POST',
+                       url: 'http://localhost:8000/addFriend',
+                       headers: {
+                         'Content-Type': "application/json"
+                       },
+                       data: { ftcid: attrs.ftcid, tcid: attrs.tcid },
+                      } 
+                    $http(req).success(function(res){
+                      console.log(res);
+                    })
+                    .error(function(res){console.log(res)})         
+                                      
+              };
+              addFriend();
 
              });
            }

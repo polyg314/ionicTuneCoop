@@ -6,10 +6,10 @@ angular.module('tunecoop.controllers', [])
 
 
      $ionicModal.fromTemplateUrl('templates/findFriends.html', {
-        scope: $scope, 
+        scope: $rootScope, 
         animation: 'slide-in-up'
       }).then(function(modal) {
-        $scope.modal = modal;
+        $rootScope.modal = modal;
       });
 
       $ionicModal.fromTemplateUrl('templates/friends.html', {
@@ -36,6 +36,21 @@ angular.module('tunecoop.controllers', [])
         $scope.usernameModal = modal;
       });
 
+      $ionicModal.fromTemplateUrl('templates/song-info.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function(modal) {
+        $scope.songInfoModal = modal;
+      });
+
+      $rootScope.showSongInfo = function() {
+        $scope.songInfoModal.show();
+      };
+
+     $rootScope.closeSongInfo = function() {
+        $scope.songInfoModal.hide();
+      };
+
       $rootScope.showShareForm = function() {
         $scope.shareModal.show();
       };
@@ -45,13 +60,15 @@ angular.module('tunecoop.controllers', [])
       };
 
       // Open the modal
-      $scope.showFindFriends= function() {
-        $scope.modal.show();
+      $rootScope.showFindFriends= function() {
+        $rootScope.modal.show();
       };
 
       //And close it
-     $scope.closeFindFriends = function() {
-        $scope.modal.hide();
+     $rootScope.closeFindFriends = function() {
+        $rootScope.modal.hide();
+        $rootScope.friendSearch.username = false;
+        
       };
 
       $scope.showFriends = function() {
@@ -126,6 +143,24 @@ angular.module('tunecoop.controllers', [])
         //     });
         // };
 
+        $rootScope.findFriends = function(){
+          var searchString = $('#friendSearchForm').find('input[name="searchString"]').val()
+          var req = {
+               method: 'POST',
+               url: 'http://localhost:8000/friendSearch',
+               headers: {
+                 'Content-Type': "application/json"
+               },
+               data: { searchString: searchString, tcid: $rootScope.user.tcid },
+              }                    
+            $http(req).success(function(res){
+                console.log(res)
+                $rootScope.friendSearch = res;
+            })
+          .error(function(res){console.log(res)})                                       
+        };
+
+
         $scope.searchSoundCloud = function(){
           var searchString = $('#searchForm').find('input[name="searchString"]').val()
           var req = {
@@ -147,6 +182,7 @@ angular.module('tunecoop.controllers', [])
             })
           .error(function(res){console.log(res)})                                       
         };
+
 
         $scope.shareWithFriends = function(){
           

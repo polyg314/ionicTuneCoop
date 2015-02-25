@@ -1,13 +1,13 @@
 
-<div class="tabs-striped row" id="mainTabDiv">
-  <div class="tabs" ng-class="{ active:tab.isSet(1)}">
-    <a href ng-click="tab.setTab(1)">Song Feed</a>
+<div class="row" id="mainTabDiv">
+  <div id="songFeedTab" class="tabs onBaby" ng-class="{ active:tab.isSet(1) }">
+    <p ng-click="tab.setTab(1)">Song Feed</p>
   </div>
-  <div class="tabs" ng-class="{ active:tab.isSet(2) }">
-    <a href ng-click="tab.setTab(2)">Favorites</a>
+  <div id="favoriteTab" class="tabs offBaby" ng-class="{ active:tab.isSet(2) }">
+    <p ng-click="tab.setTab(2)">Favorites</p>
   </div>
-  <div class="tabs" ng-class="{ active:tab.isSet(3) }">
-    <a href ng-click="tab.setTab(3)">Search & Share</a>
+  <div id="searchTab" class="tabs offBaby" ng-class="{ active:tab.isSet(3) }">
+    <p ng-click="tab.setTab(3)">Search</p>
   </div>  
 </div>
 
