@@ -420,13 +420,22 @@ a.item:after, button.item:after{
 
 .yourFriendsDiv{
   margin: 10px;
-  margin-top: 0px;
+  margin-top: 130px;
+  height: 550px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.closeFriendsButton{
+  float: right;
+  margin-top: -50px;
+}
+
+.friendsList{
+  margin-top: 30px;
   height: 450px;
   overflow-y: scroll;
-  border-bottom: solid 2px hsl(37,0%,75%);
-  border-left: solid 2px hsl(37,0%,76%);
-  border-right: solid 2px hsl(37,0%,73%);
-  border-top: solid 2px hsl(37,0%,71%);
 }
 
 
@@ -607,14 +616,13 @@ a.item:after, button.item:after{
 
 #favoritesFilter{
   font-size: 15px;
-  text-align: center;
-  margin-top: 3px;
-  margin-bottom: 3px;
+  margin: 5px;
   border-bottom: solid 3px hsl(37,0%,85%);
   border-left: solid 3px hsl(37,0%,80%);
   border-right: solid 3px hsl(37,0%,80%);
   border-top: solid 2px hsl(37,0%,71%);
-
+  background-color: transparent;
+  text-align: center;
 }
 
 .minusFriendButton{
@@ -623,4 +631,44 @@ a.item:after, button.item:after{
   margin-right: -20px;
 }
 
+.feedDiv{
+  margin-top: 10px;
+}
 
+.filterText{
+  margin-left: 40%;
+}
+
+#searchButton{
+  border: none;
+}
+
+#searchForm{
+  background-color: hsl(0,0%,90%);
+  padding: 2px;
+  margin: 5px;
+  width: 97%;
+}
+
+.accountDiv{
+  height: 550px;
+  background-color: white;
+  margin-top: 130px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.closeAccountButton{
+  float: right;
+  margin-top: -50px;
+}
+
+.saveChangesButton{
+  margin-top: 100px !important;
+}
+
+.deleteAccountButton{
+  position: absolute !important;
+  bottom: 20px;
+  width: 95% !important;
+}

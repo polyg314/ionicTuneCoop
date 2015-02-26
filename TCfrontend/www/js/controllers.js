@@ -300,6 +300,9 @@ angular.module('tunecoop.controllers', [])
                     $http(req).success(function(res){
                         $rootScope.user.username = res.username;
                         $rootScope.user.tcid = res.id;
+                        $rootScope.user.email = res.email;
+                        $rootScope.user.fullName = res.name;
+                        console.log(res);
                         var tcid = res.id;
                         if(!res.username){
                           $scope.showUpdateUsername();

@@ -1,15 +1,17 @@
 <ion-modal-view>
     <ion-content>
-    <h1 class="title">Your Friends</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeFriends()">Close</button>
-    </div>
-  <div class="yourFriendsDiv">
+    <div class="yourFriendsDiv">
+    <h4 class="title">Your Friends</h4>
+      <div class="buttons">
+        <button class="button button-clear closeFriendsButton" ng-click="closeFriends()">Close</button>
+      </div>
+    <div class="friendsList">
     <ion-list>
       <ion-item ng-repeat="friend in friends | orderBy:'username'">
         {{friend.username}}
       </ion-item>
     </ion-list>
+    </div>
   </div>
   </ion-content>
 </ion-modal-view>
