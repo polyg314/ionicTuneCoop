@@ -280,5 +280,89 @@
         };
     }]);
 
+    app.directive('acceptRequest', ['$http', '$rootScope', function($http, $rootScope) {
+      return {
+        restrict: 'E',
+        templateUrl: 'templates/accept-request.html',
+        scope: {
+          ftcid: '@',
+          friendRequestId: '@',
+          username: '@'
+        },
+        link: function($scope, element, attrs) {
+          element.bind('click', function() {
+            var tcid = $rootScope.user.tcid;
+            var ftcid = attrs.ftcid;
+            var friendRequestId = attrs.friendrequestid;
+            var username = attrs.username;
+            var acceptRequest = function(){
+                  var req = {
+                       method: 'POST',
+                       url: 'http://localhost:8000/acceptRequest',
+                       headers: {
+                         'Content-Type': "application/json"
+                       },
+                       data: { ftcid: ftcid, tcid: tcid, friendRequestId: friendRequestId },
+                      } 
+                  // console.log($rootScope.favorites);
+              $http(req).success(function(res){
+                var newFriend = {
+                  id: ftcid,
+                  username: username
+                }
+                $rootScope.friends.push(newFriend);  
+                for(i=0; i<$rootScope.friendRequests.length; i++){
+                  if(Number($rootScope.friendRequests[i].id) === Number(friendRequestId)){
+                     $rootScope.friendRequests.splice(i, 1);
+                  break;
+                  }                 
+                }
+
+              })
+              .error(function(res){console.log(res)})                                              
+              };             
+              acceptRequest();
+             });
+           }
+        };
+    }]);
+
+    app.directive('denyRequest', ['$http', '$rootScope', function($http, $rootScope) {
+      return {
+        restrict: 'E',
+        templateUrl: 'templates/deny-request.html',
+        scope: {
+          friendRequestId: '@'
+        },
+        link: function($scope, element, attrs) {
+          element.bind('click', function() {
+            var friendRequestId = attrs.friendrequestid;
+            var denyRequest = function(){
+                  var req = {
+                       method: 'POST',
+                       url: 'http://localhost:8000/denyRequest',
+                       headers: {
+                         'Content-Type': "application/json"
+                       },
+                       data: { friendRequestId: friendRequestId },
+                      } 
+                  // console.log($rootScope.favorites);
+              $http(req).success(function(res){
+                for(i=0; i<$rootScope.friendRequests.length; i++){
+                  if(Number($rootScope.friendRequests[i].id) === Number(friendRequestId)){
+                     $rootScope.friendRequests.splice(i, 1);
+                  break;
+                  }                 
+                }
+              })
+              .error(function(res){console.log(res)})                                              
+              };   
+              denyRequest();
+             });
+           }
+        };
+    }]);
+
+
 
 })();

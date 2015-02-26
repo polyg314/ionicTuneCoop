@@ -9,9 +9,8 @@
     <ion-list>
       <ion-item ng-repeat="friendRequest in friendRequests | orderBy:'username'">
         {{friendRequest.username}}
-        <button class="minusFriendButton button ion-minus button-assertive" ftcid={{friendRequest.id}}></button>
-        <button class="addFriendButton button ion-plus button-royal" ftcid={{friendRequest.id}}></button>
-
+        <deny-request friendRequestId= {{friendRequest.id}}></deny-request>
+        <accept-request ftcid={{friendRequest.user1id}} friendRequestId= {{friendRequest.id}} username={{friendRequest.username}}></accept-request>
       </ion-item>
     </ion-list>
   </div>

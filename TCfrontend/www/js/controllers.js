@@ -247,20 +247,6 @@ angular.module('tunecoop.controllers', [])
 
         };
 
-
-
-        // $scope.practice = function(){
-        // $http.jsonp('http://localhost:8000/practice').
-        //   success(function(data, status, headers, config) {
-        //   var yup = data;
-        //   console.log(yup)
-        //   // console.log(data)
-        // }).
-        // error(function(data, status, headers, config) {
-        //  console.log(data)
-        // });
-        // }
-
     })
 
 

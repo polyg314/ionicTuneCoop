@@ -12,7 +12,6 @@
 
 
 
-
     <ion-side-menu side="left">
 <!--         <header class="bar bar-header bar-dark">
 
@@ -23,8 +22,8 @@
                  <ion-item nav-clear menu-close href="/#/app/home">
                   <h2 class="title">Your <span class="logoStyle">TuneCoop</span></h2>
                 </ion-item>
-                <ion-item nav-clear menu-close ng-click="showFriendRequests()">
-                  <i class="ion-person-add item-avatar-left"></i>&nbspFriend Requests
+                <ion-item nav-clear menu-close ng-show="friendRequests" ng-click="showFriendRequests()">
+                  <i class="ion-person-add item-avatar-left"></i>&nbspFriend Requests<span class="badge badge-royal">{{friendRequests.length}}</span>
                 </ion-item>
 <!--                 <ion-item nav-clear menu-close href="/#/app/findFriends"> -->
                  <ion-item nav-clear menu-close ng-click="showFindFriends()">

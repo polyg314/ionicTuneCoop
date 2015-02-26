@@ -258,20 +258,28 @@ app.post('/addFriend', function(req, res){
 // })
 
 // // /friends
-// app.post('/confirmRequest', function(req, res){
-//   var userOne= req.user.id; 
-//   var userTwo= req.body.friendId;
-//   var friendRequestId= req.body.friendRequestId;
-//   db.query('INSERT INTO friends (user1id, user2id) VALUES ($1, $2)', [userOne, userTwo], function(err, dbRes){      
-//   });
-// });
+app.post('/acceptRequest', function(req, res){
+  var userOne= req.body.tcid; 
+  var userTwo= req.body.ftcid;
+  var friendRequestId= req.body.friendRequestId;
+  console.log(friendRequestId);
+  db.query('INSERT INTO friends (user1id, user2id) VALUES ($1, $2)', [userOne, userTwo], function(err, dbRes){      
+      if(!err){
+        db.query('UPDATE friendRequests SET viewed = $1 WHERE id = $2', [true, friendRequestId], function(err, dbRes){      
+          res.send('success!')
+        });
+      }
+  });
+});
 
 // // friendrequests/:id
-// app.patch('/removeRequest', function(req, res){
-//   var friendRequestId = req.body.friendRequestId;
-//   db.query('UPDATE friendRequests SET viewed = $1 WHERE id = $2', [true, friendRequestId], function(err, dbRes){      
-//   });
-// });
+app.post('/denyRequest', function(req, res){
+  var friendRequestId = req.body.friendRequestId;
+  console.log(friendRequestId);
+    db.query('UPDATE friendRequests SET viewed = $1 WHERE id = $2', [true, friendRequestId], function(err, dbRes){
+      res.send('deniieeddd');
+  });
+});
 
 
 
