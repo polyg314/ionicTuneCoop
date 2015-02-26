@@ -131,7 +131,12 @@ app.post('/songFeedAndFavorites', function(req, res){
           if(!err){
               db.query('SELECT users.username, users.id FROM users INNER JOIN friends ON friends.user1id = users.id AND friends.user2id = $1 UNION SELECT users.username, users.id FROM users INNER JOIN friends ON friends.user1id = $2 AND friends.user2id = users.id', [tcid, tcid], function(err, dbRes){
               var friends = dbRes.rows
-                res.send({songFeed: songFeed, favorites: favorites, friends: friends})
+              if(!err){
+                db.query('SELECT friendRequests.id, users.username, friendRequests.user1id FROM users INNER JOIN friendRequests ON users.id = friendRequests.user1id AND friendRequests.user2id = $1 AND friendRequests.viewed = $2', [tcid, false], function(err, dbRes){
+                  var friendRequests = dbRes.rows
+                  res.send({songFeed: songFeed, favorites: favorites, friends: friends, friendRequests : friendRequests});
+                });               
+              }
             });            
           }
        });
@@ -244,6 +249,29 @@ app.post('/addFriend', function(req, res){
     }   
   });
 });
+
+
+// app.get('/showFriendRequests', function(req, res){
+//   db.query('SELECT friendRequests.id, users.username, friendRequests.user1id FROM users INNER JOIN friendRequests ON users.id = friendRequests.user1id AND friendRequests.user2id = $1 AND friendRequests.viewed = $2', [req.user.id, false], function(err, dbRes){
+//     res.send({friendRequestUsers : dbRes.rows})
+//   });
+// })
+
+// // /friends
+// app.post('/confirmRequest', function(req, res){
+//   var userOne= req.user.id; 
+//   var userTwo= req.body.friendId;
+//   var friendRequestId= req.body.friendRequestId;
+//   db.query('INSERT INTO friends (user1id, user2id) VALUES ($1, $2)', [userOne, userTwo], function(err, dbRes){      
+//   });
+// });
+
+// // friendrequests/:id
+// app.patch('/removeRequest', function(req, res){
+//   var friendRequestId = req.body.friendRequestId;
+//   db.query('UPDATE friendRequests SET viewed = $1 WHERE id = $2', [true, friendRequestId], function(err, dbRes){      
+//   });
+// });
 
 
 

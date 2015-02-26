@@ -43,6 +43,20 @@ angular.module('tunecoop.controllers', [])
         $scope.songInfoModal = modal;
       });
 
+      $ionicModal.fromTemplateUrl('templates/friend-requests.html', {
+        scope: $scope
+      }).then(function(modal) {
+        $scope.friendRequestModal = modal;
+      });
+
+      $rootScope.showFriendRequests = function() {
+        $scope.friendRequestModal.show();
+      };
+
+     $rootScope.closeFriendRequests = function() {
+        $scope.friendRequestModal.hide();
+      };
+
       $rootScope.showSongInfo = function() {
         $scope.songInfoModal.show();
       };
@@ -280,7 +294,7 @@ angular.module('tunecoop.controllers', [])
                               $rootScope.feedSongs= res.songFeed;
                               $rootScope.favorites= res.favorites;
                               $rootScope.friends = res.friends;
-                              console.log($rootScope.friends);
+                              $rootScope.friendRequests = res.friendRequests;
                             })
                           })   
                         })

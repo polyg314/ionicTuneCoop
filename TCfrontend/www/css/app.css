@@ -586,3 +586,41 @@ a.item:after, button.item:after{
   padding-top: 10px;
   font-size: 20px;
 }
+
+.menuContent{
+  margin-top: 50px !important;
+}
+
+.friendRequestsDiv{
+  margin-top: 80px;
+  padding: 10px;
+  height: 450px;
+  border-radius: 5px;
+  background-color: white;
+  overflow-y: scroll;
+}
+
+.closeFriendRequests{
+  float: right;
+  margin-top: -50px;
+}
+
+#favoritesFilter{
+  font-size: 15px;
+  text-align: center;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  border-bottom: solid 3px hsl(37,0%,85%);
+  border-left: solid 3px hsl(37,0%,80%);
+  border-right: solid 3px hsl(37,0%,80%);
+  border-top: solid 2px hsl(37,0%,71%);
+
+}
+
+.minusFriendButton{
+  float: right;
+  margin-left: 20px;
+  margin-right: -20px;
+}
+
+
