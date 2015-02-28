@@ -1,17 +1,22 @@
 <ion-modal-view>
     <ion-content>
     <div class="yourFriendsDiv">
-    <h4 class="title">Your Friends</h4>
+    <h3 class="title">Your Friends</h3>
       <div class="buttons">
         <button class="button button-clear closeFriendsButton" ng-click="closeFriends()">Close</button>
       </div>
     <div class="friendsList">
     <ion-list>
       <ion-item ng-repeat="friend in friends | orderBy:'username'">
-        {{friend.username}}
+        <span class="friendsUsernames"> {{friend.username}} </span>
+        <delete-friend ng-show="editFriends" friendshipid={{friend.id}} username={{friend.username}}></delete-friend>
       </ion-item>
+
     </ion-list>
     </div>
+    <button class="button button-block button-energized editFriendsButton" ng-click="toggleEditFriends()">
+        Edit
+    </button>
   </div>
   </ion-content>
 </ion-modal-view>

@@ -75,38 +75,38 @@
       };
     });
 
-    app.directive('play', function() {
+    app.directive('play', function($rootScope) {
       return {
         restrict: 'E',
         templateUrl: 'templates/play.html',
         scope: {
           link: '@',
-          artUrl: '@',
+          arturl: '@',
           uploader: '@',
           title: '@',
-          trackId: '@'
+          trackid: '@',
+          playlist: '@',
+          id: '@'
         },
         link: function(scope, element, attrs) {
           element.bind('click', function() {
-            console.log('you clicked me!');
-            console.log(attrs.arturl)
+              var thisTrack = {
+                title : attrs.title,
+                uploader : attrs.uploader,
+                url : attrs.link,
+                playlist : attrs.playlist,
+                id : attrs.id,
+                picurl: attrs.arturl,
+                trackid: attrs.trackid
+              }
 
-              var widget = SC.Widget(document.getElementById('soundcloud_widget'));
-              var song= attrs.link + '&theme_color=0e0e15&color=0e0e15&show_artwork=true&liking=false&sharing=false&auto_play=false';
-              var art= attrs.arturl;
-              var title = attrs.title;
-              var uploader= attrs.uploader;
-              var playSelectTrack= function(){
-                    widget.load(song);
-                    widget.bind(SC.Widget.Events.READY, function(){
-                           widget.play();
-                      });
-              };
-              jQuery('#artDiv').css({'background-image' : 'url(' + art + ')'});
-              jQuery('#playerSongTitle').html(title);
-              jQuery('#playerSongUploader').html(uploader);
-              jQuery('#playerPlayButtonGlyphicon').attr("class", "glyphicon glyphicon-pause")
-              playSelectTrack();
+              $rootScope.$apply(function() {
+                $rootScope.currentSong = thisTrack;
+                console.log($rootScope.currentSong);
+              })
+
+              playSong();
+
              });
            }
         };
@@ -126,8 +126,8 @@
         },
         link: function($scope, element, attrs) {
           element.bind('click', function() {
-            console.log('you clicked a heart!!');
             console.log(attrs);
+            var newTrack = attrs;
 
               var postToFavorites= function(){
                   var req = {
@@ -141,8 +141,8 @@
                   // console.log($rootScope.favorites);
                     $http(req).success(function(res){
                         console.log(res.id);
-                        attrs.id = res.id;
-                        var newTrack= attrs;
+                        newTrack.id = res.id;
+
                         $rootScope.favorites.unshift(newTrack);
                         console.log($rootScope.favorites);
                                           
@@ -358,6 +358,48 @@
               .error(function(res){console.log(res)})                                              
               };   
               denyRequest();
+             });
+           }
+        };
+    }]);
+
+    app.directive('deleteFriend', ['$http', '$rootScope', function($http, $rootScope) {
+      return {
+        restrict: 'E',
+        templateUrl: 'templates/delete-friend.html',
+        scope: {
+          friendshipid: '@',
+          username: '@'
+        },
+        link: function($scope, element, attrs) {
+          element.bind('click', function() {
+
+            $rootScope.friendDelete.username = attrs.username;
+            $rootScope.friendDelete.friendshipid = attrs.friendshipid;
+            $rootScope.showConfirmDelete();
+
+            // var friendRequestId = attrs.friendrequestid;
+            // var denyRequest = function(){
+            //       var req = {
+            //            method: 'POST',
+            //            url: 'http://localhost:8000/denyRequest',
+            //            headers: {
+            //              'Content-Type': "application/json"
+            //            },
+            //            data: { friendRequestId: friendRequestId },
+            //           } 
+            //       // console.log($rootScope.favorites);
+            //   $http(req).success(function(res){
+            //     for(i=0; i<$rootScope.friendRequests.length; i++){
+            //       if(Number($rootScope.friendRequests[i].id) === Number(friendRequestId)){
+            //          $rootScope.friendRequests.splice(i, 1);
+            //       break;
+            //       }                 
+            //     }
+            //   })
+            //   .error(function(res){console.log(res)})                                              
+            //   };   
+            //   denyRequest();
              });
            }
         };

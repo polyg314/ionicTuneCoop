@@ -1,0 +1,14 @@
+<ion-modal-view >
+  <ion-content>
+    <div id="confirmDeleteModal">
+      <h3>Are you sure want to remove {{friendDelete.username}} from your friends?</h3>
+      <button ng-click="hideConfirmDelete()" class="button button-light">
+        Cancel
+      </button>
+      <button ng-click="confirmDeleteFriend()" class="button button-assertive">
+        Confirm
+      </button>
+
+    </div>
+  </ion-content>
+</ion-modal-view>

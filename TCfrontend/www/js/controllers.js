@@ -2,7 +2,162 @@ angular.module('tunecoop.controllers', [])
 
   
   
-    .controller('AppCtrl', function ($scope, $state, OpenFB, $ionicModal, $timeout, $http, $rootScope) {
+    .controller('AppCtrl', function ($scope, $state, OpenFB, $ionicModal, $timeout, $http, $rootScope, $ionicPopup) {
+
+      //player/playlist functions
+      
+
+
+      playSong = function(){
+          jQuery('#artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
+          widget = SC.Widget(document.getElementById('soundcloud_widget'));
+
+          widget.load($rootScope.currentSong.url + '&auto_play=false') ;
+          widget.bind(SC.Widget.Events.READY, function(){
+              widget.play();
+              $rootScope.playing = true;
+          });
+          widget.bind(SC.Widget.Events.FINISH, function(){
+              if($rootScope.currentSong.playlist === 'songFeed' || $rootScope.currentSong.playlist === 'favorites'){
+                playNext();
+              }
+          });
+      };
+
+      playNext = function(){
+        var nextTrack = findNextSong();
+        if(nextTrack){
+          $rootScope.previousSong = $rootScope.currentSong;
+          $timeout(function(){
+            $scope.$apply(function(){
+              $rootScope.currentSong = nextTrack;
+            })
+           playSong();
+          });
+        }
+        else{
+          $rootScope.playing = false;
+        }
+      };
+
+      findNextSong = function(){
+        if ($rootScope.currentSong.playlist === 'songFeed'){
+          for(i = 0; i<$rootScope.feedSongs.length; i++){
+            if (Number($rootScope.feedSongs[i].id) === Number($rootScope.currentSong.id)){
+              if($rootScope.feedSongs[i + 1]){
+                $rootScope.feedSongs[i + 1].playlist = 'songFeed';
+                return $rootScope.feedSongs[i + 1];
+              }
+              else{
+                return null;
+              }
+            }
+          }
+        };
+        if ($rootScope.currentSong.playlist === 'favorites'){
+          for(i = 0; i<$rootScope.favorites.length; i++){
+            if (Number($rootScope.favorites[i].id) === Number($rootScope.currentSong.id)){
+              if($rootScope.favorites[i + 1]){
+                $rootScope.favorites[i + 1].playlist = 'favorites';
+                return $rootScope.favorites[i + 1];
+              }
+              else{
+                return null;
+              }
+            }
+          }
+        }
+      };
+
+      findPrevSong = function(){
+        if ($rootScope.currentSong.playlist === 'songFeed'){
+          for(i = 0; i<$rootScope.feedSongs.length; i++){
+            if (Number($rootScope.feedSongs[i].id) === Number($rootScope.currentSong.id)){
+              if($rootScope.feedSongs[i - 1]){
+                $rootScope.feedSongs[i - 1].playlist = 'songFeed';
+                return $rootScope.feedSongs[i - 1];
+              }
+              else{
+                return null;
+              }
+            }
+          }
+        }
+        if ($rootScope.currentSong.playlist === 'favorites'){
+          for(i = 0; i<$rootScope.favorites.length; i++){
+            if (Number($rootScope.favorites[i].id) === Number($rootScope.currentSong.id)){
+              if($rootScope.favorites[i - 1]){
+                $rootScope.favorites[i - 1].playlist = 'favorites';
+                return $rootScope.favorites[i - 1];
+              }
+              else{
+                return null;
+              }
+            }
+          }
+        }
+      };
+
+      $scope.skipToNextSong = function(){
+          playNext();
+      };
+
+      $scope.reverseButtonFunction = function(){
+        widget.getPosition(function(position){
+          if(position > 15000){
+            widget.seekTo(0)
+          }
+          else{
+            var prevTrack = findPrevSong();
+            if(prevTrack){
+            $timeout(function(){
+              $scope.$apply(function(){
+                $rootScope.currentSong = prevTrack;
+              })
+              playSong();
+            });            
+            }
+          }
+        });
+      };
+
+      var firstPlayed = false;
+
+
+      $scope.playCurrentTrack = function(){
+        if(!firstPlayed){
+          playSong()
+          $rootScope.playing = true;
+          firstPlayed = true;
+        }
+        else{
+        widget.play();
+        $rootScope.playing = true;
+        }
+      };
+
+      $scope.pauseCurrentTrack = function(){
+        widget.pause();
+        $rootScope.playing = false;
+      }
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
      $ionicModal.fromTemplateUrl('templates/findFriends.html', {
@@ -47,6 +202,12 @@ angular.module('tunecoop.controllers', [])
         scope: $scope
       }).then(function(modal) {
         $scope.friendRequestModal = modal;
+      });
+
+      $ionicModal.fromTemplateUrl('templates/confirm-delete.html', {
+        scope: $scope
+      }).then(function(modal) {
+        $scope.confirmDeleteModal = modal;
       });
 
       $rootScope.showFriendRequests = function() {
@@ -109,6 +270,45 @@ angular.module('tunecoop.controllers', [])
         $scope.usernameModal.hide();
       };
 
+      $rootScope.friendDelete = {};
+
+      $rootScope.showConfirmDelete = function() {
+        $scope.confirmDeleteModal.show();
+     };
+
+
+     $rootScope.hideConfirmDelete = function(){
+       $scope.confirmDeleteModal.hide();
+     }
+
+     $rootScope.confirmDeleteFriend = function(){
+        var friendId = $rootScope.friendDelete.friendshipid;
+        var tcid = $rootScope.user.tcid;
+        var deleteFromFriends= function(){
+
+                  var req = {
+                       method: 'DELETE',
+                       url: 'http://localhost:8000/deleteFromFriends',
+                       headers: {
+                         'Content-Type': "application/json"
+                       },
+                       data: { friendId: friendId, tcid: tcid },
+                      } 
+                    $http(req).success(function(res){
+                      console.log(res);
+                      for(i=0; i < $rootScope.friends.length; i++){
+                        if(Number($rootScope.friends[i].id) === Number(friendId)){
+                               $rootScope.friends.splice(i, 1);
+                               $rootScope.hideConfirmDelete();
+                               return
+                        }                        
+                      }
+                    })
+                    .error(function(res){console.log(res)})                                               
+        };
+        deleteFromFriends();
+    }
+
 
       $scope.checkActive= function(whatever) {
         if(!($(whatever).hasClass('active'))){
@@ -140,6 +340,7 @@ angular.module('tunecoop.controllers', [])
                 });
         };
 
+
         // $scope.searchSoundCloud= function(){
         //   var searchString = $('#searchForm').find('input[name="searchString"]').val()
         //   SC.initialize({
@@ -157,6 +358,7 @@ angular.module('tunecoop.controllers', [])
         //     });
         // };
 
+
         $rootScope.findFriends = function(){
           var searchString = $('#friendSearchForm').find('input[name="searchString"]').val()
           var req = {
@@ -173,6 +375,16 @@ angular.module('tunecoop.controllers', [])
             })
           .error(function(res){console.log(res)})                                       
         };
+
+
+        $rootScope.toggleEditFriends = function(){
+          if(!$rootScope.editFriends){
+            $rootScope.editFriends = true;
+          }
+          else{
+            $rootScope.editFriends = false;
+          }
+        }
 
 
         $scope.searchSoundCloud = function(){
@@ -281,6 +493,11 @@ angular.module('tunecoop.controllers', [])
                               $rootScope.favorites= res.favorites;
                               $rootScope.friends = res.friends;
                               $rootScope.friendRequests = res.friendRequests;
+                              $rootScope.feedSongs[0].playlist = "songFeed"
+                              $rootScope.currentSong = $rootScope.feedSongs[0];
+                              widget = SC.Widget(document.getElementById('soundcloud_widget'));
+                              widget.load($rootScope.currentSong.url + '&auto_play=false') 
+                              jQuery('#artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
                             })
                           })   
                         })

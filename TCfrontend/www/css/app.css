@@ -232,11 +232,25 @@
   padding-left: 0px;
 }
 
-#officialHeartButton{
+#officialPauseButton{
   background: transparent;
   border: none;
   font-size: 20px;
   padding-left: 0px;
+}
+
+#officialHeartButton{
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  padding-left: 0px !important;
+}
+
+
+#officialHeartButton button{
+  margin-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 #officialDetailsButton{
@@ -434,7 +448,7 @@ a.item:after, button.item:after{
 
 .friendsList{
   margin-top: 30px;
-  height: 450px;
+  height: 400px;
   overflow-y: scroll;
 }
 
@@ -664,11 +678,34 @@ a.item:after, button.item:after{
 }
 
 .saveChangesButton{
-  margin-top: 100px !important;
+  margin-top: 70px !important;
 }
 
 .deleteAccountButton{
   position: absolute !important;
-  bottom: 20px;
+  bottom: 50px;
   width: 95% !important;
+}
+
+.unfriendButtons{
+  float: right;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.editFriendsButton{
+  margin: 0 auto;
+  margin-top: 15px;
+}
+
+.friendsUsernames{
+  font-size: 25px;
+}
+
+#confirmDeleteModal{
+  margin-top: 200px;
+  background-color: white;
+  text-align: center;
+  padding: 20px;
+  border-radius: 5px;
 }

@@ -176,6 +176,22 @@ app.delete('/deleteFromFavorites', function(req, res){
 });
 
 
+app.delete('/deleteFromFriends', function(req, res){
+  var tcid = req.body.tcid;
+  var friendId = req.body.friendId;
+  db.query('DELETE FROM friends WHERE user1id = $1 AND user2id = $2', [tcid, friendId], function(err, dbRes){
+    console.log(dbRes);
+    if(!err){
+        db.query('DELETE FROM friends WHERE user1id = $2 AND user2id = $1', [tcid, friendId], function(err, dbRes){
+          console.log(dbRes);
+          if(!err){
+            res.send('friend be gone!')
+          }
+        })
+    }
+  });
+});
+
 app.post('/songs', function(req, res){
   var trackid = req.body.trackid;
   var url = req.body.url;
