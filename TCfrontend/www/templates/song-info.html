@@ -7,21 +7,32 @@
 			    <div class="buttons closeSongInfo">
 			      <button class="button button-clear" ng-click="closeSongInfo()">Close</button>
 			    </div>
-			    <h2>Pretty Hate Machine</h2>
+			    <h2>{{currentSong.title}}</h2>
 
-			    <p>Nine Inch Nails</p>
+			    <p>{{currentSong.uploader}}</p>
 			  </div>
 
 			  <div class="item item-image">
-			    <img src="cover.jpg">
+			    <img src={{currentSong.picurl}}>
 			  </div>
 
-			  <a class="item item-icon-left assertive" href="#">
-			    <i class="icon ion-music-note"></i>
-			    Volume
-			  </a>
+		<label>volume: <input ng-change="setVolume(volume)" min="0" max="1" value=".8" step="0.01" type="range" ng-model="volume" /></label>
+		{{volume}}
 
 		</div>
+<!-- 
+	<div class="sliderExample"><a name="ex1"></a>
+		<strong>Step slider with event listeners (see console log)</strong>
+		<div ui-slider min="0" max="200" ng-model="demoVals.sliderExample1"></div>
+		<input type="text" ng-model="demoVals.sliderExample1" />	
+	</div>
+       -->
+  <!-- </div> -->
+  
+<!-- </div>
+    </div> -->
+
+
 
   </ion-content>
 </ion-modal-view>

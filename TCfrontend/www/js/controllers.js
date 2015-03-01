@@ -7,13 +7,13 @@ angular.module('tunecoop.controllers', [])
       //player/playlist functions
       
 
-
       playSong = function(){
           jQuery('#artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
           widget = SC.Widget(document.getElementById('soundcloud_widget'));
 
           widget.load($rootScope.currentSong.url + '&auto_play=false') ;
           widget.bind(SC.Widget.Events.READY, function(){
+              widget.setVolume($scope.volume)
               widget.play();
               $rootScope.playing = true;
           });
@@ -121,14 +121,15 @@ angular.module('tunecoop.controllers', [])
         });
       };
 
-      var firstPlayed = false;
+
+      $rootScope.firstPlayed = false;
 
 
       $scope.playCurrentTrack = function(){
-        if(!firstPlayed){
+        if(!$rootScope.firstPlayed){
           playSong()
           $rootScope.playing = true;
-          firstPlayed = true;
+          $rootScope.firstPlayed = true;
         }
         else{
         widget.play();
@@ -141,24 +142,17 @@ angular.module('tunecoop.controllers', [])
         $rootScope.playing = false;
       }
       
+      $scope.volume = .9;
 
 
 
+      $scope.setVolume = function(volume){
+        $scope.volume = volume; 
+        widget.setVolume(volume);
+      }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //modals
 
      $ionicModal.fromTemplateUrl('templates/findFriends.html', {
         scope: $rootScope, 

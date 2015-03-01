@@ -106,6 +106,7 @@
               })
 
               playSong();
+              $rootScope.firstPlayed = true;
 
              });
            }
@@ -404,6 +405,48 @@
            }
         };
     }]);
+
+    // app.directive('volumeSlider', function() {
+    // return{
+    // restrict: 'E',
+    // require: 'ngModel',
+    // replace: true,
+    // scope: {
+    //   volume: '=ngModel'
+    // }, //isolate the scope
+    // template: '<label>volume: <input min="0" max="1" step="0.01" type="range" ng-model="player.volume" /></label>',
+    // link: function(scope, elem, attrs, ctrl) {
+    //   // console.log(scope.volume)
+    //      // get the value from ngModel
+    //      // scope.player.volume = ctrl.$viewValue;
+    //      // $scope.volume = ctrl.volume;
+
+
+    //     //  elem.on('change', function () {
+    //     //   console.log('hi')
+    //     //   console.log(attrs.volume)
+
+    //     //     // scope.$apply(function () {
+    //     //     //     scope.time = element.datepicker('getDate');
+    //     //     // });
+    //     // });
+
+    //      // set the value of ngModel when the local date property changes
+    //      // scope.$watch('volume', function(value) {
+    //      //     if(ctrl.$viewValue != value) {
+    //      //        ctrl.$setViewValue(value);
+    //      //        console.log(value);
+    //      //     }
+    //      // })
+    //       scope.$watch("volume", function(newval) {
+    //         consol.log(newval);
+    //         var result = constructRangeString(newval, scope.volume);
+    //         ngModel.$setViewValue(result);
+    //       });
+
+    //     }
+    //   }
+    // });
 
 
 
