@@ -1,38 +1,34 @@
 <ion-modal-view>
     <ion-content>
-		<div class="list card">
+		<div class="list card cardDiv">
+			<div class="row">
+			  <div class="item item-avatar col-90">
+			    <img id="songCardImg" src={{currentSong.img}}>
 
-			  <div class="item item-avatar">
-			    <img src={{currentSong.img}}>
-			    <div class="buttons closeSongInfo">
-			      <button class="button button-clear" ng-click="closeSongInfo()">Close</button>
-			    </div>
 			    <h2>{{currentSong.title}}</h2>
 
 			    <p>{{currentSong.uploader}}</p>
 			  </div>
+			  <div class="buttons col-10 closeSongInfo">
+<!-- 
+			  ion-android-arrow-dropdown -->
+
+		
+			      <button class="button button-clear" ng-click="closeSongInfo()"><span class="glyphicon glyphicon-chevron-down"></span></button>
+			   </div>
+			 	 </div>
 
 			  <div class="item item-image">
 			    <img src={{currentSong.picurl}}>
 			  </div>
 
-		<label>volume: <input ng-change="setVolume(volume)" min="0" max="1" value=".8" step="0.01" type="range" ng-model="volume" /></label>
-		{{volume}}
-
+			<div id="volumeDiv" class="row">
+				 <input id="volumeSlider" ng-change="setVolume(volume)" min="0" max="1" value=".8" step="0.01" type="range" ng-model="volume" class="col-90"/>	
+				<span ng-if="volume == 0"class="col-10 glyphicon glyphicon-volume-off volumeGlyphs"></span>
+				<span ng-if="volume > 0 && volume < .5" class="col-10 glyphicon glyphicon-volume-down volumeGlyphs"></span>	
+				<span ng-if="volume >= .5" class="col-10 glyphicon glyphicon-volume-up volumeGlyphs"></span>				
+			</div>
 		</div>
-<!-- 
-	<div class="sliderExample"><a name="ex1"></a>
-		<strong>Step slider with event listeners (see console log)</strong>
-		<div ui-slider min="0" max="200" ng-model="demoVals.sliderExample1"></div>
-		<input type="text" ng-model="demoVals.sliderExample1" />	
-	</div>
-       -->
-  <!-- </div> -->
-  
-<!-- </div>
-    </div> -->
-
-
 
   </ion-content>
 </ion-modal-view>

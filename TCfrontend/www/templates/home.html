@@ -21,17 +21,21 @@
                   <button id="officialPlayButton" ng-hide="playing" ng-click="playCurrentTrack()" class="col"><span id="playerPlayButtonGlyphicon" class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
                   <button id="officialPauseButton" ng-show="playing" ng-click="pauseCurrentTrack()" class="col"><span id="playerPauseButtonGlyphicon" class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
                   <button id="officialNextButton" class="col"><span class="glyphicon glyphicon-forward" aria-hidden="true" ng-click="skipToNextSong()"></span></button>
-                  <heart id="officialHeartButton" url="{{ currentSong.url }}" picUrl= "{{ currentSong.picurl }}" uploader="{{ currentSong.uploader }}" title="{{ currentSong.title }}" trackId="{{ currentSong.trackid }}" tcid="{{ user.tcid }}" ><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
-                  <button id="officialDetailsButton" class="col" ng-click="showSongInfo()"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>
+                  <heart id="officialHeartButton" url="{{ currentSong.url }}" picUrl= "{{ currentSong.picurl }}" uploader="{{ currentSong.uploader }}" title="{{ currentSong.title }}" trackId="{{ currentSong.trackid }}" tcid="{{ user.tcid }}" class="col"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
+                  <button id="officialDetailsButton" class="col" ng-click="showSongInfo()"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ></span></button>
             
          </div> 
-         
-         <div class="col-sm-12" id="progressBarDiv">
-            <div id="progressbar" class="col-sm-12"></div>
-            <div id="progressBarTimer">0:00:00</div>
-            <div id="progressBarTime">0:00:00</div>
+        
+         <!-- div class="col-sm-12" id="progressBarDiv"> -->
+<!--           {{position}} -->
+            <input id="progressBar" ng-change="seekTo(progress)" min="0" max={{duration}} value={{position}} step="1" type="range" ng-model="progress" class="col-100"/> 
+            <div class="row timerRow">
+              <div class="col-10" ng-show="playing" id="progressBarTimer">{{position | millSecondsToTimeString}}</div>
+              <div class="col-80"></div>
+              <div class="col-10" ng-show="firstPlayed" id="progressBarTime">{{duration - position | millSecondsToTimeString}}</div>
+            </div>
            
-         </div>
+       <!--   </div> -->
        </div>
        </div>
       </div>

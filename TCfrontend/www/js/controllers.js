@@ -6,6 +6,8 @@ angular.module('tunecoop.controllers', [])
 
       //player/playlist functions
       
+      $scope.position = 0;
+      $scope.duration = 100;
 
       playSong = function(){
           jQuery('#artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
@@ -13,16 +15,44 @@ angular.module('tunecoop.controllers', [])
 
           widget.load($rootScope.currentSong.url + '&auto_play=false') ;
           widget.bind(SC.Widget.Events.READY, function(){
+              
               widget.setVolume($scope.volume)
+
               widget.play();
               $rootScope.playing = true;
-          });
+              $timeout(function(){
+                widget.getDuration(function(duration){
+                $scope.$apply(function(){
+                  $scope.duration = duration; 
+                })  
+                },1000)              
+              })
+              progressChecker = setInterval(function(){
+                    widget.getPosition(function(position){
+                      if(position < ($scope.duration - 1000)){
+                        $scope.$apply(function(){
+                          $scope.position = Math.floor(position)
+                          jQuery('#progressBar').val(Math.floor(position))
+                        })
+                      }
+                      else{
+                        clearInterval()
+                      }
+                    })
+              } , 1000)
+              progressChecker();
+              });
+
           widget.bind(SC.Widget.Events.FINISH, function(){
               if($rootScope.currentSong.playlist === 'songFeed' || $rootScope.currentSong.playlist === 'favorites'){
                 playNext();
               }
           });
       };
+
+
+      // $scope.findProgress = widget.getCurrentPosition()
+
 
       playNext = function(){
         var nextTrack = findNextSong();
@@ -125,7 +155,7 @@ angular.module('tunecoop.controllers', [])
       $rootScope.firstPlayed = false;
 
 
-      $scope.playCurrentTrack = function(){
+      $rootScope.playCurrentTrack = function(){
         if(!$rootScope.firstPlayed){
           playSong()
           $rootScope.playing = true;
@@ -150,6 +180,17 @@ angular.module('tunecoop.controllers', [])
         $scope.volume = volume; 
         widget.setVolume(volume);
       }
+
+
+
+      $scope.progress = 0;
+
+      $scope.seekTo = function(progress){
+        widget.seekTo(progress);
+      }
+
+      // $scope.duration = 100;
+
 
 
     //modals

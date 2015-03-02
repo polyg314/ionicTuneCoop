@@ -57,7 +57,7 @@
 }
 
 #artDiv{
-	padding: 0px;
+/*	padding: 105px !important;*/
 	margin-bottom: 30px;
 	height: 250px;
 	width: 100%;
@@ -67,7 +67,7 @@
 }
 
 #overlay{
-	  padding: 0px;
+	  padding: 3px;
       position: absolute;
       top: 0px;
       left: 0%;
@@ -101,65 +101,6 @@
 	color: purple;
 };*/
 
-
-
-.volume {  
-    display: inline-block;  
-    width: 25px;  
-    height: 25px;  
-    right: -5px;  
-    background: url('../images/volume.png') no-repeat 0 -50px;  
-    position: absolute;  
-    margin-top: -5px; 
-    color: black; 
-    } 
-
-.ui-slider-handle {  
-    position: absolute;  
-    z-index: 2;  
-    width: 25px;  
-    height: 20px;  
-    cursor: pointer;  
-    background: url('../images/handle.png') no-repeat 50% 50%;  
-    font-weight: bold;  
-    color: #1C94C4;  
-    outline: none;  
-    top: -7px;  
-    margin-left: -12px;  
-    } 
-
-.ui-slider-range {  
-    background: hsl(0,0%,98%);
-    position: absolute;  
-    border: 0;  
-    top: 0;  
-    height: 100%;  
-    border-radius: 25px; 
-/*    background: green   --> background for volume slider;*/
-    }  
-
-.ui-slider .ui-slider-handle{
-    width: 12px;
-    height: 15px;
-    border-radius: 3px;
-/*    background: green   --> background for volume slider tip;*/
-    }
-  /*    body {  
-    background: url('../images/bg.jpg') repeat top left;  
-} */ 
-/*
-  #volumeDiv{
-    position: relative;
-    float: left;
-    margin-top: 5px;
-    margin-left: -10px;
-    height: 40px;
-    padding: 0px;
-    width: 100px;
-    color: black;
-    z-index: 10;
-  }
-*/
   #soundCloudImageLink{
     position: relative;
     margin-right: 0px;
@@ -250,7 +191,7 @@
 #officialHeartButton button{
   margin-top: 5px;
   padding-left: 5px;
-  padding-right: 5px;
+  padding-right: 20px;
 }
 
 #officialDetailsButton{
@@ -261,26 +202,7 @@
   color: white;
 }
 
-#progressBarTimer{
-/*	width: 35px;*/
-	margin-right: 0px !important;
-}
 
-#progressBarTime{
-  float: right;
-  position: relative;
-  margin-top: -17px;
-}
-
-#progressBarDiv{
-/*  width: 55%*/;
-  padding: 0px;
-  padding-bottom: 20px;
-  margin: 0px;
-  margin-top: 70px;
-/*  margin-top: -8px;*/
-  font-size: 13px
-}
 
 #soundCloudImageLinkDiv{
   padding: 0px;
@@ -711,68 +633,89 @@ a.item:after, button.item:after{
 }
 
 
-/*input[type="range"]{
-    background: rgb(94, 30, 30);
-    width: 130px;
-    height: 6px;
-    -webkit-appearance: none;
-    border-radius: 8px;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -webkit-box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.9), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
-    -moz-box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.9), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
-    box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.9), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
+#closeSongInfo{
+
 }
 
-input[type="range"]:hover{
-    background: rgb(194, 139, 131);
-    width: 130px;
-    height: 6px;
-    -webkit-appearance: none;
-    border-radius: 8px;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -webkit-box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.9), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
-    -moz-box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.9), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
-    box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.9), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
+#songCardImg{
+  width: 10px !important;
 }
 
-input[type="range"]::-webkit-slider-thumb{
+#volumeSlider{
+
+}
+
+.cardDiv{
+
+}
+
+.cardDiv .item-avatar{
+  padding: 15px;
+}
+
+.cardDiv .item-image{
+  padding: 20px;
+}
+
+#volumeDiv{
+  padding: 20px;
+  padding-left: 40px;
+}
+
+.volumeGlyphs{
+  font-size: 30px;
+  margin-top: 5px;
+  padding-left: 20px;
+}
+
+#progressBarTimer{
+
+}
+
+#progressBarTime{
+
+}
+
+.timerRow{
+/*  padding-left: 30px;*/
+  font-size: 17px;
+  margin-left: 0px !important;
+  padding-right: 0px;
+}
+
+#progressBar{
+    background: rgb(254, 254, 254);
+    height: 12px;
+    margin: 2px;
+    -webkit-appearance: none;
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -webkit-box-shadow: inset 0px 0px 2px 2px hsla(273, 75%, 20%, 1), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
+    -moz-box-shadow: inset 0px 0px 2px 2px hsla(273, 75%, 20%, 1), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
+    box-shadow: inset 0px 0px 2px 1px hsla(273, 75%, 20%, 1), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
+    margin-bottom: 0px;
+/*    color: white;*/
+}
+
+
+#progressBar::-webkit-slider-thumb{
    -webkit-appearance:none !important;  
-   width:25px;
-   height:15px;
+   width:7px;
+   height:14px;
    -webkit-appearance: none;
-    border-radius: 8px;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    border:1px solid black;
+    border-radius: 2px;
+/*    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;*/
+    border:1px solid hsla(273, 75%, 50%, 1);
 
-    background: #a90329;
-    background: -moz-linear-gradient(left, #a90329 0%, #8f0222 50%, #6d0019 100%);
+    background: hsla(273, 75%, 30%, 1);
+/*    background: -moz-linear-gradient(left, #a90329 0%, #8f0222 50%, #6d0019 100%);
     background: -webkit-gradient(linear, left top, right top, color-stop(0%,#a90329), color-stop(50%,#8f0222), color-stop(100%,#6d0019));
     background: -webkit-linear-gradient(left, #a90329 0%,#8f0222 50%,#6d0019 100%);
     background: -o-linear-gradient(left, #a90329 0%,#8f0222 50%,#6d0019 100%);
     background: -ms-linear-gradient(left, #a90329 0%,#8f0222 50%,#6d0019 100%);
-    background: linear-gradient(to right, #a90329 0%,#8f0222 50%,#6d0019 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=1 );
+    background: linear-gradient(to right, #a90329 0%,#8f0222 50%,#6d0019 100%);*/
+/*    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=1 );*/
  }
 
-input[type="range"]::-webkit-slider-thumb:hover{
-   -webkit-appearance:none !important;  
-   width:25px;
-   height:15px;
-   -webkit-appearance: none;
-    border-radius: 8px;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    background-color:rgb(56, 13, 13);
-    border:1px solid black;
-
-    background: -moz-linear-gradient(left, #1d2e38 0%, #2b4254 50%, #2b4254 100%);
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#1d2e38), color-stop(50%,#2b4254), color-stop(100%,#2b4254));
-    background: -webkit-linear-gradient(left, #1d2e38 0%,#2b4254 50%,#2b4254 100%);
-    background: -o-linear-gradient(left, #1d2e38 0%,#2b4254 50%,#2b4254 100%);
-    background: -ms-linear-gradient(left, #1d2e38 0%,#2b4254 50%,#2b4254 100%);
-    background: linear-gradient(left, #1d2e38 0%,#2b4254 50%,#2b4254 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d2e38', endColorstr='#2b4254',GradientType=1 );
- }*/

@@ -378,75 +378,32 @@
             $rootScope.friendDelete.username = attrs.username;
             $rootScope.friendDelete.friendshipid = attrs.friendshipid;
             $rootScope.showConfirmDelete();
-
-            // var friendRequestId = attrs.friendrequestid;
-            // var denyRequest = function(){
-            //       var req = {
-            //            method: 'POST',
-            //            url: 'http://localhost:8000/denyRequest',
-            //            headers: {
-            //              'Content-Type': "application/json"
-            //            },
-            //            data: { friendRequestId: friendRequestId },
-            //           } 
-            //       // console.log($rootScope.favorites);
-            //   $http(req).success(function(res){
-            //     for(i=0; i<$rootScope.friendRequests.length; i++){
-            //       if(Number($rootScope.friendRequests[i].id) === Number(friendRequestId)){
-            //          $rootScope.friendRequests.splice(i, 1);
-            //       break;
-            //       }                 
-            //     }
-            //   })
-            //   .error(function(res){console.log(res)})                                              
-            //   };   
-            //   denyRequest();
              });
            }
         };
     }]);
 
-    // app.directive('volumeSlider', function() {
-    // return{
-    // restrict: 'E',
-    // require: 'ngModel',
-    // replace: true,
-    // scope: {
-    //   volume: '=ngModel'
-    // }, //isolate the scope
-    // template: '<label>volume: <input min="0" max="1" step="0.01" type="range" ng-model="player.volume" /></label>',
-    // link: function(scope, elem, attrs, ctrl) {
-    //   // console.log(scope.volume)
-    //      // get the value from ngModel
-    //      // scope.player.volume = ctrl.$viewValue;
-    //      // $scope.volume = ctrl.volume;
-
-
-    //     //  elem.on('change', function () {
-    //     //   console.log('hi')
-    //     //   console.log(attrs.volume)
-
-    //     //     // scope.$apply(function () {
-    //     //     //     scope.time = element.datepicker('getDate');
-    //     //     // });
-    //     // });
-
-    //      // set the value of ngModel when the local date property changes
-    //      // scope.$watch('volume', function(value) {
-    //      //     if(ctrl.$viewValue != value) {
-    //      //        ctrl.$setViewValue(value);
-    //      //        console.log(value);
-    //      //     }
-    //      // })
-    //       scope.$watch("volume", function(newval) {
-    //         consol.log(newval);
-    //         var result = constructRangeString(newval, scope.volume);
-    //         ngModel.$setViewValue(result);
-    //       });
-
-    //     }
-    //   }
-    // });
+    app.filter('millSecondsToTimeString', function() {
+        return function(milliseconds) {
+          var totalSeconds = Math.floor(milliseconds/1000);
+          var seconds = totalSeconds % 60;
+          if(seconds < 10){
+            seconds = ('0' + seconds); 
+          }
+          var minutes = Math.floor(totalSeconds/60);
+          var hours = Math.floor(totalSeconds/3600);
+          if(hours){
+            if(minutes < 10){
+              minutes = ('0' + minutes);
+            }
+            var timeString = hours + ':' + minutes + ':' + seconds;
+          }
+          else{
+            var timeString = minutes + ':' + seconds;
+          }
+          return timeString;
+        }
+    });
 
 
 
