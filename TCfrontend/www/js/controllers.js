@@ -17,7 +17,28 @@ angular.module('tunecoop.controllers', [])
             jQuery('#favoriteTab').css({'color':'hsl(0,0%,15%)'});
             jQuery('#searchTab').css({'color':'hsl(0,0%,15%)'});
 
+            for(i=0; i<$rootScope.feedSongs.length; i++){
+              if(Number($rootScope.currentSong.id) === Number($rootScope.feedSongs[i].id)){
+                if($rootScope.feedSongs[i].isplayed === false){
+                  var count = i;
+                  console.log('id is.. ' + $rootScope.feedSongs[i].id)
+                  var req = {
+                     method: 'PATCH',
+                     url: 'http://localhost:8000/updateIsPlayed',
+                     headers: {
+                       'Content-Type': "application/json"
+                     },
+                     data: { songId: $rootScope.feedSongs[i].id },
+                    }                     
+                  $http(req).success(function(res){
+                    $rootScope.newSongs --;
+                    $rootScope.feedSongs[count].isplayed = true;
+                  });
+                }
+              }
+            }
           }
+
           else if($rootScope.currentSong.playlist === 'favorites'){
             jQuery('#favoriteTab').css({'color':'hsla(254, 74%, 27%, 1)'});
             jQuery('#songFeedTab').css({'color':'hsl(0,0%,15%)'});
@@ -58,7 +79,8 @@ angular.module('tunecoop.controllers', [])
                     })
               } , 1000)
               progressChecker();
-              });
+          });
+
 
           widget.bind(SC.Widget.Events.FINISH, function(){
               if($rootScope.currentSong.playlist === 'songFeed' || $rootScope.currentSong.playlist === 'favorites'){
@@ -519,11 +541,8 @@ angular.module('tunecoop.controllers', [])
                     $location.path('/app/person/me/feed');
                  OpenFB.get('/me').success(function (user) {
                     $rootScope.user = user;
-                    // console.log($scope.user)
-                    
 
                     var getSongFeedAndFavorites= function(){
-                      console.log('but.... ' + $scope.user.tcid);
                       var req = {
                            method: 'POST',
                            url: 'http://localhost:8000/songFeedAndFavorites',
@@ -546,8 +565,9 @@ angular.module('tunecoop.controllers', [])
                               widget = SC.Widget(document.getElementById('soundcloud_widget'));
                               widget.load($rootScope.currentSong.url + '&auto_play=false') 
                               jQuery('#artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
+                              checkNew()   
                             })
-                          })   
+                          })
                         })
                       .error(function(res){console.log(res)})                                       
                     };
@@ -577,7 +597,17 @@ angular.module('tunecoop.controllers', [])
                       .error(function(res){console.log(res)});
                     }
 
+                    checkNew = function(){
+                      $rootScope.newSongs = 0;
+                      for (i=0; i<$rootScope.feedSongs.length; i++){
+                        if ($rootScope.feedSongs[i].isplayed === false){
+                          $rootScope.newSongs ++
+                        }
+                      }
+                    }; 
+
                     getUsername();
+
 
                     })
                   })

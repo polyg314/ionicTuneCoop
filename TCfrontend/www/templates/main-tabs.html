@@ -1,7 +1,7 @@
 
 <div class="row" id="mainTabDiv">
   <div id="songFeedTab" class="tabs onBaby" ng-class="{ active:tab.isSet(1) }">
-    <p ng-click="tab.setTab(1)">Feed</p>
+    <p ng-click="tab.setTab(1)">Feed <div class="newSongsPill" ng-show="newSongs">{{newSongs}}</div></p>
   </div>
   <div id="favoriteTab" class="tabs offBaby" ng-class="{ active:tab.isSet(2) }">
     <p ng-click="tab.setTab(2)">Favorites</p>

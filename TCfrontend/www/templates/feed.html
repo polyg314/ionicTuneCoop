@@ -8,7 +8,7 @@
         <h2>{{feedSong.title}}<br><span class="uploaderName">{{feedSong.uploader}}</span></h2>
 
         <p class="feedMessages">{{feedSong.messages}}</p>
-        <p class="fromUsername">from&nbsp{{feedSong.username}}, <span class="feedDate">{{feedSong.date | date : short}}</span></p>
+        <p class="fromUsername">-&nbsp{{feedSong.username}}, <span class="feedDate">{{feedSong.date | date : short}}</span></p>
         <div class="buttonRow">
           <share-button url="{{ feedSong.url }}" picUrl= "{{ feedSong.picurl }}"  uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></share-button>
           <heart url="{{ feedSong.url }}" picUrl= "{{ feedSong.picurl }}"  uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}" tcid="{{user.tcid}}"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>

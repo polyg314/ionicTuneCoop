@@ -273,7 +273,7 @@ app.post('/addFriend', function(req, res){
 //   });
 // })
 
-// // /friends
+
 app.post('/acceptRequest', function(req, res){
   var userOne= req.body.tcid; 
   var userTwo= req.body.ftcid;
@@ -288,12 +288,20 @@ app.post('/acceptRequest', function(req, res){
   });
 });
 
-// // friendrequests/:id
+
 app.post('/denyRequest', function(req, res){
   var friendRequestId = req.body.friendRequestId;
   console.log(friendRequestId);
     db.query('UPDATE friendRequests SET viewed = $1 WHERE id = $2', [true, friendRequestId], function(err, dbRes){
       res.send('deniieeddd');
+  });
+});
+
+app.patch('/updateIsPlayed', function(req, res){
+  var shareId = req.body.songId;
+  db.query('UPDATE shares SET isplayed = $1 WHERE id = $2', [true, shareId], function(err, dbRes){ 
+    console.log(dbRes); 
+    res.send('success!');    
   });
 });
 
