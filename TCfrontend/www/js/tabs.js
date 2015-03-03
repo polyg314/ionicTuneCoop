@@ -167,8 +167,10 @@
         },
         link: function($scope, element, attrs) {
           element.bind('click', function() {
-            console.log('you clicked delete!!');
-            console.log(attrs);
+
+              if($rootScope.currentSong.id === attrs.favid){
+                playNext();
+              }
 
               var deleteFromFavorites= function(){
                   var req = {

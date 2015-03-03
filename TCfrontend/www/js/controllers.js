@@ -11,6 +11,23 @@ angular.module('tunecoop.controllers', [])
 
       playSong = function(){
           jQuery('#artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
+
+          if($rootScope.currentSong.playlist === 'songFeed'){
+            jQuery('#songFeedTab').css({'color':'hsla(254, 74%, 27%, 1)'});
+            jQuery('#favoriteTab').css({'color':'hsl(0,0%,15%)'});
+            jQuery('#searchTab').css({'color':'hsl(0,0%,15%)'});
+
+          }
+          else if($rootScope.currentSong.playlist === 'favorites'){
+            jQuery('#favoriteTab').css({'color':'hsla(254, 74%, 27%, 1)'});
+            jQuery('#songFeedTab').css({'color':'hsl(0,0%,15%)'});
+            jQuery('#searchTab').css({'color':'hsl(0,0%,15%)'});
+          }
+          else{
+            jQuery('#searchTab').css({'color':'hsla(254, 74%, 27%, 1)'});
+            jQuery('#songFeedTab').css({'color':'hsl(0,0%,15%)'});
+            jQuery('#favoriteTab').css({'color':'hsl(0,0%,15%)'});
+          }
           widget = SC.Widget(document.getElementById('soundcloud_widget'));
 
           widget.load($rootScope.currentSong.url + '&auto_play=false') ;
@@ -49,10 +66,6 @@ angular.module('tunecoop.controllers', [])
               }
           });
       };
-
-
-      // $scope.findProgress = widget.getCurrentPosition()
-
 
       playNext = function(){
         var nextTrack = findNextSong();

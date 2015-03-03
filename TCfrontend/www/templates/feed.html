@@ -1,14 +1,20 @@
-<div class="mainDiv">
+<div class="mainFeedDiv">
   <div class="list feedDiv" ng-repeat="feedSong in feedSongs">
       <ion-item class="item item-thumbnail-left">
+
         <img class="feedImgs" src={{feedSong.picurl}}>
-        <h2>{{feedSong.title}}</h2>
-        <p>{{feedSong.uploader}}</p>
-        <p>{{feedSong.messages}}</p>
-        <p class="fromUsername">from&nbsp{{feedSong.username}}</p>
-        <share-button url="{{ feedSong.url }}" picUrl= "{{ feedSong.picurl }}"  uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></share-button>
-        <heart url="{{ feedSong.url }}" picUrl= "{{ feedSong.picurl }}"  uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}" tcid="{{user.tcid}}" ><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
-        <play link="{{ feedSong.url }}" artUrl="{{ feedSong.picurl }}" uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}" playlist= "songFeed" id= "{{ feedSong.id }}" ><span class="glyphicon glyphicon-play" aria-hidden="true"></span></play>
+        <div class="feedSongOverlay">
+        <div class="newSong" ng-hide="feedSong.isplayed">NEW</div>
+        <h2>{{feedSong.title}}<br><span class="uploaderName">{{feedSong.uploader}}</span></h2>
+
+        <p class="feedMessages">{{feedSong.messages}}</p>
+        <p class="fromUsername">from&nbsp{{feedSong.username}}, <span class="feedDate">{{feedSong.date | date : short}}</span></p>
+        <div class="buttonRow">
+          <share-button url="{{ feedSong.url }}" picUrl= "{{ feedSong.picurl }}"  uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></share-button>
+          <heart url="{{ feedSong.url }}" picUrl= "{{ feedSong.picurl }}"  uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}" tcid="{{user.tcid}}"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
+          <play link="{{ feedSong.url }}" artUrl="{{ feedSong.picurl }}" uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}" playlist= "songFeed" id= "{{ feedSong.id }}" ><span class="glyphicon glyphicon-play" aria-hidden="true"></span></play>
+        </div>
+      </div>
       </ion-item>
   </div>
 </div>
