@@ -484,9 +484,9 @@ angular.module('tunecoop.controllers', [])
           
 
           var postToShares = function(){
-          var message = $('#shareMessageBox').val();
+          message = $('#shareMessageBox').val();
           var friendSelection = $scope.selection;
-          console.log(friendSelection);
+          // console.log(friendSelection);
               var req = {
                method: 'POST',
                url: 'http://localhost:8000/addToShares',
@@ -496,8 +496,9 @@ angular.module('tunecoop.controllers', [])
                data: { message: message, friendSelection: friendSelection, tcid: $rootScope.user.tcid, trackid: $rootScope.currentShareTrack },
               }
             $http(req).success(function(res){
-              console.log(res)
-              $('#shareMessageBox').empty();
+              // console.log(res)
+              $('#shareMessageBox').val('');
+              message = ''; 
               $scope.shareModal.hide();
               })
               .error(function(res){console.log(res)});
