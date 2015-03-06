@@ -469,6 +469,7 @@ angular.module('tunecoop.controllers', [])
               }                     
             $http(req).success(function(res){
               var tracks = res;
+              // console.log(tracks)
               for(i=0; i<tracks.length; i++){
                 if(!tracks[i].artwork_url){
                   tracks[i].artwork_url= 'https://upload.wikimedia.org/wikipedia/en/thumb/a/af/Squarepusher_Enstrobia.jpg/220px-Squarepusher_Enstrobia.jpg';

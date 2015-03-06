@@ -9,7 +9,8 @@
       <ion-item class="item item-thumbnail-left">
         <img src={{track.artwork_url}}>
         <h2>{{track.title}}</h2>
-        <p>{{track.user.username}}</p>   
+        <p>{{track.user.username}}</p> 
+        <p>{{track.duration | millSecondsToTimeString}}  
         <div class="fandsButtonRow">    
           <share-button url="{{ track.permalink_url  }}" picUrl= "{{ track.artwork_url }}"  uploader="{{ track.user.username }}" title="{{ track.title }}" trackId="{{ track.id }}"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></share-button>
           <heart url="{{ track.permalink_url }}" picUrl="{{ track.artwork_url }}" uploader="{{ track.user.username }}" title="{{ track.title }}" trackId="{{ track.id }}" tcid="{{ user.tcid }}"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
