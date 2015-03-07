@@ -895,3 +895,7 @@ img.feedImgs{
 #loginButton{
   top: 30px;
 }
+
+/*#soundcloud_widget{
+  z-index: -10 !important;
+}*/
