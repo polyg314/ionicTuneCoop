@@ -4,6 +4,44 @@ angular.module('tunecoop.controllers', [])
   
     .controller('AppCtrl', function ($scope, $state, OpenFB, $ionicModal, $timeout, $http, $rootScope, $ionicPopup) {
 
+
+      $rootScope.tcFavorites = true;
+
+      // $scope.fonts = [
+      //     {title: "Arial" , text: 'Url for Arial' },
+      //     {title: "Helvetica" , text: 'Url for Helvetica' }
+      // ];
+      $rootScope.changeFavs = function(){
+          alert('anything')
+      }
+
+      $rootScope.tcFavorites = {
+     }
+
+     $rootScope.favFunction = function(option){
+      console.log(option)
+     }
+
+
+
+
+
+      // $rootScope.zeFavorites = [
+      //   {title: "tcFavorites"},
+      //   {title: "scFavorites"}
+      // ]
+
+      // $rootScope.favChange = function(yup){
+      //   alert(yup.title)
+      // };      
+      // $rootScope.tcFavoritesTrue = function(){
+      //   $rootScope.tcFavorites = true;
+      // }
+
+      // $rootScope.tcFavoritesFalse = function(){
+      //   $rootScope.tcFavorites = false;
+      // }
+
       $rootScope.soundCloudConnect = function(){
           // initialize client with app credentials
           SC.initialize({
@@ -45,7 +83,17 @@ angular.module('tunecoop.controllers', [])
                             })
                           })
                         })
-                      .error(function(res){console.log(res)})                                       
+                      .error(function(res){console.log(res)}) 
+                      var reqTwo = {
+                           method: 'GET',
+                           url: $rootScope.user.uri + '/favorites.json?client_id=9c6c34a18ce4704b429202afd4f5675f',
+                           headers: {
+                             'Content-Type': "application/json"
+                           },
+                        }                     
+                        $http(reqTwo).success(function(res){
+                          $rootScope.soundCloudFavorites = res;
+                        }).error(function(res){console.log(res)})                                
                     };
 
 

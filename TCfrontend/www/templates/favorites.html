@@ -1,4 +1,4 @@
-<div class="col-md-2">
+<div class="col-md-2" ng-show="tcFavorites">
       <!--Sidebar content-->
 
       <input id="favoritesFilter" placeholder="filter" ng-model="query">
@@ -6,7 +6,7 @@
 </div>
 
 
-<div class="mainDiv searchAndFavorites">
+<div class="mainDiv searchAndFavorites" ng-show="tcFavorites">
   <div class="list" ng-repeat="favorite in favorites | filter:query">
       <ion-item class="item item-thumbnail-left">
         <img class="favoriteImgs" src={{favorite.picurl}}>

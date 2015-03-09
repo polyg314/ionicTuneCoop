@@ -17,6 +17,12 @@
 	background-size: 33.5%;
   margin-left: 0px;
 	text-align: center;
+  height: 100%;
+}
+
+#soundCloudConnectButton{
+  margin-top: 30px;
+  width: 230px;
 }
 
 #frontLogo{
@@ -31,7 +37,7 @@
 /*      margin-top: 100px;*/
       position: relative;
       height: 0px;
-      padding-top: 150px;
+      padding-top: 200px;
       padding-bottom: 20%;
 /*      background: black;*/
 }
@@ -309,7 +315,7 @@ a.item:after, button.item:after{
 
 .mainDiv{
   height: 300px;
-  overflow-y: scroll;
+  overflow-y: scroll !important;
   border-bottom: solid 3px hsl(37,0%,96%);
   border-left: solid 3px hsl(37,0%,94%);
   border-right: solid 3px hsl(37,0%,94%);
@@ -860,8 +866,11 @@ img.feedImgs{
   border-radius: 25px;
   height: 20px;
   line-height: 19px;
-  margin-top: 13px;
-  margin-left: 14px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+/*  margin-top: 13px;
+  margin-left: 14px;*/
 }
 
 .searchAndFavorites .list .item .item-content{
@@ -898,3 +907,50 @@ img.feedImgs{
 /*#soundcloud_widget{
   z-index: -10 !important;
 }*/
+
+#favoriteTab{
+
+}
+
+.tcsc{
+  z-index: 100;
+  position: absolute;
+  right: -10px;
+  top: 0px;
+  width: 70px;
+  background: transparent;
+  border: none;
+  height: 100px;
+  border-radius: 0px !important;
+}
+
+/*.tcsc .toggle{
+  border-radius: none !important;
+  padding: none !important;
+  background-color: orange; 
+}*/
+
+.tcsc .toggle .track{
+  border-radius: none !important;
+  width: 50px;
+  border: none ;
+  background-color: hsla(254, 74%, 27%, 1);
+}
+
+
+
+
+.tcsc .toggle input:checked + .track {
+  background-color: #FC5003 !important;
+}
+
+.tcsc .toggle div .handle{
+  border-radius: none !important;
+}
+
+
+
+#favoriteTab select{
+  background: transparent !important;
+  border: none;
+}
