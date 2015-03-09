@@ -40,7 +40,7 @@
         <div class="fandsButtonRow">    
           <share-button url="{{ soundCloudFavorite.permalink_url  }}" picUrl= "{{ soundCloudFavorite.artwork_url }}"  uploader="{{ soundCloudFavorite.user.username }}" title="{{ soundCloudFavorite.title }}" trackId="{{ soundCloudFavorite.id }}"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></share-button>
           <heart url="{{ soundCloudFavorite.permalink_url }}" picUrl="{{ soundCloudFavorite.artwork_url }}" uploader="{{ soundCloudFavorite.user.username }}" title="{{ soundCloudFavorite.title }}" trackId="{{ soundCloudFavorite.id }}"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
-          <play link="{{ soundCloudFavorite.permalink_url }}" artUrl="{{ soundCloudFavorite.artwork_url }}" uploader="{{ soundCloudFavorite.user.username }}" title="{{ soundCloudFavorite.title }}" trackId="{{ soundCloudFavorite.id }}" playlist= "soundCloudFavorites"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></play>
+          <play link="{{ soundCloudFavorite.permalink_url }}" artUrl="{{ soundCloudFavorite.artwork_url }}" uploader="{{ soundCloudFavorite.user.username }}" title="{{ soundCloudFavorite.title }}" trackId="{{ soundCloudFavorite.id }}" playlist= "soundCloudFavorites" id= "{{ soundCloudFavorite.id }}"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></play>
       </ion-item>
   </div>
 </div>

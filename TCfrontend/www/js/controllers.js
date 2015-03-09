@@ -119,6 +119,7 @@ angular.module('tunecoop.controllers', [])
       $scope.duration = 100;
 
       playSong = function(){
+          console.log($rootScope.currentSong)
           jQuery('#artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
 
           if($rootScope.currentSong.playlist === 'songFeed'){
@@ -148,7 +149,7 @@ angular.module('tunecoop.controllers', [])
             }
           }
 
-          else if($rootScope.currentSong.playlist === 'favorites'){
+          else if($rootScope.currentSong.playlist === 'favorites' || $rootScope.currentSong.playlist === 'soundCloudFavorites'){
             jQuery('#favoriteTab').css({'color':'hsla(254, 74%, 27%, 1)'});
             jQuery('#songFeedTab').css({'color':'hsl(0,0%,15%)'});
             jQuery('#searchTab').css({'color':'hsl(0,0%,15%)'});
@@ -192,7 +193,7 @@ angular.module('tunecoop.controllers', [])
 
 
           widget.bind(SC.Widget.Events.FINISH, function(){
-              if($rootScope.currentSong.playlist === 'songFeed' || $rootScope.currentSong.playlist === 'favorites'){
+              if($rootScope.currentSong.playlist === 'songFeed' || $rootScope.currentSong.playlist === 'favorites' || $rootScope.currentSong.playlist === "soundCloudFavorites"){
                 playNext();
               }
           });
@@ -209,7 +210,7 @@ angular.module('tunecoop.controllers', [])
            playSong();
           });
         }
-        else{
+        if(!nextTrack){
           $rootScope.playing = false;
         }
       };
@@ -241,6 +242,27 @@ angular.module('tunecoop.controllers', [])
             }
           }
         }
+        if ($rootScope.currentSong.playlist === 'soundCloudFavorites'){
+          for(i = 0; i<$rootScope.soundCloudFavorites.length; i++){
+            if (Number($rootScope.soundCloudFavorites[i].id) === Number($rootScope.currentSong.id)){
+              if($rootScope.soundCloudFavorites[i + 1]){
+                var nextSong = {
+                  title: $rootScope.soundCloudFavorites[i + 1].title,
+                  uploader: $rootScope.soundCloudFavorites[i + 1].user.username,
+                  url: $rootScope.soundCloudFavorites[i + 1].permalink_url,
+                  picurl: $rootScope.soundCloudFavorites[i + 1].artwork_url,
+                  id: $rootScope.soundCloudFavorites[i + 1].id,
+                  trackid: $rootScope.soundCloudFavorites[i + 1].id,
+                  playlist: 'soundCloudFavorites'
+                }
+                return nextSong;
+              }
+              else{
+                return null;
+              }
+            }
+          }
+        }
       };
 
       findPrevSong = function(){
@@ -263,6 +285,27 @@ angular.module('tunecoop.controllers', [])
               if($rootScope.favorites[i - 1]){
                 $rootScope.favorites[i - 1].playlist = 'favorites';
                 return $rootScope.favorites[i - 1];
+              }
+              else{
+                return null;
+              }
+            }
+          }
+        }
+        if ($rootScope.currentSong.playlist === 'soundCloudFavorites'){
+          for(i = 0; i<$rootScope.soundCloudFavorites.length; i++){
+            if (Number($rootScope.soundCloudFavorites[i].id) === Number($rootScope.currentSong.id)){
+              if($rootScope.soundCloudFavorites[i - 1]){
+                var prevSong = {
+                  title: $rootScope.soundCloudFavorites[i - 1].title,
+                  uploader: $rootScope.soundCloudFavorites[i - 1].user.username,
+                  url: $rootScope.soundCloudFavorites[i - 1].permalink_url,
+                  picurl: $rootScope.soundCloudFavorites[i - 1].artwork_url,
+                  id: $rootScope.soundCloudFavorites[i - 1].id,
+                  trackid: $rootScope.soundCloudFavorites[i - 1].id,
+                  playlist: 'soundCloudFavorites'
+                }
+                return prevSong;
               }
               else{
                 return null;
