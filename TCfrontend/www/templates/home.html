@@ -1,7 +1,19 @@
 <ion-view hide-back-button="true">
 
-  
 
+  <div ng-hide="user" id="loginPage" hide-back-button="true" hide-nav-bar="true">
+    <div id="frontOverlay">
+
+      <div id="frontLogo">TuneCoop</div>
+                <div id="soundCloudConnectDiv">
+                 <a ng-click="soundCloudConnect()"><img id="soundCloudConnectButton" src="http://connect.soundcloud.com/2/btn-connect-sc-m.png"></a>
+                </div>
+      </ion-content>
+      </div>
+  </div>
+
+  
+  <div ng-show="user">
      <div id="artDiv">
      <div id="overlay">
         <div class="col-sm-1" id="soundCloudImageLinkDiv">  <a id="soundCloudImageLink" href="" target="_blank"> <img src="https://developers.soundcloud.com/assets/logo_white-8bf7615eb575eeb114fc65323068e1e4.png"></a>
@@ -66,6 +78,6 @@
   
 
 
-  
+  </div>
 
 </ion-view>

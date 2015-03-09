@@ -241,7 +241,7 @@
 
 #mainTabDiv{
   margin: 0 auto;
-	margin-top: -100px;
+	margin-top: -95px;
 /*  width: 100%;*/
   padding: 0px;
   background-color: hsla(0,0%,0%,0);
@@ -308,7 +308,7 @@ a.item:after, button.item:after{
 }
 
 .mainDiv{
-  height: 52%;
+  height: 300px;
   overflow-y: scroll;
   border-bottom: solid 3px hsl(37,0%,96%);
   border-left: solid 3px hsl(37,0%,94%);
@@ -322,7 +322,7 @@ a.item:after, button.item:after{
   border-left: solid 5px hsl(37,0%,94%);
   border-right: solid 5px hsl(37,0%,94%);
   border-top: solid 3px hsl(37,0%,94%);
-  height: 58%;
+  height: 350px;
   overflow-y: scroll;
 }
 
@@ -590,7 +590,6 @@ a.item:after, button.item:after{
 
 .feedDiv{
   margin-top: 20px;
-
 }
 
 .filterText{

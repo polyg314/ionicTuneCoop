@@ -4,8 +4,103 @@ angular.module('tunecoop.controllers', [])
   
     .controller('AppCtrl', function ($scope, $state, OpenFB, $ionicModal, $timeout, $http, $rootScope, $ionicPopup) {
 
+      $rootScope.soundCloudConnect = function(){
+          // initialize client with app credentials
+          SC.initialize({
+            client_id: '9c6c34a18ce4704b429202afd4f5675f',
+            redirect_uri: 'http://localhost:8100/#/app/feed'
+          });
+
+          // initiate auth popup
+          SC.connect(function() {
+            SC.get('/me', function(me) { 
+
+                    $rootScope.user = me;
+                    console.log(me);
+
+                    var getSongFeedAndFavorites= function(){
+                      var req = {
+                           method: 'POST',
+                           url: 'http://localhost:8000/songFeedAndFavorites',
+                           headers: {
+                             'Content-Type': "application/json"
+                           },
+                           data: { tcid: $scope.user.tcid },
+                          }                     
+                        $http(req).success(function(res){
+                          // songFeed = res.songFeed;
+                          // favorites = res.favorites;
+                          $timeout(function() {
+                            $scope.$apply(function() {
+                              $rootScope.feedSongs= res.songFeed;
+                              $rootScope.favorites= res.favorites;
+                              $rootScope.friends = res.friends;
+                              $rootScope.friendRequests = res.friendRequests;
+                              $rootScope.feedSongs[0].playlist = "songFeed"
+                              $rootScope.currentSong = $rootScope.feedSongs[0];
+                              widget = SC.Widget(document.getElementById('soundcloud_widget'));
+                              widget.load($rootScope.currentSong.url + '&auto_play=false') 
+                              jQuery('#artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
+                              checkNew()   
+                            })
+                          })
+                        })
+                      .error(function(res){console.log(res)})                                       
+                    };
+
+
+                    var getUsername= function(){
+                      var req = {
+                       method: 'POST',
+                       url: 'http://localhost:8000/login',
+                       headers: {
+                         'Content-Type': "application/json"
+                       },
+                       data: { fbid: $scope.user.id, fullName: $scope.user.full_name },
+                      }
+                    $http(req).success(function(res){
+                        $rootScope.user.username = res.username;
+                        $rootScope.user.tcid = res.id;
+                        $rootScope.user.fullName = res.name;
+                        console.log(res);
+                        var tcid = res.id;
+                        if(!res.username){
+                          $scope.showUpdateUsername();
+                        }
+                        getSongFeedAndFavorites();
+                      })
+                      .error(function(res){console.log(res)});
+                    }
+
+                    checkNew = function(){
+                      $rootScope.newSongs = 0;
+                      for (i=0; i<$rootScope.feedSongs.length; i++){
+                        if ($rootScope.feedSongs[i].isplayed === false){
+                          $rootScope.newSongs ++
+                        }
+                      }
+                    }; 
+
+                    getUsername();
+
+            });
+          });
+      };
+
+
+      //playing around with window.open:
+
+          // window.open('https://soundcloud.com/connect?state=SoundCloud_Dialog_9ec01&client_id=9c6c34a18ce4704b429202afd4f5675f&redirect_uri=http%3A%2F%2Flocalhost%3A8100%2F%23%2Fapp%2Ffeed&response_type=code_and_token&scope=non-expiring&display=popup', function(){
+          //   SC.get('/me', function(me) { 
+          //     console.log(me);
+          //   });         
+          // })
+
+
       //player/playlist functions
       
+
+
       $scope.position = 0;
       $scope.duration = 100;
 
@@ -396,8 +491,7 @@ angular.module('tunecoop.controllers', [])
       };
 
         $scope.logout = function () {
-            OpenFB.logout();
-            $state.go('app.login');
+            $rootScope.user = null;
         };
 
         $scope.revokePermissions = function () {
@@ -534,90 +628,90 @@ angular.module('tunecoop.controllers', [])
     })
 
 
-    .controller('LoginCtrl', function ($scope, $location, OpenFB, $http, $rootScope, $timeout) {
+    // .controller('LoginCtrl', function ($scope, $location, OpenFB, $http, $rootScope, $timeout) {
 
-        $scope.facebookLogin = function () {
+    //     $scope.facebookLogin = function () {
 
-            OpenFB.login('email,read_stream,publish_stream').then(
-                function () {
-                    $location.path('/app/person/me/feed');
-                 OpenFB.get('/me').success(function (user) {
-                    $rootScope.user = user;
+    //         OpenFB.login('email,read_stream,publish_stream').then(
+    //             function () {
+    //                 $location.path('/app/person/me/feed');
+    //              OpenFB.get('/me').success(function (user) {
+    //                 $rootScope.user = user;
 
-                    var getSongFeedAndFavorites= function(){
-                      var req = {
-                           method: 'POST',
-                           url: 'http://localhost:8000/songFeedAndFavorites',
-                           headers: {
-                             'Content-Type': "application/json"
-                           },
-                           data: { tcid: $scope.user.tcid },
-                          }                     
-                        $http(req).success(function(res){
-                          // songFeed = res.songFeed;
-                          // favorites = res.favorites;
-                          $timeout(function() {
-                            $scope.$apply(function() {
-                              $rootScope.feedSongs= res.songFeed;
-                              $rootScope.favorites= res.favorites;
-                              $rootScope.friends = res.friends;
-                              $rootScope.friendRequests = res.friendRequests;
-                              $rootScope.feedSongs[0].playlist = "songFeed"
-                              $rootScope.currentSong = $rootScope.feedSongs[0];
-                              widget = SC.Widget(document.getElementById('soundcloud_widget'));
-                              widget.load($rootScope.currentSong.url + '&auto_play=false') 
-                              jQuery('#artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
-                              checkNew()   
-                            })
-                          })
-                        })
-                      .error(function(res){console.log(res)})                                       
-                    };
-
-
-                    var getUsername= function(){
-                      var req = {
-                       method: 'POST',
-                       url: 'http://localhost:8000/login',
-                       headers: {
-                         'Content-Type': "application/json"
-                       },
-                       data: { fbid: $scope.user.id, fullName: $scope.user.first_name + ' ' + $scope.user.last_name, email: $scope.user.email },
-                      }
-                    $http(req).success(function(res){
-                        $rootScope.user.username = res.username;
-                        $rootScope.user.tcid = res.id;
-                        $rootScope.user.email = res.email;
-                        $rootScope.user.fullName = res.name;
-                        console.log(res);
-                        var tcid = res.id;
-                        if(!res.username){
-                          $scope.showUpdateUsername();
-                        }
-                        getSongFeedAndFavorites();
-                      })
-                      .error(function(res){console.log(res)});
-                    }
-
-                    checkNew = function(){
-                      $rootScope.newSongs = 0;
-                      for (i=0; i<$rootScope.feedSongs.length; i++){
-                        if ($rootScope.feedSongs[i].isplayed === false){
-                          $rootScope.newSongs ++
-                        }
-                      }
-                    }; 
-
-                    getUsername();
+    //                 var getSongFeedAndFavorites= function(){
+    //                   var req = {
+    //                        method: 'POST',
+    //                        url: 'http://localhost:8000/songFeedAndFavorites',
+    //                        headers: {
+    //                          'Content-Type': "application/json"
+    //                        },
+    //                        data: { tcid: $scope.user.tcid },
+    //                       }                     
+    //                     $http(req).success(function(res){
+    //                       // songFeed = res.songFeed;
+    //                       // favorites = res.favorites;
+    //                       $timeout(function() {
+    //                         $scope.$apply(function() {
+    //                           $rootScope.feedSongs= res.songFeed;
+    //                           $rootScope.favorites= res.favorites;
+    //                           $rootScope.friends = res.friends;
+    //                           $rootScope.friendRequests = res.friendRequests;
+    //                           $rootScope.feedSongs[0].playlist = "songFeed"
+    //                           $rootScope.currentSong = $rootScope.feedSongs[0];
+    //                           widget = SC.Widget(document.getElementById('soundcloud_widget'));
+    //                           widget.load($rootScope.currentSong.url + '&auto_play=false') 
+    //                           jQuery('#artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
+    //                           checkNew()   
+    //                         })
+    //                       })
+    //                     })
+    //                   .error(function(res){console.log(res)})                                       
+    //                 };
 
 
-                    })
-                  })
-                },
-                function () {
-                    alert('OpenFB login failed');
-                };
-        })
+    //                 var getUsername= function(){
+    //                   var req = {
+    //                    method: 'POST',
+    //                    url: 'http://localhost:8000/login',
+    //                    headers: {
+    //                      'Content-Type': "application/json"
+    //                    },
+    //                    data: { fbid: $scope.user.id, fullName: $scope.user.first_name + ' ' + $scope.user.last_name, email: $scope.user.email },
+    //                   }
+    //                 $http(req).success(function(res){
+    //                     $rootScope.user.username = res.username;
+    //                     $rootScope.user.tcid = res.id;
+    //                     $rootScope.user.email = res.email;
+    //                     $rootScope.user.fullName = res.name;
+    //                     console.log(res);
+    //                     var tcid = res.id;
+    //                     if(!res.username){
+    //                       $scope.showUpdateUsername();
+    //                     }
+    //                     getSongFeedAndFavorites();
+    //                   })
+    //                   .error(function(res){console.log(res)});
+    //                 }
+
+    //                 checkNew = function(){
+    //                   $rootScope.newSongs = 0;
+    //                   for (i=0; i<$rootScope.feedSongs.length; i++){
+    //                     if ($rootScope.feedSongs[i].isplayed === false){
+    //                       $rootScope.newSongs ++
+    //                     }
+    //                   }
+    //                 }; 
+
+    //                 getUsername();
+
+
+    //                 })
+    //               })
+    //             },
+    //             function () {
+    //                 alert('OpenFB login failed');
+    //             };
+    // })
 
     .controller('UsernameController', function($scope, $rootScope, $http) {
       // $scope.master = {};
@@ -650,53 +744,53 @@ angular.module('tunecoop.controllers', [])
       // $scope.reset();
     })
 
-    .controller('ShareCtrl', function ($scope, OpenFB) {
+    // .controller('ShareCtrl', function ($scope, OpenFB) {
 
-        $scope.item = {};
+    //     $scope.item = {};
 
-        $scope.share = function () {
-            OpenFB.post('/me/feed', $scope.item)
-                .success(function () {
-                    $scope.status = "This item has been shared on OpenFB";
-                })
-                .error(function(data) {
-                    alert(data.error.message);
-                });
-        };
+    //     $scope.share = function () {
+    //         OpenFB.post('/me/feed', $scope.item)
+    //             .success(function () {
+    //                 $scope.status = "This item has been shared on OpenFB";
+    //             })
+    //             .error(function(data) {
+    //                 alert(data.error.message);
+    //             });
+    //     };
 
-    })
+    // })
 
-    .controller('ProfileCtrl', function ($scope, OpenFB) {
-        OpenFB.get('/me').success(function (user) {
-            $scope.user = user;
-        });
-    })
+    // .controller('ProfileCtrl', function ($scope, OpenFB) {
+    //     OpenFB.get('/me').success(function (user) {
+    //         $scope.user = user;
+    //     });
+    // })
 
-    .controller('PersonCtrl', function ($scope, $stateParams, OpenFB) {
-        OpenFB.get('/' + $stateParams.personId).success(function (user) {
-            $scope.user = user;
-        });
-    })
+    // .controller('PersonCtrl', function ($scope, $stateParams, OpenFB) {
+    //     OpenFB.get('/' + $stateParams.personId).success(function (user) {
+    //         $scope.user = user;
+    //     });
+    // })
 
-    .controller('FriendsCtrl', function ($scope, $stateParams, OpenFB) {
-        OpenFB.get('/' + $stateParams.personId + '/friends', {limit: 50})
-            .success(function (result) {
-                $scope.friends = result.data;
-            })
-            .error(function(data) {
-                alert(data.error.message);
-            });
-    })
+    // .controller('FriendsCtrl', function ($scope, $stateParams, OpenFB) {
+    //     OpenFB.get('/' + $stateParams.personId + '/friends', {limit: 50})
+    //         .success(function (result) {
+    //             $scope.friends = result.data;
+    //         })
+    //         .error(function(data) {
+    //             alert(data.error.message);
+    //         });
+    // })
 
-    .controller('MutualFriendsCtrl', function ($scope, $stateParams, OpenFB) {
-        OpenFB.get('/' + $stateParams.personId + '/mutualfriends', {limit: 50})
-            .success(function (result) {
-                $scope.friends = result.data;
-            })
-            .error(function(data) {
-                alert(data.error.message);
-            });
-    })
+    // .controller('MutualFriendsCtrl', function ($scope, $stateParams, OpenFB) {
+    //     OpenFB.get('/' + $stateParams.personId + '/mutualfriends', {limit: 50})
+    //         .success(function (result) {
+    //             $scope.friends = result.data;
+    //         })
+    //         .error(function(data) {
+    //             alert(data.error.message);
+    //         });
+    // })
 
 
 

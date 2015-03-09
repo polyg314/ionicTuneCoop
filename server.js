@@ -105,11 +105,11 @@ app.post('/login', function(req, res){
 });
 
 app.post('/updateUsername', function(req, res){
-  var fbid= req.body.fbid;
+  var scid= req.body.fbid;
   var username = req.body.username;
-  db.query('UPDATE users SET username = $1 WHERE facebookid = $2', [username, fbid], function(err, dbRes){
+  db.query('UPDATE users SET username = $1 WHERE facebookid = $2', [username, scid], function(err, dbRes){
     if(!err){
-        db.query('SELECT * FROM users WHERE facebookid = $1', [fbid], function(err, user) {
+        db.query('SELECT * FROM users WHERE facebookid = $1', [scid], function(err, user) {
           if (user.rows[0]) {
             res.send(user.rows[0])
           } 
