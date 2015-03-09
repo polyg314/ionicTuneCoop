@@ -314,7 +314,7 @@ a.item:after, button.item:after{
 }
 
 .mainDiv{
-  height: 300px;
+  height: 350px;
   overflow-y: scroll !important;
   border-bottom: solid 3px hsl(37,0%,96%);
   border-left: solid 3px hsl(37,0%,94%);
@@ -328,7 +328,7 @@ a.item:after, button.item:after{
   border-left: solid 5px hsl(37,0%,94%);
   border-right: solid 5px hsl(37,0%,94%);
   border-top: solid 3px hsl(37,0%,94%);
-  height: 350px;
+  height: 380px;
   overflow-y: scroll;
 }
 
@@ -706,7 +706,8 @@ a.item:after, button.item:after{
 }
 
 .timerRow{
-  font-size: 20px;
+  font-size: 21px;
+  font-weight: bold; 
   margin-left: 0px !important;
   padding-right: 0px;
   position: absolute;
@@ -913,7 +914,7 @@ img.feedImgs{
 }
 
 .tcsc{
-  z-index: 100;
+/*  z-index: 100;*/
   position: absolute;
   right: -10px;
   top: 0px;
@@ -935,9 +936,8 @@ img.feedImgs{
   width: 50px;
   border: none ;
   background-color: hsla(254, 74%, 27%, 1);
+/*  height: 20px;*/
 }
-
-
 
 
 .tcsc .toggle input:checked + .track {
@@ -949,8 +949,23 @@ img.feedImgs{
 }
 
 
-
 #favoriteTab select{
   background: transparent !important;
   border: none;
 }
+
+#tcToggle{
+  position: absolute;
+  top: 0px;
+  left: 53px;
+  z-index: 10;
+}
+
+#scToggle{
+  position: absolute;
+  top: 0px;
+  left: 76px;
+  z-index: 10;
+
+}
+

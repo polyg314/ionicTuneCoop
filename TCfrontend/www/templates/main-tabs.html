@@ -6,8 +6,7 @@
 
   <div id="favoriteTab" class="tabs offBaby input-label col" ng-class="{ active:tab.isSet(2) }">
     <p ng-click="tab.setTab(2)">Favorites</p>  
-
-    <ion-toggle class="tcsc" ng-model="tcFavorites" toggle-class="toggle-energized" ng-change="favFunction(tcFavorites)"></ion-toggle>
+    <ion-toggle class="tcsc" ng-model="scFavorites" toggle-class="toggle-energized"><span id="tcToggle" ng-hide="scFavorites">TC</span><span id="scToggle" ng-show="scFavorites">SC</span></ion-toggle>
   </div>
   <div id="searchTab" class="tabs offBaby col" ng-class="{ active:tab.isSet(3) }">
     <p ng-click="tab.setTab(3)">Search</p>

@@ -5,42 +5,8 @@ angular.module('tunecoop.controllers', [])
     .controller('AppCtrl', function ($scope, $state, OpenFB, $ionicModal, $timeout, $http, $rootScope, $ionicPopup) {
 
 
-      $rootScope.tcFavorites = true;
+      $rootScope.scFavorites = false;
 
-      // $scope.fonts = [
-      //     {title: "Arial" , text: 'Url for Arial' },
-      //     {title: "Helvetica" , text: 'Url for Helvetica' }
-      // ];
-      $rootScope.changeFavs = function(){
-          alert('anything')
-      }
-
-      $rootScope.tcFavorites = {
-     }
-
-     $rootScope.favFunction = function(option){
-      console.log(option)
-     }
-
-
-
-
-
-      // $rootScope.zeFavorites = [
-      //   {title: "tcFavorites"},
-      //   {title: "scFavorites"}
-      // ]
-
-      // $rootScope.favChange = function(yup){
-      //   alert(yup.title)
-      // };      
-      // $rootScope.tcFavoritesTrue = function(){
-      //   $rootScope.tcFavorites = true;
-      // }
-
-      // $rootScope.tcFavoritesFalse = function(){
-      //   $rootScope.tcFavorites = false;
-      // }
 
       $rootScope.soundCloudConnect = function(){
           // initialize client with app credentials
