@@ -152,6 +152,12 @@ app.post('/favorites', function(req, res){
   var picurl = req.body.picurl;
   var title = req.body.title; 
   var uploader = req.body.uploader;
+  console.log(tcid);
+  console.log(trackid);
+  console.log(url);
+  console.log(picurl);
+  console.log(title);
+  console.log(uploader);
   var date= new Date();
   db.query('INSERT INTO songs (trackid, url, picurl, title, uploader) (SELECT $1, $2, $3, $4, $5 WHERE NOT EXISTS (SELECT 1 FROM songs WHERE trackid= $1))', [trackid, url, picurl, title, uploader], function(err, dbRes){   
     if(!err){
