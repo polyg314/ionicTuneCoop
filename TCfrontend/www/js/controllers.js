@@ -9,6 +9,24 @@ angular.module('tunecoop.controllers', [])
 
 
       $rootScope.soundCloudConnect = function(){
+
+
+          $rootScope.user = {};
+          
+            // expect(scope.foodCounter).toEqual(0);
+            $scope.$watch(
+              // This function returns the value being watched. It is called for each turn of the $digest loop
+              function() { return $rootScope.user; },
+              // This is the change listener, called when the value returned from the above function changes
+              function(newValue, oldValue) {
+                if ( newValue !== oldValue ) {
+                  // Only increment the counter if the value changed
+                  getUsername();
+                }
+              }
+          );
+
+
           // initialize client with app credentials
           SC.initialize({
             client_id: '9c6c34a18ce4704b429202afd4f5675f',
@@ -18,11 +36,18 @@ angular.module('tunecoop.controllers', [])
           // initiate auth popup
           SC.connect(function() {
             SC.get('/me', function(me) { 
+              console.log(me);
+              $rootScope.user = me;
+             //  $scope.$watch(function(scope) { $rootScope.user === me },
+             //  function(newValue) {
+             //     getUsername()
+             //  }
+             // );
 
-                    $rootScope.user = me;
-                    console.log(me);
 
-                    var getSongFeedAndFavorites= function(){
+
+
+                    getSongFeedAndFavorites= function(){
                       var req = {
                            method: 'POST',
                            url: 'http://localhost:8000/songFeedAndFavorites',
@@ -63,7 +88,7 @@ angular.module('tunecoop.controllers', [])
                     };
 
 
-                    var getUsername= function(){
+                    getUsername= function(){
                       var req = {
                        method: 'POST',
                        url: 'http://localhost:8000/login',
@@ -94,8 +119,6 @@ angular.module('tunecoop.controllers', [])
                         }
                       }
                     }; 
-
-                    getUsername();
 
             });
           });
