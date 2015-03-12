@@ -1,6 +1,9 @@
 <div class="mainFeedDiv">
+  <h4 ng-hide="loaded">Loading...</h4>
   <div class="list feedDiv" ng-repeat="feedSong in feedSongs">
+
       <ion-item class="item item-thumbnail-left">
+
 
         <img class="feedImgs" src={{feedSong.picurl}}>
         <div class="feedSongOverlay">

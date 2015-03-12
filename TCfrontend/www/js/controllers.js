@@ -10,17 +10,17 @@ angular.module('tunecoop.controllers', [])
 
       $rootScope.soundCloudConnect = function(){
 
-
-          $rootScope.user = {};
+            $rootScope.user = {};
           
             $scope.$watch(
               function() { return $rootScope.user; },
               function(newValue, oldValue) {
                 if ( newValue !== oldValue ) {
                   getUsername();
+                  $timeout(function(){$rootScope.loaded = true;console.log('hey papi')},1000)
                 }
               }
-          );
+            );
 
 
           // initialize client with app credentials
@@ -42,7 +42,7 @@ angular.module('tunecoop.controllers', [])
                            headers: {
                              'Content-Type': "application/json"
                            },
-                           data: { tcid: $scope.user.tcid },
+                           data: { tcid: $rootScope.user.tcid },
                           }                     
                         $http(req).success(function(res){
                           // songFeed = res.songFeed;
@@ -83,7 +83,7 @@ angular.module('tunecoop.controllers', [])
                        headers: {
                          'Content-Type': "application/json"
                        },
-                       data: { fbid: $scope.user.id, fullName: $scope.user.full_name },
+                       data: { fbid: $rootScope.user.id, fullName: $rootScope.user.full_name },
                       }
                     $http(req).success(function(res){
                         $rootScope.user.username = res.username;
