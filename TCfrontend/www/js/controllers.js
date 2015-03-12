@@ -13,14 +13,10 @@ angular.module('tunecoop.controllers', [])
 
           $rootScope.user = {};
           
-            // expect(scope.foodCounter).toEqual(0);
             $scope.$watch(
-              // This function returns the value being watched. It is called for each turn of the $digest loop
               function() { return $rootScope.user; },
-              // This is the change listener, called when the value returned from the above function changes
               function(newValue, oldValue) {
                 if ( newValue !== oldValue ) {
-                  // Only increment the counter if the value changed
                   getUsername();
                 }
               }
@@ -36,16 +32,8 @@ angular.module('tunecoop.controllers', [])
           // initiate auth popup
           SC.connect(function() {
             SC.get('/me', function(me) { 
-              console.log(me);
+              // console.log(me);
               $rootScope.user = me;
-             //  $scope.$watch(function(scope) { $rootScope.user === me },
-             //  function(newValue) {
-             //     getUsername()
-             //  }
-             // );
-
-
-
 
                     getSongFeedAndFavorites= function(){
                       var req = {
@@ -101,7 +89,7 @@ angular.module('tunecoop.controllers', [])
                         $rootScope.user.username = res.username;
                         $rootScope.user.tcid = res.id;
                         $rootScope.user.fullName = res.name;
-                        console.log(res);
+                        // console.log(res);
                         var tcid = res.id;
                         if(!res.username){
                           $scope.showUpdateUsername();
@@ -134,15 +122,11 @@ angular.module('tunecoop.controllers', [])
           // })
 
 
-      //player/playlist functions
-      
-
-
       $scope.position = 0;
       $scope.duration = 100;
 
       playSong = function(){
-          console.log($rootScope.currentSong)
+          // console.log($rootScope.currentSong)
           jQuery('#artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
 
           if($rootScope.currentSong.playlist === 'songFeed'){
@@ -154,7 +138,7 @@ angular.module('tunecoop.controllers', [])
               if(Number($rootScope.currentSong.id) === Number($rootScope.feedSongs[i].id)){
                 if($rootScope.feedSongs[i].isplayed === false){
                   var count = i;
-                  console.log('id is.. ' + $rootScope.feedSongs[i].id)
+                  // console.log('id is.. ' + $rootScope.feedSongs[i].id)
                   var req = {
                      method: 'PATCH',
                      url: 'http://localhost:8000/updateIsPlayed',
@@ -399,7 +383,6 @@ angular.module('tunecoop.controllers', [])
         widget.seekTo(progress);
       }
 
-      // $scope.duration = 100;
 
 
 
@@ -540,7 +523,7 @@ angular.module('tunecoop.controllers', [])
                        data: { friendId: friendId, tcid: tcid },
                       } 
                     $http(req).success(function(res){
-                      console.log(res);
+                      // console.log(res);
                       for(i=0; i < $rootScope.friends.length; i++){
                         if(Number($rootScope.friends[i].id) === Number(friendId)){
                                $rootScope.friends.splice(i, 1);
@@ -614,7 +597,7 @@ angular.module('tunecoop.controllers', [])
                data: { searchString: searchString, tcid: $rootScope.user.tcid },
               }                    
             $http(req).success(function(res){
-                console.log(res)
+                // console.log(res)
                 $rootScope.friendSearch = res;
             })
           .error(function(res){console.log(res)})                                       
@@ -688,7 +671,7 @@ angular.module('tunecoop.controllers', [])
          // toggle selection for a given fruit by name
         $scope.toggleSelection = function toggleSelection(friendId) {
 
-            console.log(friendId);
+            // console.log(friendId);
           
             var idx = $scope.selection.indexOf(friendId);
 
@@ -707,97 +690,11 @@ angular.module('tunecoop.controllers', [])
 
     })
 
-
-    // .controller('LoginCtrl', function ($scope, $location, OpenFB, $http, $rootScope, $timeout) {
-
-    //     $scope.facebookLogin = function () {
-
-    //         OpenFB.login('email,read_stream,publish_stream').then(
-    //             function () {
-    //                 $location.path('/app/person/me/feed');
-    //              OpenFB.get('/me').success(function (user) {
-    //                 $rootScope.user = user;
-
-    //                 var getSongFeedAndFavorites= function(){
-    //                   var req = {
-    //                        method: 'POST',
-    //                        url: 'http://localhost:8000/songFeedAndFavorites',
-    //                        headers: {
-    //                          'Content-Type': "application/json"
-    //                        },
-    //                        data: { tcid: $scope.user.tcid },
-    //                       }                     
-    //                     $http(req).success(function(res){
-    //                       // songFeed = res.songFeed;
-    //                       // favorites = res.favorites;
-    //                       $timeout(function() {
-    //                         $scope.$apply(function() {
-    //                           $rootScope.feedSongs= res.songFeed;
-    //                           $rootScope.favorites= res.favorites;
-    //                           $rootScope.friends = res.friends;
-    //                           $rootScope.friendRequests = res.friendRequests;
-    //                           $rootScope.feedSongs[0].playlist = "songFeed"
-    //                           $rootScope.currentSong = $rootScope.feedSongs[0];
-    //                           widget = SC.Widget(document.getElementById('soundcloud_widget'));
-    //                           widget.load($rootScope.currentSong.url + '&auto_play=false') 
-    //                           jQuery('#artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
-    //                           checkNew()   
-    //                         })
-    //                       })
-    //                     })
-    //                   .error(function(res){console.log(res)})                                       
-    //                 };
-
-
-    //                 var getUsername= function(){
-    //                   var req = {
-    //                    method: 'POST',
-    //                    url: 'http://localhost:8000/login',
-    //                    headers: {
-    //                      'Content-Type': "application/json"
-    //                    },
-    //                    data: { fbid: $scope.user.id, fullName: $scope.user.first_name + ' ' + $scope.user.last_name, email: $scope.user.email },
-    //                   }
-    //                 $http(req).success(function(res){
-    //                     $rootScope.user.username = res.username;
-    //                     $rootScope.user.tcid = res.id;
-    //                     $rootScope.user.email = res.email;
-    //                     $rootScope.user.fullName = res.name;
-    //                     console.log(res);
-    //                     var tcid = res.id;
-    //                     if(!res.username){
-    //                       $scope.showUpdateUsername();
-    //                     }
-    //                     getSongFeedAndFavorites();
-    //                   })
-    //                   .error(function(res){console.log(res)});
-    //                 }
-
-    //                 checkNew = function(){
-    //                   $rootScope.newSongs = 0;
-    //                   for (i=0; i<$rootScope.feedSongs.length; i++){
-    //                     if ($rootScope.feedSongs[i].isplayed === false){
-    //                       $rootScope.newSongs ++
-    //                     }
-    //                   }
-    //                 }; 
-
-    //                 getUsername();
-
-
-    //                 })
-    //               })
-    //             },
-    //             function () {
-    //                 alert('OpenFB login failed');
-    //             };
-    // })
-
     .controller('UsernameController', function($scope, $rootScope, $http) {
       // $scope.master = {};
 
       $scope.update = function(username) {
-        console.log(username)
+        // console.log(username)
             var req = {
                method: 'POST',
                url: 'http://localhost:8000/updateUsername',
@@ -814,94 +711,11 @@ angular.module('tunecoop.controllers', [])
                 console.log($rootScope.user.tcid);
                 $scope.hideUpdateUsername();
               })
-        // $scope.master = angular.copy(user);
       };
 
-      // $scope.reset = function() {
-      //   $scope.user = angular.copy($scope.master);
-      // };
-
-      // $scope.reset();
     })
-
-    // .controller('ShareCtrl', function ($scope, OpenFB) {
-
-    //     $scope.item = {};
-
-    //     $scope.share = function () {
-    //         OpenFB.post('/me/feed', $scope.item)
-    //             .success(function () {
-    //                 $scope.status = "This item has been shared on OpenFB";
-    //             })
-    //             .error(function(data) {
-    //                 alert(data.error.message);
-    //             });
-    //     };
-
-    // })
-
-    // .controller('ProfileCtrl', function ($scope, OpenFB) {
-    //     OpenFB.get('/me').success(function (user) {
-    //         $scope.user = user;
-    //     });
-    // })
-
-    // .controller('PersonCtrl', function ($scope, $stateParams, OpenFB) {
-    //     OpenFB.get('/' + $stateParams.personId).success(function (user) {
-    //         $scope.user = user;
-    //     });
-    // })
-
-    // .controller('FriendsCtrl', function ($scope, $stateParams, OpenFB) {
-    //     OpenFB.get('/' + $stateParams.personId + '/friends', {limit: 50})
-    //         .success(function (result) {
-    //             $scope.friends = result.data;
-    //         })
-    //         .error(function(data) {
-    //             alert(data.error.message);
-    //         });
-    // })
-
-    // .controller('MutualFriendsCtrl', function ($scope, $stateParams, OpenFB) {
-    //     OpenFB.get('/' + $stateParams.personId + '/mutualfriends', {limit: 50})
-    //         .success(function (result) {
-    //             $scope.friends = result.data;
-    //         })
-    //         .error(function(data) {
-    //             alert(data.error.message);
-    //         });
-    // })
-
 
 
     .controller('HomeCtrl', function ($scope, $stateParams, OpenFB, $ionicLoading) {
-
-        // $scope.show = function() {
-        //     $scope.loading = $ionicLoading.show({
-        //         content: 'Loading feed...'
-        //     });
-        // };
-        // $scope.hide = function(){
-        //     $scope.loading.hide();
-        // };
-
-        // function loadFeed() {
-        //     $scope.show();
-        //     OpenFB.get('/' + $stateParams.personId + '/home', {limit: 30})
-        //         .success(function (result) {
-        //             $scope.hide();
-        //             $scope.items = result.data;
-        //             // Used with pull-to-refresh
-        //             $scope.$broadcast('scroll.refreshComplete');
-        //         })
-        //         .error(function(data) {
-        //             $scope.hide();
-        //             alert(data.error.message);
-        //         });
-        // }
-
-        // $scope.doRefresh = loadFeed;
-
-        // loadFeed();
 
     });

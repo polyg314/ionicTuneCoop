@@ -1,5 +1,5 @@
 (function(){
-    var app = angular.module('tab-directives', []);
+    var app = angular.module('directives', []);
 
     app.directive("usernameForm", function() {
       return {
@@ -102,7 +102,7 @@
 
               $rootScope.$apply(function() {
                 $rootScope.currentSong = thisTrack;
-                console.log($rootScope.currentSong);
+                // console.log($rootScope.currentSong);
               })
 
               playSong();
@@ -127,7 +127,7 @@
         },
         link: function($scope, element, attrs) {
           element.bind('click', function() {
-            console.log(attrs);
+            // console.log(attrs);
             var newTrack = attrs;
 
               var postToFavorites= function(){
@@ -141,11 +141,11 @@
                       } 
                   // console.log($rootScope.favorites);
                     $http(req).success(function(res){
-                        console.log(res.id);
+                        // console.log(res.id);
                         newTrack.id = res.id;
 
                         $rootScope.favorites.unshift(newTrack);
-                        console.log($rootScope.favorites);
+                        // console.log($rootScope.favorites);
                                           
                     })
                   .error(function(res){console.log(res)})         
@@ -182,7 +182,7 @@
                        data: { id: attrs.favid },
                       } 
                     $http(req).success(function(res){
-                      console.log(res);
+                      // console.log(res);
                       for(i=0; i < $rootScope.favorites.length; i++){
                         if(Number($rootScope.favorites[i].id) === Number(attrs.favid)){
                                $rootScope.favorites.splice(i, 1);
@@ -213,8 +213,8 @@
         },
         link: function($scope, element, attrs) {
           element.bind('click', function() {
-            console.log('you clicked share!');
-            console.log(attrs);
+            // console.log('you clicked share!');
+            // console.log(attrs);
             $rootScope.showShareForm();
             $rootScope.currentShareTrack = attrs.trackid;
             jQuery('#shareSongTitle').text(attrs.title);
@@ -258,8 +258,8 @@
         },
         link: function($rootScope, element, attrs) {
           element.bind('click', function() {
-            console.log(attrs.ftcid);
-            console.log(attrs.tcid);
+            // console.log(attrs.ftcid);
+            // console.log(attrs.tcid);
 
               var addFriend= function(){
                   var req = {
@@ -271,7 +271,7 @@
                        data: { ftcid: attrs.ftcid, tcid: attrs.tcid },
                       } 
                     $http(req).success(function(res){
-                      console.log(res);
+                      // console.log(res);
                     })
                     .error(function(res){console.log(res)})         
                                       
