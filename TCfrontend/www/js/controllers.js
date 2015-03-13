@@ -10,19 +10,8 @@ angular.module('tunecoop.controllers', [])
 
       $rootScope.soundCloudConnect = function(){
 
-            $rootScope.user = {};
+          // $rootScope.user = {};
           
-            $scope.$watch(
-              function() { return $rootScope.user; },
-              function(newValue, oldValue) {
-                if ( newValue !== oldValue ) {
-                  getUsername();
-                  $timeout(function(){$rootScope.loaded = true;console.log('hey papi')},1000)
-                }
-              }
-            );
-
-
           // initialize client with app credentials
           SC.initialize({
             client_id: '9c6c34a18ce4704b429202afd4f5675f',
@@ -32,86 +21,98 @@ angular.module('tunecoop.controllers', [])
           // initiate auth popup
           SC.connect(function() {
             SC.get('/me', function(me) { 
-              // console.log(me);
-              $rootScope.user = me;
-
-                    getSongFeedAndFavorites= function(){
-                      var req = {
-                           method: 'POST',
-                           url: 'http://localhost:8000/songFeedAndFavorites',
-                           headers: {
-                             'Content-Type': "application/json"
-                           },
-                           data: { tcid: $rootScope.user.tcid },
-                          }                     
-                        $http(req).success(function(res){
-                          // songFeed = res.songFeed;
-                          // favorites = res.favorites;
-                          $timeout(function() {
-                            $scope.$apply(function() {
-                              $rootScope.feedSongs= res.songFeed;
-                              $rootScope.favorites= res.favorites;
-                              $rootScope.friends = res.friends;
-                              $rootScope.friendRequests = res.friendRequests;
-                              $rootScope.feedSongs[0].playlist = "songFeed"
-                              $rootScope.currentSong = $rootScope.feedSongs[0];
-                              widget = SC.Widget(document.getElementById('soundcloud_widget'));
-                              widget.load($rootScope.currentSong.url + '&auto_play=false') 
-                              jQuery('#artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
-                              checkNew()   
-                            })
-                          })
-                        })
-                      .error(function(res){console.log(res)}) 
-                      var reqTwo = {
-                           method: 'GET',
-                           url: $rootScope.user.uri + '/favorites.json?client_id=9c6c34a18ce4704b429202afd4f5675f',
-                           headers: {
-                             'Content-Type': "application/json"
-                           },
-                        }                     
-                        $http(reqTwo).success(function(res){
-                          $rootScope.soundCloudFavorites = res;
-                        }).error(function(res){console.log(res)})                                
-                    };
-
-
-                    getUsername= function(){
-                      var req = {
-                       method: 'POST',
-                       url: 'http://localhost:8000/login',
-                       headers: {
-                         'Content-Type': "application/json"
-                       },
-                       data: { fbid: $rootScope.user.id, fullName: $rootScope.user.full_name },
-                      }
-                    $http(req).success(function(res){
-                        $rootScope.user.username = res.username;
-                        $rootScope.user.tcid = res.id;
-                        $rootScope.user.fullName = res.name;
-                        // console.log(res);
-                        var tcid = res.id;
-                        if(!res.username){
-                          $scope.showUpdateUsername();
-                        }
-                        getSongFeedAndFavorites();
-                      })
-                      .error(function(res){console.log(res)});
-                    }
-
-                    checkNew = function(){
-                      $rootScope.newSongs = 0;
-                      for (i=0; i<$rootScope.feedSongs.length; i++){
-                        if ($rootScope.feedSongs[i].isplayed === false){
-                          $rootScope.newSongs ++
-                        }
-                      }
-                    }; 
-
+              $scope.$apply(function(){
+                $rootScope.user = me; 
+              })
+              if($rootScope.user){
+                getUsername();
+              }                 
             });
           });
       };
 
+      // $scope.$watch(
+      //   function() { return $rootScope.user; },
+      //   function(newValue, oldValue) {
+      //     if ( newValue !== oldValue ) {
+      //       getUsername();
+      //       $timeout(function(){$rootScope.loaded = true;console.log('hey papi')},1000)
+      //     }
+      // });
+
+
+      getSongFeedAndFavorites= function(){
+        var req = {
+             method: 'POST',
+             url: 'http://localhost:8000/songFeedAndFavorites',
+             headers: {
+               'Content-Type': "application/json"
+             },
+             data: { tcid: $rootScope.user.tcid },
+            }                     
+          $http(req).success(function(res){
+            // songFeed = res.songFeed;
+            // favorites = res.favorites;
+            $timeout(function() {
+              $scope.$apply(function() {
+                $rootScope.feedSongs= res.songFeed;
+                $rootScope.favorites= res.favorites;
+                $rootScope.friends = res.friends;
+                $rootScope.friendRequests = res.friendRequests;
+                $rootScope.feedSongs[0].playlist = "songFeed"
+                $rootScope.currentSong = $rootScope.feedSongs[0];
+                widget = SC.Widget(document.getElementById('soundcloud_widget'));
+                widget.load($rootScope.currentSong.url + '&auto_play=false') 
+                jQuery('#artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
+                checkNew()   
+              })
+            })
+          })
+        .error(function(res){console.log(res)}) 
+        var reqTwo = {
+             method: 'GET',
+             url: $rootScope.user.uri + '/favorites.json?client_id=9c6c34a18ce4704b429202afd4f5675f',
+             headers: {
+               'Content-Type': "application/json"
+             },
+          }                     
+          $http(reqTwo).success(function(res){
+            $rootScope.soundCloudFavorites = res;
+          }).error(function(res){console.log(res)})                                
+      };
+
+
+        getUsername= function(){
+            var req = {
+             method: 'POST',
+             url: 'http://localhost:8000/login',
+             headers: {
+               'Content-Type': "application/json"
+             },
+             data: { fbid: $rootScope.user.id, fullName: $rootScope.user.full_name },
+            }
+          $http(req).success(function(res){
+              $rootScope.user.username = res.username;
+              $rootScope.user.tcid = res.id;
+              $rootScope.user.fullName = res.name;
+              // console.log(res);
+              var tcid = res.id;
+              if(!res.username){
+                $scope.showUpdateUsername();
+              }
+              getSongFeedAndFavorites();
+            })
+            .error(function(res){console.log(res)});
+          }
+
+          checkNew = function(){
+            $rootScope.newSongs = 0;
+            for (i=0; i<$rootScope.feedSongs.length; i++){
+              if ($rootScope.feedSongs[i].isplayed === false){
+                $rootScope.newSongs ++
+              }
+            }
+          }; 
 
       //playing around with window.open:
 
@@ -554,6 +555,7 @@ angular.module('tunecoop.controllers', [])
       };
 
         $scope.logout = function () {
+            widget.pause();
             $rootScope.user = null;
         };
 
