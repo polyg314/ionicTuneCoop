@@ -971,3 +971,27 @@ img.feedImgs{
 
 }
 
+.glyphicon-play:active{
+  color: #009900;
+}
+
+.glyphicon-share-alt:active{
+  color: #0029A3;
+}
+
+.glyphicon-forward:active{
+  color: #730000;
+}
+
+.glyphicon-backward:active{
+  color: #730000;
+}
+
+.glyphicon-heart:active{
+  color: purple;
+}
+
+.glyphicon-minus:active{
+  color: red;
+}
+
