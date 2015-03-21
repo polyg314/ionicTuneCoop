@@ -198,12 +198,15 @@ angular.module('tunecoop.controllers', [])
               } , 1000)
               progressChecker();
           });
-
+          widget.bind(SC.Widget.Events.PAUSE, function(){
+            $rootScope.playing = false;
+          });
 
           widget.bind(SC.Widget.Events.FINISH, function(){
               if($rootScope.currentSong.playlist === 'songFeed' || $rootScope.currentSong.playlist === 'favorites' || $rootScope.currentSong.playlist === "soundCloudFavorites"){
                 playNext();
               }
+              $rootScope.playing = false;
           });
       };
 

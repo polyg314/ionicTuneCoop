@@ -995,3 +995,7 @@ img.feedImgs{
   color: red;
 }
 
+.searchTitle{
+     white-space: normal !important;
+}
+
