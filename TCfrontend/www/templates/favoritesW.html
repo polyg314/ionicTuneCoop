@@ -32,6 +32,7 @@
 
 
 <div class="mainDiv searchAndFavorites" ng-show="scFavorites">
+  <h4 ng-hide="loaded">Loading...</h4>
   <div class="list" ng-repeat="soundCloudFavorite in soundCloudFavorites | filter:query">
       <ion-item class="item item-thumbnail-left">
         <img src={{soundCloudFavorite.artwork_url}}>
@@ -40,7 +41,7 @@
         <p>{{soundCloudFavorite.duration | millSecondsToTimeString}}  
         <div class="fandsButtonRow">    
           <share-button url="{{ soundCloudFavorite.permalink_url  }}" picUrl= "{{ soundCloudFavorite.artwork_url }}"  uploader="{{ soundCloudFavorite.user.username }}" title="{{ soundCloudFavorite.title }}" trackId="{{ soundCloudFavorite.id }}"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></share-button>
-          <heart url="{{ soundCloudFavorite.permalink_url }}" picUrl="{{ soundCloudFavorite.artwork_url }}" uploader="{{ soundCloudFavorite.user.username }}" title="{{ soundCloudFavorite.title }}" trackId="{{ soundCloudFavorite.id }}" tcid="{{ user.tcid }}"><span class="glyphicon glyphicon-heart" aria-hidden="true" ></span></heart>
+          <heart url="{{ soundCloudFavorite.permalink_url }}" picUrl="{{ soundCloudFavorite.artwork_url }}" uploader="{{ soundCloudFavorite.user.username }}" title="{{ soundCloudFavorite.title }}" trackId="{{ soundCloudFavorite.id }}" tcid="{{ user.tcid }}"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
           <play link="{{ soundCloudFavorite.permalink_url }}" artUrl="{{ soundCloudFavorite.artwork_url }}" uploader="{{ soundCloudFavorite.user.username }}" title="{{ soundCloudFavorite.title }}" trackId="{{ soundCloudFavorite.id }}" playlist= "soundCloudFavorites" id= "{{ soundCloudFavorite.id }}"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></play>
       </ion-item>
   </div>

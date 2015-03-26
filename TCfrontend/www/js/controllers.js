@@ -63,7 +63,7 @@ angular.module('tunecoop.controllers', [])
                 $rootScope.currentSong = $rootScope.feedSongs[0];
                 widget = SC.Widget(document.getElementById('soundcloud_widget'));
                 widget.load($rootScope.currentSong.url + '&auto_play=false') 
-                jQuery('#artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
+                jQuery('.artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
                 checkNew()   
               })
             })
@@ -112,6 +112,7 @@ angular.module('tunecoop.controllers', [])
                 $rootScope.newSongs ++
               }
             }
+            $rootScope.loaded = true;
           }; 
 
       //playing around with window.open:
@@ -128,7 +129,7 @@ angular.module('tunecoop.controllers', [])
 
       playSong = function(){
           // console.log($rootScope.currentSong)
-          jQuery('#artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
+          jQuery('.artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
 
           if($rootScope.currentSong.playlist === 'songFeed'){
             jQuery('#songFeedTab').css({'color':'hsla(254, 74%, 27%, 1)'});
