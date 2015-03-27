@@ -1,6 +1,6 @@
 <ion-view hide-back-button="true">
-
-  <container id="phoneHTML">
+<!-- 
+  <span class="phoneHTML"> -->
   <div ng-hide="user" id="loginPage" hide-back-button="true" hide-nav-bar="true">
     <div id="frontOverlay">
 
@@ -8,7 +8,7 @@
                 <div id="soundCloudConnectDiv">
                  <a ng-click="soundCloudConnect()"><img id="soundCloudConnectButton" src="http://connect.soundcloud.com/2/btn-connect-sc-m.png"></a>
                 </div>
-      </ion-content>
+<!--       </ion-content> -->
       </div>
   </div>
 
@@ -20,22 +20,25 @@
        </div>
    
     <div id="logo">TuneCoop</div>
-<!--     <div ng-hide="user" id="soundCloudLogin">
-        <a ng-click="soundCloudLogin()"><img id="soundCloudConnectButton" src="http://connect.soundcloud.com/2/btn-connect-sc-m.png"></a>
-    </div>
- -->
       <div>
         <div class="col-sm-12" id="player">
-              <div class="col-sm-3" id="playerSongTitle">{{currentSong.title}}</div>
-              <div id="playerSongUploader">{{currentSong.uploader}}</div>  
+              <div class="playerSongTitle"><strong>{{currentSong.title}}</strong><br><span id="playerSongUploader">{{currentSong.uploader}}</span>  </div>
               <div class="row" id="playerButtons">
                   <button id="officialReverseButton" class="col" ng-click="reverseButtonFunction()"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
                   <button id="officialPlayButton" ng-hide="playing" ng-click="playCurrentTrack()" class="col"><span id="playerPlayButtonGlyphicon" class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
                   <button id="officialPauseButton" ng-show="playing" ng-click="pauseCurrentTrack()" class="col"><span id="playerPauseButtonGlyphicon" class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
                   <button id="officialNextButton" class="col"><span class="glyphicon glyphicon-forward" aria-hidden="true" ng-click="skipToNextSong()"></span></button>
                   <heart id="officialHeartButton" url="{{ currentSong.url }}" picUrl= "{{ currentSong.picurl }}" uploader="{{ currentSong.uploader }}" title="{{ currentSong.title }}" trackId="{{ currentSong.trackid }}" tcid="{{ user.tcid }}" class="col"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
-                  <button id="officialDetailsButton" class="col" ng-click="showSongInfo()"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>     
+                  <button id="officialDetailsButton" class="col phoneHTML" ng-click="showSongInfo()"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>     
               </div> 
+              <span class="webHTML">
+              <div id="volumeDiv" class="row">
+                 <input id="volumeSlider" ng-change="setVolume(volume)" min="0" max="1" value=".8" step="0.01" type="range" ng-model="volume" class="col-90"/>  
+                <span ng-if="volume == 0"class="col-10 glyphicon glyphicon-volume-off volumeGlyphs"></span>
+                <span ng-if="volume > 0 && volume < .5" class="col-10 glyphicon glyphicon-volume-down volumeGlyphs"></span> 
+                <span ng-if="volume >= .5" class="col-10 glyphicon glyphicon-volume-up volumeGlyphs"></span>        
+              </div>
+              </span>
         
          <!-- div class="col-sm-12" id="progressBarDiv"> -->
 <!--           {{position}} -->
@@ -68,12 +71,28 @@
     </div>
   </div>
  -->
-
+<span class="phoneHTML">
   <main-tabs></main-tabs>
 
   <song-feed ng-show="tab.isSet(1)"></song-feed>
   <favorites ng-show="tab.isSet(2)"></favorites> 
   <search ng-show="tab.isSet(3)"></search>
+</span>
+
+  <div class="row mainDivRow webHTML">
+    <div class="mainDivs col" id="songFeedDiv"><h4>Feed</h4><div class="newSongsPill" ng-show="newSongs">{{newSongs}}</div>
+      <song-feed></song-feed>
+    </div>
+
+    <div class="mainDivs col" id="favoritesDiv"><h4>Favorites</h4> 
+      <ion-toggle class="tcsc" ng-model="scFavorites" toggle-class="toggle-energized"><span id="tcToggle" ng-hide="scFavorites">TC</span><span id="scToggle" ng-show="scFavorites">SC</span></ion-toggle>
+      <favorites></favorites>
+    </div>
+
+    <div class="mainDivs col" id="searchesDiv"><h4>Search</h4>
+      <search></search>
+    </div>
+  </div>
 
   
 
@@ -81,8 +100,8 @@
   </div>
 </container>
 
-<container id="webHTML">
-
+<!-- <container class="webHTML"> -->
+  <span class="webHTML"
   <div ng-hide="user" id="loginPage" hide-back-button="true" hide-nav-bar="true">
     <div id="frontOverlay">
 
@@ -101,9 +120,9 @@
       </ion-content>
       </div>
   </div>
-
+  </span>
   
-  <container ng-show="user">
+<!--   <container ng-show="user">
 
      <div class="artDiv">
      <div id="overlay">
@@ -115,7 +134,7 @@
 
 
       <div>
-        <div class="col-sm-3" id="playerSongTitle">{{currentSong.title}}<br><span id="playerSongUploader">{{currentSong.uploader}}</span>  </div>
+        <div class="col-sm-3 webHTML" id="playerSongTitle">{{currentSong.title}}<br><span id="playerSongUploader">{{currentSong.uploader}}</span>  </div>
         
         <div class="col-sm-12" id="player">
 
@@ -125,23 +144,17 @@
               <div class="col-60"></div>
               <div class="col-20" ng-show="firstPlayed" id="progressBarTime">{{duration - position | millSecondsToTimeString}}</div>
             </div>       
+ -->
 
-
-              <div class="row" id="playerButtons">
+<!--               <div class="row" id="playerButtons">
                   <button id="officialReverseButton" class="col" ng-click="reverseButtonFunction()"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
                   <button id="officialPlayButton" ng-hide="playing" ng-click="playCurrentTrack()" class="col"><span id="playerPlayButtonGlyphicon" class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
                   <button id="officialPauseButton" ng-show="playing" ng-click="pauseCurrentTrack()" class="col"><span id="playerPauseButtonGlyphicon" class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
                   <button id="officialNextButton" class="col"><span class="glyphicon glyphicon-forward" aria-hidden="true" ng-click="skipToNextSong()"></span></button>
                   <heart id="officialHeartButton" url="{{ currentSong.url }}" picUrl= "{{ currentSong.picurl }}" uploader="{{ currentSong.uploader }}" title="{{ currentSong.title }}" trackId="{{ currentSong.trackid }}" tcid="{{ user.tcid }}" class="col"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
-<!--                   <button id="officialDetailsButton" class="col" ng-click="showSongInfo()"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>   -->   
-              </div> 
-              <div id="volumeDiv" class="row">
-                 <input id="volumeSlider" ng-change="setVolume(volume)" min="0" max="1" value=".8" step="0.01" type="range" ng-model="volume" class="col-90"/>  
-                <span ng-if="volume == 0"class="col-10 glyphicon glyphicon-volume-off volumeGlyphs"></span>
-                <span ng-if="volume > 0 && volume < .5" class="col-10 glyphicon glyphicon-volume-down volumeGlyphs"></span> 
-                <span ng-if="volume >= .5" class="col-10 glyphicon glyphicon-volume-up volumeGlyphs"></span>        
-              </div>
-        
+<!               <button id="officialDetailsButton" class="col" ng-click="showSongInfo()"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>   -->   
+<!--               </div>  --> 
+
          <!-- div class="col-sm-12" id="progressBarDiv"> -->
 <!--           {{position}} -->
 
@@ -159,7 +172,7 @@
       </div>
 <!--      </div> -->
 
-<iframe id="soundcloud_widget" width="0" height="0" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/9394924&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+<!-- <iframe id="soundcloud_widget" width="0" height="0" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/9394924&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe> -->
 <!-- 
   <div class="tabs-striped" id="mainTabDiv">
     <div class="tabs" ng-class="{ active:tab.isSet(1) }">
@@ -182,25 +195,11 @@
   <favorites ng-show="tab.isSet(2)"></favorites> 
   <search ng-show="tab.isSet(3)"></search> -->
 
-  <div class="row mainDivRow">
-    <div class="mainDivs col" id="songFeedDiv"><h4>Feed</h4><div class="newSongsPill" ng-show="newSongs">{{newSongs}}</div>
-      <song-feed></song-feed>
-    </div>
-
-    <div class="mainDivs col" id="favoritesDiv"><h4>Favorites</h4> 
-      <ion-toggle class="tcsc" ng-model="scFavorites" toggle-class="toggle-energized"><span id="tcToggle" ng-hide="scFavorites">TC</span><span id="scToggle" ng-show="scFavorites">SC</span></ion-toggle>
-      <favorites></favorites>
-    </div>
-
-    <div class="mainDivs col" id="searchesDiv"><h4>Search</h4>
-      <search></search>
-    </div>
-  </div>
-  </container>
+<!--   </container> -->
 
 
-</container>
-
+<!-- </container>
+ -->
 
 
 </ion-view>

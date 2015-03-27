@@ -1,6 +1,6 @@
 /* Your app's CSS, go crazy, make it your own */
 @media (max-width: 1000px) {
- #webHTML{
+ .webHTML{
   display: none;
  } 
 
@@ -288,7 +288,7 @@ a:active {
 }
 
 
-#playerSongTitle{
+.playerSongTitle{
 	padding: 0px;
 	padding-left: 2px;
 	font-size: 23px;
@@ -297,7 +297,7 @@ a:active {
 /*  text-overflow: elipsis;*/
 }
 
-#playerSongUploader{
+.playerSongUploader{
   font-size: 20px;
   font-weight: bold;
   margin-left: 4px;
@@ -1012,7 +1012,7 @@ img.feedImgs{
 
 @media (min-width: 1000px) {
 
-#phoneHTML{
+.phoneHTML{
   display: none;
 }
 
@@ -1086,7 +1086,7 @@ body{
 .artDiv{
 /*  padding: 105px !important;*/
   margin-bottom: 30px;
-  height: 50%;
+  height: 400px;
   width: 98%;
   background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/a/af/Squarepusher_Enstrobia.jpg/220px-Squarepusher_Enstrobia.jpg');
   background-size: 9%;
@@ -1103,7 +1103,7 @@ body{
       padding: 0px;
       position: absolute;
       top: 20px;
-      height: 50%;
+      height: 400px;
       width: 98%;
       z-index: 0;
 /*      border-top: 1px solid hsl(0,0%,99%);*/
@@ -1291,23 +1291,21 @@ a:active {
 }
 
 
-#playerSongTitle{
+.playerSongTitle{
   padding: 0px;
   padding-left: 2px;
-  font-size: 23px;
+  font-size: 24px;
   font-weight: bold;
   margin-left: 3px;
-  position: absolute;
-  top: 80px;
-  color: white;
-  width: 42%;
-  height: 100px;
+  margin-top: -250px;
+
 /*  text-overflow: elipsis;*/
 }
 
-#playerSongUploader{
-  font-size: 19px;
-
+.playerSongUploader{
+  font-size: 18px !important;
+/*  font-weight: bold;*/
+  margin-left: 4px;
 }
 
 #frontOverlay{
@@ -2097,6 +2095,8 @@ div .modal-wrapper .scroll-content .scroll{
 .glyphicon-minus:active{
   color: red;
 }
+}
+
 
 
 
