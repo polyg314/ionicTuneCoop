@@ -71,13 +71,6 @@
     </div>
   </div>
  -->
-<span class="phoneHTML">
-  <main-tabs></main-tabs>
-
-  <song-feed ng-show="tab.isSet(1)"></song-feed>
-  <favorites ng-show="tab.isSet(2)"></favorites> 
-  <search ng-show="tab.isSet(3)"></search>
-</span>
 
   <div class="row mainDivRow webHTML">
     <div class="mainDivs col" id="songFeedDiv"><h4>Feed</h4><div class="newSongsPill" ng-show="newSongs">{{newSongs}}</div>
@@ -94,7 +87,14 @@
     </div>
   </div>
 
-  
+<span class="phoneHTML">
+  <main-tabs></main-tabs>
+
+  <song-feed ng-show="tab.isSet(1)"></song-feed>
+  <favorites ng-show="tab.isSet(2)"></favorites> 
+  <search ng-show="tab.isSet(3)"></search>
+</span>
+
 
 
   </div>

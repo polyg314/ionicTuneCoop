@@ -620,8 +620,9 @@ angular.module('tunecoop.controllers', [])
         }
 
 
-        $scope.searchSoundCloud = function(){
-          var searchString = $('#searchForm').find('input[name="searchString"]').val()
+        $scope.searchSoundCloud = function(searchText){
+          console.log(searchText);
+          var searchString = searchText;
           var req = {
                method: 'POST',
                url: 'http://localhost:8000/soundCloudSearch',
@@ -639,6 +640,7 @@ angular.module('tunecoop.controllers', [])
                 };
               }
               $scope.tracks = tracks;
+              $('.searchForm').find('input[name="searchString"]').val('')
             })
           .error(function(res){console.log(res)})                                       
         };
