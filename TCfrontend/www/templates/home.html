@@ -122,44 +122,7 @@
   </div>
   </span>
   
-<!--   <container ng-show="user">
 
-     <div class="artDiv">
-     <div id="overlay">
-        <div class="col-sm-1" id="soundCloudImageLinkDiv">  <a id="soundCloudImageLink" href="" target="_blank"> <img src="https://developers.soundcloud.com/assets/logo_white-8bf7615eb575eeb114fc65323068e1e4.png"></a>
-       </div>
-   
-    <div id="logo">TuneCoop</div>
-
-
-
-      <div>
-        <div class="col-sm-3 webHTML" id="playerSongTitle">{{currentSong.title}}<br><span id="playerSongUploader">{{currentSong.uploader}}</span>  </div>
-        
-        <div class="col-sm-12" id="player">
-
-           <input id="progressBar" ng-change="seekTo(progress)" min="0" max={{duration}} value={{position}} step="1" type="range" ng-model="progress" class="col-100"/> 
-            <div class="row timerRow">
-              <div class="col-20" ng-show="firstPlayed" id="progressBarTimer">{{position | millSecondsToTimeString}}</div>
-              <div class="col-60"></div>
-              <div class="col-20" ng-show="firstPlayed" id="progressBarTime">{{duration - position | millSecondsToTimeString}}</div>
-            </div>       
- -->
-
-<!--               <div class="row" id="playerButtons">
-                  <button id="officialReverseButton" class="col" ng-click="reverseButtonFunction()"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
-                  <button id="officialPlayButton" ng-hide="playing" ng-click="playCurrentTrack()" class="col"><span id="playerPlayButtonGlyphicon" class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
-                  <button id="officialPauseButton" ng-show="playing" ng-click="pauseCurrentTrack()" class="col"><span id="playerPauseButtonGlyphicon" class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
-                  <button id="officialNextButton" class="col"><span class="glyphicon glyphicon-forward" aria-hidden="true" ng-click="skipToNextSong()"></span></button>
-                  <heart id="officialHeartButton" url="{{ currentSong.url }}" picUrl= "{{ currentSong.picurl }}" uploader="{{ currentSong.uploader }}" title="{{ currentSong.title }}" trackId="{{ currentSong.trackid }}" tcid="{{ user.tcid }}" class="col"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
-<!               <button id="officialDetailsButton" class="col" ng-click="showSongInfo()"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>   -->   
-<!--               </div>  --> 
-
-         <!-- div class="col-sm-12" id="progressBarDiv"> -->
-<!--           {{position}} -->
-
-           
-       <!--   </div> -->
        </div>
        </div>
 
@@ -170,36 +133,6 @@
 
 
       </div>
-<!--      </div> -->
-
-<!-- <iframe id="soundcloud_widget" width="0" height="0" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/9394924&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe> -->
-<!-- 
-  <div class="tabs-striped" id="mainTabDiv">
-    <div class="tabs" ng-class="{ active:tab.isSet(1) }">
-      <a class="tab-item active feedTab" ng-click="checkActive('.feedTab')">
-        Song Feed
-      </a>
-      <a class="tab-item favoritesTab" ng-click="checkActive('.favoritesTab')">
-        Favorites
-      </a>
-      <a class="tab-item searchTab" g-click="checkActive('.searchTab')">
-        Search & Share
-      </a>
-    </div>
-  </div>
- -->
-<!-- 
-  <main-tabs></main-tabs>
-
-  <song-feed ng-show="tab.isSet(1)"></song-feed>
-  <favorites ng-show="tab.isSet(2)"></favorites> 
-  <search ng-show="tab.isSet(3)"></search> -->
-
-<!--   </container> -->
-
-
-<!-- </container>
- -->
 
 
 </ion-view>

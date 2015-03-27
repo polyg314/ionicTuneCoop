@@ -1694,8 +1694,17 @@ a.item:after, button.item:after{
 }
 
 #volumeSlider{
-
+  margin-top: 13px;
+  background-color: hsla(0,0%,100%,.6);
+  height: 15px;
+  border-radius: 6px;
+  color: purple;
 }
+
+#volumeSlider::-webkit-slider-thumb{
+  height: 15px;
+}
+
 
 .cardDiv{
 
