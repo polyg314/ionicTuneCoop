@@ -4,6 +4,14 @@
   display: none;
  } 
 
+ .scroll{
+  height: 50px;
+}
+
+.scroll div .buttons{
+  height: 50px;
+}
+
 .ionic-logo {
   display: block;
   margin: 15px auto;
@@ -27,6 +35,10 @@
 #soundCloudConnectButton{
   margin-top: 30px;
   width: 230px;
+}
+
+#headerBar{
+  height: 35px;
 }
 
 #frontLogo{
@@ -70,11 +82,11 @@
 .artDiv{
 /*	padding: 105px !important;*/
 	margin-bottom: 30px;
-	height: 300px;
-	width: 100%;
+	height: 205px;
+	width: 99%;
 	background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/a/af/Squarepusher_Enstrobia.jpg/220px-Squarepusher_Enstrobia.jpg');
-    background-size: 25%;
-    z-index: -10;
+  background-size: 25%;
+
 }
 
 #overlay{
@@ -82,9 +94,9 @@
       position: absolute;
       top: 0px;
       left: 0%;
-      height: 300px;
-      width: 100%;
-      z-index: 0;
+      height: 170px;
+      width: 99%;
+  
 /*      border-top: 1px solid hsl(0,0%,99%);*/
       border-left: 1px solid hsl(0,0%,40%);
       border-right: 1px solid hsl(0,0%,40%);
@@ -148,16 +160,11 @@
 
   #playerButtons{
     position: absolute;
-    bottom: 70px;
-    float: left;
+    bottom: 60px;
     padding: 0px;
     color: white;
     width: 100%;
-    margin-right: 0px;
-    margin-left: 0px;
-    text-align: justify;
-    margin-top: 15px;
-/*    z-index: 10;*/
+
   }
 
 #officialNextButton{
@@ -225,11 +232,10 @@
       color: rgb(250,250,250);
 /*      z-index: 10;*/
 /*      margin-top: 100px;*/
-      position: relative;
-      height: 0px;
-      padding-right: 50%;
-      padding-bottom: 70px;
-      padding-left: 2%;
+      position: absolute;
+      left: 40px;
+      top: -5px;
+
 /*      background: black;*/
 }
 
@@ -240,32 +246,38 @@
 
 
 #player{
-      height: 200px;
+      position: absolute;
+      height: 180px;
       padding: 5px;
       padding-left: 0px;
       padding-bottom: 30px;
       background: transparent;
       color: white;
       font-family: 'PT Sans Narrow', sans-serif;
-      margin-top: -20px;
+      top: 5px;
+      width: 100%;
     }
 
 #mainTabDiv{
   margin: 0 auto;
-	margin-top: -95px;
+	margin-top: 150px;
 /*  width: 100%;*/
   padding: 0px;
   background-color: hsla(0,0%,0%,0);
+  font-size: 10px;
 }
 
 .tabs{
   /*border: 2px black solid;*/
-  font-size: 18px;
+  font-size: 14px;
+  padding-bottom: 0px !important;
+  height: 35px;
 }
 
 
 .tabs a{
-  color: black;
+  color: hsl(0,15%,15%);
+  font-size: 15px;
 }
 
 .tabs .active{
@@ -292,16 +304,20 @@ a:active {
 .playerSongTitle{
 	padding: 0px;
 	padding-left: 2px;
-	font-size: 28px;
+	font-size: 20px;
   font-weight: bold;
   margin-left: 3px;
+  position: absolute;
+  top: 40px;
 /*  text-overflow: elipsis;*/
 }
 
-.playerSongUploader{
-  font-size: 20px;
-  font-weight: bold;
-  margin-left: 4px;
+#playerSongUploader{
+  position: absolute;
+  font-size: 18px;
+  margin-left: 5px;
+  top: 60px;
+
 }
 
 #frontOverlay{
@@ -319,13 +335,30 @@ a.item:after, button.item:after{
 }
 
 .mainDiv{
-  height: 90%;
-  background-color: black;
+  height: 150%;
+  background-color: white;
   overflow-y: scroll !important;
   border-bottom: solid 3px hsl(37,0%,96%);
   border-left: solid 3px hsl(37,0%,94%);
   border-right: solid 3px hsl(37,0%,94%);
   border-top: solid 3px hsl(37,0%,93%);
+}
+
+.mainDivRow{
+/*  height: 50%;*/
+  width: 97.25%;
+  position: absolute;
+  margin-left: 0%!important;
+  bottom: 10px;
+  border-radius: 0px 0px 15px 15px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+}
+
+.favFilterDiv{
+  background-color: white;
+  z-index: 0;
 }
 
 .mainFeedDiv{
@@ -334,8 +367,13 @@ a.item:after, button.item:after{
   border-left: solid 5px hsl(37,0%,94%);
   border-right: solid 5px hsl(37,0%,94%);
   border-top: solid 3px hsl(37,0%,94%);
-  height: 380px;
+  height: auto !important;
+  height: calc(300% - 205px) !important;
   overflow-y: scroll;
+}
+
+song-feed{
+  height: 100px;
 }
 
 .searchButtons{
@@ -385,11 +423,15 @@ a.item:after, button.item:after{
 
 .yourFriendsDiv{
   margin: 10px;
-  margin-top: 130px;
+  margin-top: 30px;
   height: 550px;
   background-color: white;
   padding: 10px;
   border-radius: 5px;
+}
+
+.yourFriendsDiv div.buttons{
+  height: 0px;
 }
 
 .closeFriendsButton{
@@ -511,13 +553,15 @@ a.item:after, button.item:after{
 
 .tabs{ 
   background-color: white !important;
- /* margin-bottom: px;*/
+  vertical-align: middle;
 }
 
 .tabs p{
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
-  font-size: 21px;
+  font-size: 18px;
+  margin-top: -5px;
+  margin-right: 0px;
 }
 
 .onBaby{
@@ -545,7 +589,7 @@ a.item:after, button.item:after{
 
 #friendSearchDiv{
   border-radius: 5px;
-  margin-top: 125px;
+  margin-top: 30px;
   background-color: white;
   height: 500px;
   padding: 10px;
@@ -629,7 +673,7 @@ a.item:after, button.item:after{
 .accountDiv{
   height: 550px;
   background-color: white;
-  margin-top: 130px;
+  margin-top: 30px;
   padding: 10px;
   border-radius: 5px;
 }
@@ -665,7 +709,7 @@ a.item:after, button.item:after{
 }
 
 #confirmDeleteModal{
-  margin-top: 200px;
+  margin-top: 100px;
   background-color: white;
   text-align: center;
   padding: 20px;
@@ -695,24 +739,8 @@ a.item:after, button.item:after{
   padding-left: 20px;
 }
 
-#progressBarTimer{
 
-}
 
-#progressBarTime{
-  position: absolute;
-  right: 8px;
-
-}
-
-.timerRow{
-  font-size: 21px;
-  font-weight: bold; 
-  margin-left: 0px !important;
-  padding-right: 0px;
-  position: absolute;
-  bottom: 5px;
-}
 
 #progressBar{
     position: absolute;
@@ -887,11 +915,22 @@ img.feedImgs{
 /*  padding-bottom: 10px !important;*/
 }
 
-.fandsButtonRow{
+/*.fandsButtonRow{
   position: absolute !important;
   bottom: 10px;
   right: 15px;
+}*/
+
+
+.fandsButtonRow{
+/*  color: purple;*/
+  z-index: 100;
+  position: absolute;
+  right: 20px;
+  bottom: 0px;
+  width: 170px;
 }
+
 
 #frontSoundCloudImg{
   text-align: center;
@@ -911,12 +950,12 @@ img.feedImgs{
 /*  z-index: 100;*/
   position: absolute;
   right: -10px;
-  top: 0px;
+  top: -5px;
   width: 70px;
   background: transparent;
   border: none;
-  height: 100px;
   border-radius: 0px !important;
+  z-index: 100;
 }
 
 
@@ -925,6 +964,8 @@ img.feedImgs{
   width: 50px;
   border: none ;
   background-color: hsla(254, 74%, 27%, .7);
+  height: 20px;
+  margin-top: 5px;
 /*  height: 20px;*/
 }
 
@@ -936,6 +977,8 @@ img.feedImgs{
 
 .tcsc .toggle div .handle{
   border-radius: none !important;
+  margin-top: 5px;
+  height: 15px;
 }
 
 
@@ -986,6 +1029,22 @@ img.feedImgs{
 
 .searchTitle{
      white-space: normal !important;
+}
+
+.timerRow{
+  font-size: 15px;
+  font-weight: bold; 
+  position: absolute;
+  bottom: 10px;
+  font-weight: bold; 
+  margin-left: 0px !important;
+  padding-right: 0px;
+  width: 100%;
+}
+
+#progressBarTime{
+  position: absolute;
+  right: 10px;
 }
 
 }
@@ -1131,7 +1190,7 @@ body div{
 
 
   #soundCloudImageLink img{
-    width: 130px;
+    width: 200%;
   }
 
 
@@ -1186,7 +1245,7 @@ body div{
 
 #soundCloudImageLinkDiv{
   position: absolute;
-  right: 40px;
+  right: 6%;
   margin-top: 0px;
 }
 
@@ -1198,7 +1257,7 @@ body div{
       height: 0px;
       position: absolute;
       left: 60px;
-      top: 0px;
+      top: -2px;
 }
 
 .logoStyle{
@@ -1221,13 +1280,6 @@ body div{
       background: radial-gradient(rgba(0, 0, 0, 0.35), rgba(0,0,0,.25));*/
     }
 
-#mainTabDiv{
-  margin: 0 auto;
-  margin-top: -95px;
-/*  width: 100%;*/
-  padding: 0px;
-  background-color: hsla(0,0%,0%,0);
-}
 
 .tabs{
   /*border: 2px black solid;*/
@@ -1295,12 +1347,16 @@ a.item:after, button.item:after{
 }
 
 .mainDiv{
-  height: 300px;
+  height: 82%;
   overflow-y: scroll !important;
   border-bottom: solid 3px hsl(37,0%,96%);
   border-left: solid 3px hsl(37,0%,94%);
   border-right: solid 3px hsl(37,0%,94%);
   border-top: solid 3px hsl(37,0%,93%);
+}
+
+.mainDiv .list{
+  height: 120px;
 }
 
 .mainFeedDiv{
@@ -1391,12 +1447,15 @@ a.item:after, button.item:after{
 
 #shareForm{
   background-color: white;
+  height: 550px;
   border-radius: 5px;
   padding-bottom: 10px;
 }
 
 #closeShareFormDiv{
-  float: right;
+  position: absolute;
+  left: 530px;
+  top: 0px;
 }
 
 #shareSong{
@@ -1531,8 +1590,9 @@ a.item:after, button.item:after{
 }
 
 .closeFriendSearch{
-  margin-top: -50px;
-  float: right;
+  position: absolute;
+  top: 0px;
+  left: 540px;
 }
 
 .addFriendButton{
@@ -1544,9 +1604,18 @@ a.item:after, button.item:after{
   font-size: 20px;
 }
 
-.menuContent{
+/*.menuContent{
   margin-top: 50px !important;
+}*/
+
+.menu{
+
 }
+
+.scroll{
+  height: 50px;
+}
+
 
 .friendRequestsDiv{
   margin-top: 80px;
@@ -1675,7 +1744,7 @@ a.item:after, button.item:after{
 }
 
 #volumeSlider{
-  margin-top: 31%;
+/*  margin-top: 31%;*/
   background-color: hsla(0,0%,100%,0.2);
   height: 15px;
   border-radius: 3px;
@@ -1706,28 +1775,27 @@ a.item:after, button.item:after{
 #volumeDiv{
   width: 150px;
   position: absolute;
-  bottom: 50px;
+  bottom: 7%;
   right: 65px;
 }
 
 .volumeGlyphs{
   font-size: 30px;
-  margin-top: 25%;
+/*  margin-top: 25%;*/
   padding-left: 20px;
-}
-
-#progressBarTime{
-  position: absolute;
-  right: 33px;
-
+  margin-top: -3px;
 }
 
 .timerRow{
   font-size: 21px;
   font-weight: bold; 
-  margin-left: 5px !important;
   position: absolute;
-  bottom: 0px;
+  bottom: -50px;
+  font-size: 21px;
+  font-weight: bold; 
+  margin-left: 0px !important;
+  padding-right: 0px;
+  width: 100%;
 }
 
 #progressBar{
@@ -1930,8 +1998,8 @@ img.feedImgs{
 /*  color: purple;*/
   z-index: 100;
   position: absolute;
-  right: 10px;
-  bottom: 0px;
+  right: 20px;
+  bottom: -10px;
   width: 170px;
 }
 
@@ -2043,21 +2111,22 @@ img.feedImgs{
 }
 
 .mainDivs{
-  background: hsla(0,0%,100%,.97);
+  background: hsla(0,0%,100%,1);
   border-radius: 5px;
-  border-top: solid 7px hsl(37,0%,96%);
-  border-left: solid 6px hsl(37,0%,94%);
-  border-right: solid 6px hsl(37,0%,94%);
-  border-bottom: solid 5px hsl(37,0%,90%);
--webkit-box-shadow: 0px -3px 99px -20px rgba(252,244,252,1);
--moz-box-shadow: 0px -3px 99px -20px rgba(252,244,252,1);
-box-shadow: 0px -3px 99px -20px rgba(252,244,252,1);
-padding: 2px;
+  border-top: solid 6px hsla(254, 32%, 95%, .8);
+  border-left: solid 5px hsla(254, 32%, 85%, .8);
+  border-right: solid 5px hsla(254, 32%, 80%, .8);
+  border-bottom: solid 4px hsla(254, 32%, 74%, .8);
+  -webkit-box-shadow: 0px -3px 99px -20px rgba(252,244,252,1);
+  -moz-box-shadow: 0px -3px 99px -20px rgba(252,244,252,1);
+  box-shadow: 0px -3px 99px -20px rgba(252,244,252,1);
+  padding: 2px;
 /*text-align: center*/
 }
 
 #searchBar{
   width: 100%;
+  background-color: transparent;
 }
 
 #favoritesDiv{
@@ -2115,6 +2184,29 @@ div .modal-wrapper .scroll-content .scroll{
 .fandsButtonRow .searchButtons .playButton .searchPlay button{
   margin-top: -100px !important;
   float: right;
+}
+
+.scroll div .buttons{
+  height: 50px;
+}
+
+#friendCard{
+  height: 200px;
+}
+
+.friendsList{
+  margin-top: 0px;
+  overflow-y: scroll;
+  height: 350px;
+}
+
+.friendsList .list{
+  height: 60px;
+}
+
+#progressBarTime{
+  position: absolute;
+  left: 95%;
 }
 
 }

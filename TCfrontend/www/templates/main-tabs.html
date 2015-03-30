@@ -4,7 +4,7 @@
     <p ng-click="tab.setTab(1)">Feed <div class="newSongsPill" ng-show="newSongs">{{newSongs}}</div></p>
   </div>
 
-  <div id="favoriteTab" class="tabs offBaby input-label col" ng-class="{ active:tab.isSet(2) }">
+  <div id="favoriteTab" class="tabs offBaby  col" ng-class="{ active:tab.isSet(2) }">
     <p ng-click="tab.setTab(2)">Favs</p>  
     <ion-toggle class="tcsc" ng-model="scFavorites" toggle-class="toggle-energized"><span id="tcToggle" ng-hide="scFavorites">TC</span><span id="scToggle" ng-show="scFavorites">SC</span></ion-toggle>
   </div>

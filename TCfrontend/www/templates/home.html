@@ -45,9 +45,9 @@
 <!--           {{position}} -->
             <input id="progressBar" ng-change="seekTo(progress)" min="0" max={{duration}} value={{position}} step="1" type="range" ng-model="progress" class="col-100"/> 
             <div class="row timerRow">
-              <div class="col-20" ng-show="firstPlayed" id="progressBarTimer">{{position | millSecondsToTimeString}}</div>
-              <div class="col-60"></div>
-              <div class="col-20" ng-show="firstPlayed" id="progressBarTime">{{duration - position | millSecondsToTimeString}}</div>
+              <div ng-show="firstPlayed" id="progressBarTimer">{{position | millSecondsToTimeString}}</div>
+<!--               <div class="col-80"></div> -->
+              <div ng-show="firstPlayed" id="progressBarTime">{{duration - position | millSecondsToTimeString}}</div>
             </div>
            
        <!--   </div> -->
