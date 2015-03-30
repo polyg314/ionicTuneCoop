@@ -1163,12 +1163,14 @@ body div{
 
 
   #progressbar div{
+/*    position: absolute;
+    top: 30%;*/
     background: hsl(0,0%,15%);
   }
 
   #playerButtons{
     position: absolute;
-    bottom: 60px;
+    top: -10%;
     left: 0px;
     padding: 0px;
     color: white;
@@ -1252,14 +1254,14 @@ body div{
 }
 
 #player{
-      height: 100px;
+      height: 40%;
       padding: 10px;
       padding-bottom: 0px;
       color: white;
       font-family: 'PT Sans Narrow', sans-serif;
 /*      margin-top: 50px;*/
       position: absolute;
-      bottom: 0px;
+      top: 300px;
 /*      background-color: -webkit-radial-gradient(rgba(0, 0, 0, 0.35), rgba(0,0,0,.25)); 
       background: -o-radial-gradient(rgba(0, 0, 0, 0.35), rgba(0,0,0,.25));
       background: -moz-radial-gradient(rgba(0, 0, 0, 0.35), rgba(0,0,0,.25)); 
@@ -1778,9 +1780,9 @@ a.item:after, button.item:after{
 }
 
 #progressBar{
-    position: absolute;
-    bottom: 40px;
-    background: linear-gradient(to right, #FFFFFF 0%, hsl(0,0%,45%) 100%);
+/*    position: absolute;
+    bottom: ;
+*/  background: linear-gradient(to right, #FFFFFF 0%, hsl(0,0%,45%) 100%);
     background: white;
     height: 9px;
     -webkit-appearance: none;
@@ -1792,9 +1794,10 @@ a.item:after, button.item:after{
     -moz-box-shadow: inset 0px 0px 2px 2px hsla(273, 75%, 10%, 1), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
     box-shadow: inset 0px 2px 1px 0px hsla(254, 74%, 0%, .8), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
     margin-bottom: 0px;
-    width: 97.5%;
-    margin-left: 10px;
-    margin-right: 10px;
+    width: 100.5%;
+    margin-left: -1%;
+    margin-right: 0px;
+    margin-top: -2%;
 }
 
 #progressBar::-webkit-slider-thumb{
@@ -2062,7 +2065,6 @@ img.feedImgs{
 }
 
 .mainDivRow{
-
   height: 50%;
   width: 97.25%;
   position: absolute;
