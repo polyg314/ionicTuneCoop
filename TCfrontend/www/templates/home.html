@@ -22,13 +22,14 @@
     <div id="logo">TuneCoop</div>
       <div>
         <div class="col-sm-12" id="player">
-              <div class="playerSongTitle"><strong>{{currentSong.title}}</strong><br><span id="playerSongUploader">{{currentSong.uploader}}</span>  </div>
+              <div><span class="playerSongTitle">{{currentSong.title}}</span><br><span id="playerSongUploader">{{currentSong.uploader}}</span></div>
               <div class="row" id="playerButtons">
                   <button id="officialReverseButton" class="col" ng-click="reverseButtonFunction()"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
                   <button id="officialPlayButton" ng-hide="playing" ng-click="playCurrentTrack()" class="col"><span id="playerPlayButtonGlyphicon" class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
                   <button id="officialPauseButton" ng-show="playing" ng-click="pauseCurrentTrack()" class="col"><span id="playerPauseButtonGlyphicon" class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
                   <button id="officialNextButton" class="col"><span class="glyphicon glyphicon-forward" aria-hidden="true" ng-click="skipToNextSong()"></span></button>
-                  <heart id="officialHeartButton" url="{{ currentSong.url }}" picUrl= "{{ currentSong.picurl }}" uploader="{{ currentSong.uploader }}" title="{{ currentSong.title }}" trackId="{{ currentSong.trackid }}" tcid="{{ user.tcid }}" class="col"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
+                  <button id="officialHeartButton" class="col"><span class="glyphicon glyphicon-heart" aria-hidden="true" ng-click="favoriteCurrentSong()"></span></button>
+<!--                   <heart id="officialHeartButton" url="{{ currentSong.url }}" picUrl= "{{ currentSong.picurl }}" uploader="{{ currentSong.uploader }}" title="{{ currentSong.title }}" trackId="{{ currentSong.trackid }}" tcid="{{ user.tcid }}" class="col"></heart> -->
                   <button id="officialDetailsButton" class="col phoneHTML" ng-click="showSongInfo()"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>     
               </div> 
               <span class="webHTML">

@@ -646,6 +646,30 @@ angular.module('tunecoop.controllers', [])
         };
 
 
+       $scope.favoriteCurrentSong = function(){
+              
+        var req = {
+         method: 'POST',
+         url: 'http://localhost:8000/favorites',
+         headers: {
+           'Content-Type': "application/json"
+         },
+         data: { trackid: currentSong.trackid, url: currentSong.url, picurl: currentSong.picurl, title: currentSong.title, uploader: currentSong.uploader, tcid: currentSong.tcid  },
+        } 
+                  // console.log($rootScope.favorites);
+          $http(req).success(function(res){
+              // console.log(res.id);
+              newTrack.id = res.id;
+
+              $rootScope.favorites.unshift(newTrack);
+              // console.log($rootScope.favorites);
+                                
+          })
+        .error(function(res){console.log(res)})         
+                                      
+      };
+
+
         $scope.shareWithFriends = function(){
           
 
@@ -697,6 +721,8 @@ angular.module('tunecoop.controllers', [])
         };
 
     })
+
+
 
     .controller('UsernameController', function($scope, $rootScope, $http) {
       // $scope.master = {};
