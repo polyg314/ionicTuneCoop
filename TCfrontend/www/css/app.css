@@ -2143,6 +2143,9 @@ img.feedImgs{
   right: 20px;
   background: hsla(0,0%,10%, .5);
   color: white;
+  height: 500px;
+  width: 500px;
+  z-index: 100;
 }
 
 div .modal-wrapper .scroll-content .scroll{
@@ -2211,6 +2214,8 @@ div .modal-wrapper .scroll-content .scroll{
   position: absolute;
   left: 95%;
 }
+
+
 
 }
 

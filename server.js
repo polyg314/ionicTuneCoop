@@ -81,20 +81,26 @@ app.post('/soundCloudSearch', function(req, resp){
 
 
 app.post('/login', function(req, res){
-  var fbid= req.body.fbid;
   var fullname= req.body.fullName;
-  var email= req.body.email;
+  if(!req.body.fullName){
+    var fullname = "unknown"
+  }
+  var fbid= req.body.fbid;
+  console.log('facebook id is: ' + fbid);
   db.query('SELECT * FROM users WHERE facebookid = $1', [fbid], function(err, user) {
     if (err){
         return done(err);
     }
     // if the user is found, then send their info
+    console.log(user.rows[0])
     if (user.rows[0]) {
+        console.log('found')
         res.send(user.rows[0])
     } 
     else {
+      console.log('new')
       //or add them to the database
-      db.query('INSERT INTO users (name, email, facebookid) VALUES ($1, $2, $3)', [fullname, email, fbid], function(err, dbRes){
+      db.query('INSERT INTO users (name, facebookid) VALUES ($1, $2)', [fullname, fbid], function(err, dbRes){
         console.log(dbRes)
         if(!err){
           res.send({response: dbRes})

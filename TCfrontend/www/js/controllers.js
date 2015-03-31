@@ -92,8 +92,9 @@ angular.module('tunecoop.controllers', [])
              headers: {
                'Content-Type': "application/json"
              },
-             data: { fbid: $rootScope.user.id, fullName: $rootScope.user.full_name },
+             data: { fbid: $rootScope.user.fbid, fullName: $rootScope.user.full_name },
             }
+            console.log(req);
           $http(req).success(function(res){
               var username = res.username;
               if(username){
@@ -565,6 +566,7 @@ angular.module('tunecoop.controllers', [])
       };
 
         $scope.logout = function () {
+          widget = SC.Widget(document.getElementById('soundcloud_widget'));
             widget.pause();
             $rootScope.user = null;
         };
