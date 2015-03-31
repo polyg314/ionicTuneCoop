@@ -10,7 +10,7 @@ angular.module('tunecoop.controllers', [])
 
       $rootScope.soundCloudConnect = function(){
 
-          // $rootScope.user = {};
+
           
           // initialize client with app credentials
           SC.initialize({
@@ -21,10 +21,13 @@ angular.module('tunecoop.controllers', [])
           // initiate auth popup
           SC.connect(function() {
             SC.get('/me', function(me) { 
+              $rootScope.user = {};
               $scope.$apply(function(){
-                $rootScope.user = me; 
+                $rootScope.user.fbid = me.id; 
+                $rootScope.user.uri = me.uri;
               })
-              if($rootScope.user){
+              if($rootScope.user.fbid){
+                console.log($rootScope.user.fbid)
                 getUsername();
               }                 
             });
@@ -92,12 +95,15 @@ angular.module('tunecoop.controllers', [])
              data: { fbid: $rootScope.user.id, fullName: $rootScope.user.full_name },
             }
           $http(req).success(function(res){
-              $rootScope.user.username = res.username;
+              var username = res.username;
+              if(username){
+                $rootScope.user.username = res.username;
+              }
               $rootScope.user.tcid = res.id;
               $rootScope.user.fullName = res.name;
               // console.log(res);
               var tcid = res.id;
-              if(!res.username){
+              if(!username){
                 $scope.showUpdateUsername();
               }
               getSongFeedAndFavorites();
@@ -731,14 +737,15 @@ angular.module('tunecoop.controllers', [])
       // $scope.master = {};
 
       $scope.update = function(username) {
-        // console.log(username)
+
+        console.log(username)
             var req = {
                method: 'POST',
                url: 'http://localhost:8000/updateUsername',
                headers: {
                  'Content-Type': "application/json"
                },
-               data: { fbid: $rootScope.user.id, username: username },
+               data: { fbid: $rootScope.user.fbid, username: username },
               }
               $http(req).success(function(res){
                 console.log(res);
@@ -747,6 +754,7 @@ angular.module('tunecoop.controllers', [])
                 console.log($rootScope.user.username);
                 console.log($rootScope.user.tcid);
                 $scope.hideUpdateUsername();
+                $rootScope.loaded = true;
               })
       };
 

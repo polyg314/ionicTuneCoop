@@ -467,11 +467,12 @@ song-feed{
 
 #updateUsernameDiv{
   text-align: center;
-  margin-top: 40%;
+/*  margin-top: 40%;*/
   background-color: white;
   padding: 10px;
   border-radius: 10px;
   padding-top: 0px;
+  height: 500px;
 }
 
 #updateUsernameDiv input{
@@ -1468,6 +1469,7 @@ a.item:after, button.item:after{
   padding: 10px;
   border-radius: 10px;
   padding-top: 0px;
+  height: 500px;
 }
 
 #updateUsernameDiv input{
@@ -1477,6 +1479,7 @@ a.item:after, button.item:after{
   padding: 20px;
   border: 1px solid black;
   font-size: 20px;
+
 }
 
 
