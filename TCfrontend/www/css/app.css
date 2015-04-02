@@ -1191,7 +1191,7 @@ body div{
 
 
   #soundCloudImageLink img{
-    width: 200%;
+    width: 150%;
   }
 
 
@@ -1207,9 +1207,10 @@ body div{
     left: 0px;
     padding: 0px;
     color: white;
-    width: 450px;
+    width: 40%;
     text-align: justify;
     margin-top: 15px;
+    padding: 8px;
   }
 
 #officialNextButton{
@@ -1246,7 +1247,7 @@ body div{
 
 #soundCloudImageLinkDiv{
   position: absolute;
-  right: 6%;
+  right: 4%;
   margin-top: 0px;
 }
 
@@ -1354,11 +1355,9 @@ a.item:after, button.item:after{
   border-left: solid 3px hsl(37,0%,94%);
   border-right: solid 3px hsl(37,0%,94%);
   border-top: solid 3px hsl(37,0%,93%);
+  background-color: white;
 }
 
-.mainDiv .list{
-  height: 120px;
-}
 
 .mainFeedDiv{
   margin-top: 5px;
@@ -1400,11 +1399,6 @@ a.item:after, button.item:after{
   background-size: 32.75%;
 }
 
-.feedImgs{
-  margin-top: 3px;
-  height: 250px !important;
-  width: 250px !important;
-}
 
 .fromUsername{
   position: absolute !important;
@@ -1776,10 +1770,13 @@ a.item:after, button.item:after{
 }
 
 #volumeDiv{
-  width: 150px;
-  position: absolute;
-  bottom: 7%;
-  right: 65px;
+    position: absolute;
+    top: -10px;
+    right: 65px;
+    padding: 0px;
+    color: white;
+    width: 15%;
+    text-align: justify;
 }
 
 .volumeGlyphs{
@@ -1802,10 +1799,8 @@ a.item:after, button.item:after{
 }
 
 #progressBar{
-/*    position: absolute;
+    position: absolute;
     bottom: ;
-*/  background: linear-gradient(to right, #FFFFFF 0%, hsl(0,0%,45%) 100%);
-    background: white;
     height: 9px;
     -webkit-appearance: none;
     border-radius: 0px;
@@ -1816,12 +1811,12 @@ a.item:after, button.item:after{
     -moz-box-shadow: inset 0px 0px 2px 2px hsla(273, 75%, 10%, 1), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
     box-shadow: inset 0px 2px 1px 0px hsla(254, 74%, 0%, .8), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
     margin-bottom: 0px;
-    width: 100.5%;
-    margin-left: -1%;
-    margin-right: 0px;
+    width: 98.5%;
+    left: 0px;
+    right: 0px;
     margin-top: -280px;
     padding-top: 8px;
-    background-color: hsla(0,0%,100%,.9)
+    background-color: hsla(0,0%,100%,.5)
 }
 
 #progressBar::-webkit-slider-thumb{
@@ -1853,7 +1848,7 @@ a.item:after, button.item:after{
  a:hover, a:focus{
   text-decoration: none !important;
   color: hsl(0,0%,15%) !important;
-/*  color: #552bdf !important;*/
+/*  color: #552bdf !important;
  }
 
  .uploaderName{
@@ -1866,56 +1861,11 @@ a:hover .uploaderName , a:focus .uploaderName {
   color: hsl(0,0%,15%) !important;*/
 }
 
-.feedDiv .item h2{
-/*  position: absolute !important;*/
-  margin-left: 10px;
-  height: 60px !important;
-  font-size: 18px;
-  width: 88%;
-  white-space: normal !important;
-}
 
-.feedDiv .item p{
-   white-space: normal !important;
 
-}
 
-.feedDiv .item-content{
-   white-space: normal !important;
-   padding-bottom: 5px !important;
-   padding-top: 0px !important;
-   height: 145px;
-}
 
-.feedDiv .item-content img{
-   margin-top: -10px;
-}
 
-div.list.feedDiv{
-  margin-top: 0px;
-}
-
-/*.feedDate{
-  font-size: 15px !important;
-}*/
-
-.fromUsername{
-  bottom: 3px;
-  left: 10px;
-  font-size: 15px !important;
-  color: hsl(0,0%,10%) !important;
-  font-size: 17px !important;
-
-}
-
-img.feedImgs{
-  max-width: none !important;
-  max-height: none !important;
-/*  height: 135px !important;
-  width: 135px !important;*/
-  z-index: -10 !important;
-  margin-left: 17%;
-}
 
 .feedDiv .item{
   padding: 0px !important;
@@ -1934,50 +1884,15 @@ img.feedImgs{
   color: hsl(0,0%,15%);
 }
 
-.feedMessages{
-  color: hsl(0,0%,5%) !important;
-  margin-left: 10px;
-  font-size: 20px !important;
-  height: 48px;
-  font-family: 'Shadows Into Light', cursive;
-  line-height: 20px;
-}
 
-.newSong{
-  position: absolute !important;
-  right: 3px;
-  background-color: hsla(254, 74%, 27%, 1);
-  color: white;
-  border-radius: 5px;
-  width: 30px;
-  height: 15px;
-  font-size: 12px;
-  padding: 1px;
-}
 
-.newSongsPill{
-  background-color: hsla(254, 74%, 27%, 1);
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  width: 34px;
-  border-radius: 25px;
-  height: 20px;
-  line-height: 19px;
-  position: absolute;
-  top: 18px;
-  left: 29.5%;
-/*  margin-top: 13px;
-  margin-left: 14px;*/
-}
+
 
 .searchAndFavorites{
   height: 82%;
 }
 
-.searchAndFavorites .list{
-  height: 120px;
-}
+
 
 .searchAndFavorites .list .item .item-content{
   padding-bottom: 0px;
@@ -2114,16 +2029,17 @@ img.feedImgs{
 }
 
 .mainDivs{
-  background: hsla(0,0%,100%,1);
+  background: hsla(0,0%,11%,.5);
   border-radius: 5px;
-  border-top: solid 6px hsla(254, 32%, 95%, .8);
-  border-left: solid 5px hsla(254, 32%, 85%, .8);
-  border-right: solid 5px hsla(254, 32%, 80%, .8);
-  border-bottom: solid 4px hsla(254, 32%, 74%, .8);
+  border-top: solid 4px hsla(254, 32%, 55%, .8);
+  border-left: solid 4px hsla(254, 32%, 45%, .8);
+  border-right: solid 4px hsla(254, 32%, 40%, .8);
+  border-bottom: solid 4px hsla(254, 32%, 34%, .8);
   -webkit-box-shadow: 0px -3px 99px -20px rgba(252,244,252,1);
   -moz-box-shadow: 0px -3px 99px -20px rgba(252,244,252,1);
   box-shadow: 0px -3px 99px -20px rgba(252,244,252,1);
-  padding: 2px;
+  padding: 5px;
+  color: white;
 /*text-align: center*/
 }
 
@@ -2215,7 +2131,128 @@ div .modal-wrapper .scroll-content .scroll{
   left: 95%;
 }
 
+#playerButtons button span {
+  float: left;
+}
 
+.list .item{
+  padding-top: 0px;
+}
+
+.searchAndFavorites .list{
+  height: 105px;
+}
+
+.feedImgs{
+  margin-top: 3px;
+  height: 90px !important;
+  width: 90px !important;
+}
+
+.favoriteImgs{
+  height: 100px !important;
+  width: 100px !important;
+}
+
+img.feedImgs{
+  max-width: none !important;
+  max-height: none !important;
+/*  height: 135px !important;
+  width: 135px !important;*/
+  z-index: -10 !important;
+  margin-left: -5px;
+  margin-top: -3px;
+
+}
+.feedDate{
+  font-size: 15px !important;
+}
+
+.fromUsername{
+  position: absolute;
+  bottom: -12px;
+  left: 10px;
+  font-size: 15px !important;
+  color: hsl(0,0%,10%) !important;
+  font-size: 17px !important;
+
+}
+
+
+.feedDiv .item h2{
+/*  position: absolute !important;*/
+  margin-left: 105px;
+  margin-top: 5px;
+/*  top: 100px;*/
+  height: 60px !important;
+  font-size: 18px;
+  width: 78%;
+  white-space: normal !important;
+}
+
+.feedDiv .item p{
+   white-space: normal !important;
+
+}
+
+.feedDiv .item-content{
+   white-space: normal !important;
+   padding-bottom: 5px !important;
+   padding-top: 0px !important;
+   height: 145px;
+}
+
+/*.feedDiv .item-content {
+   margin-top: -10px;
+}*/
+
+div.list.feedDiv{
+  margin-top: 0px;
+}
+
+.feedMessages{
+  color: hsl(0,0%,5%) !important;
+  margin-left: 105px;
+  font-size: 20px !important;
+  height: 48px;
+  font-family: 'Shadows Into Light', cursive;
+  line-height: 20px;
+}
+
+ .uploaderName{
+  font-weight:normal;
+  font-size: 14px;
+ }
+
+
+ .newSong{
+  position: absolute !important;
+  left: 34px;
+  top: 70px;
+  background-color: hsla(254, 74%, 27%, 1);
+  color: white;
+  border-radius: 5px;
+  width: 35px;
+  height: 18px;
+  font-size: 14px;
+  padding: 1px;
+}
+
+.newSongsPill{
+  background-color: hsla(254, 74%, 27%, 1);
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  width: 34px;
+  border-radius: 25px;
+  height: 20px;
+  line-height: 19px;
+  position: absolute;
+  top: 18px;
+  left: 29.5%;
+/*  margin-top: 13px;
+  margin-left: 14px;*/
+}
 
 }
 

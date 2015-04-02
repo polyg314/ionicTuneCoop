@@ -17,7 +17,7 @@
               <h5><strong>Email: </strong>pgaudin@willamette.edu<br><strong>Password: </strong>password</h5><br>
               <h5><strong>Email: </strong>cameronlanejones@gmail.com<br><strong>Password: </strong>password<br><br></h5>
               <h4>Or create your own! But be sure to add me at TC username: polyg123</h4>
-      </div>
+              </div>
   </div>
 
   
@@ -38,7 +38,8 @@
                   <button id="officialNextButton" class="col"><span class="glyphicon glyphicon-forward" aria-hidden="true" ng-click="skipToNextSong()"></span></button>
                   <button id="officialHeartButton" class="col"><span class="glyphicon glyphicon-heart" aria-hidden="true" ng-click="favoriteCurrentSong()"></span></button>
 <!--                   <heart id="officialHeartButton" url="{{ currentSong.url }}" picUrl= "{{ currentSong.picurl }}" uploader="{{ currentSong.uploader }}" title="{{ currentSong.title }}" trackId="{{ currentSong.trackid }}" tcid="{{ user.tcid }}" class="col"></heart> -->
-                  <button id="officialDetailsButton" class="col phoneHTML" ng-click="showSongInfo()"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>     
+                  <button id="officialDetailsButton" class="col phoneHTML" ng-click="showSongInfo()"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span></button>   
+
               </div> 
               <span class="webHTML">
               <div id="volumeDiv" class="row">
@@ -47,15 +48,16 @@
                 <span ng-if="volume > 0 && volume < .5" class="col-10 glyphicon glyphicon-volume-down volumeGlyphs"></span> 
                 <span ng-if="volume >= .5" class="col-10 glyphicon glyphicon-volume-up volumeGlyphs"></span>        
               </div>
-              </span>
+              </span>  
+
         
          <!-- div class="col-sm-12" id="progressBarDiv"> -->
 <!--           {{position}} -->
             <input id="progressBar" ng-change="seekTo(progress)" min="0" max={{duration}} value={{position}} step="1" type="range" ng-model="progress" class="col-100"/> 
             <div class="row timerRow">
-              <div ng-show="firstPlayed" id="progressBarTimer">{{position | millSecondsToTimeString}}</div>
+              <div id="progressBarTimer">{{position | millSecondsToTimeString}}</div>
 <!--               <div class="col-80"></div> -->
-              <div ng-show="firstPlayed" id="progressBarTime">{{duration - position | millSecondsToTimeString}}</div>
+              <div id="progressBarTime">{{duration - position | millSecondsToTimeString}}</div>
             </div>
            
        <!--   </div> -->
