@@ -1048,6 +1048,190 @@ img.feedImgs{
   right: 10px;
 }
 
+/* heeerrrre */
+
+.searchAndFavorites .list{
+  height: 105px;
+}
+
+.feedImgs{
+  margin-top: 3px;
+  height: 90px !important;
+  width: 90px !important;
+}
+
+.favoriteImgs{
+  height: 100px !important;
+  width: 100px !important;
+}
+
+img.feedImgs{
+  max-width: none !important;
+  max-height: none !important;
+/*  height: 135px !important;
+  width: 135px !important;*/
+  z-index: -10 !important;
+  margin-left: -5px;
+  margin-top: -3px;
+
+}
+.feedDate{
+  font-size: 15px !important;
+}
+
+.fromUsername{
+  position: absolute;
+  bottom: -12px;
+  left: 10px;
+  font-size: 15px !important;
+  color: hsl(0,0%,10%) !important;
+  font-size: 17px !important;
+}
+
+
+.feedDiv .item h2{
+/*  position: absolute !important;*/
+  margin-left: 105px;
+  margin-top: 6px;
+/*  top: 100px;*/
+  height: 60px !important;
+  font-size: 18px;
+  width: 78%;
+  white-space: normal !important;
+}
+
+.feedDiv .item p{
+   white-space: normal !important;
+
+}
+
+.feedDiv .item-content{
+   white-space: normal !important;
+   padding-bottom: 5px !important;
+   padding-top: 0px !important;
+   height: 145px;
+}
+
+/*.feedDiv .item-content {
+   margin-top: -10px;
+}*/
+
+div.list.feedDiv{
+  margin-top: 0px;
+}
+
+.feedMessages{
+  color: hsl(0,0%,10%) !important;
+  margin-left: 105px;
+  font-size: 20px !important;
+  height: 48px;
+  font-family: 'Shadows Into Light', cursive;
+  line-height: 20px;
+}
+
+ .uploaderName{
+  font-weight:normal;
+  font-size: 14px;
+ }
+
+
+ .newSong{
+  position: absolute !important;
+  left: 34px;
+  top: 70px;
+  background-color: hsla(254, 74%, 27%, 1);
+  color: white;
+  border-radius: 5px;
+  width: 35px;
+  height: 18px;
+  font-size: 14px;
+  padding: 1px;
+}
+
+
+
+.feedDiv .item{
+  background-color: white !important;
+}
+
+
+.feedDiv .item .item-content{
+  background-color: hsla(0,0%,100%,1);
+  color: hsl(0,0%,10%);
+}
+
+.mainDivs h4{
+/*  font-weight: bold;*/
+  font-size: 25px;
+  margin: 0px;
+  margin-bottom: 7px;
+  font-family: 'Lobster', cursive;
+}
+#favoritesFilter{
+  font-size: 18px;
+/*  margin: 5px;*/
+  border-bottom: solid 3px hsl(37,0%,85%);
+  border-left: solid 3px hsl(37,0%,80%);
+  border-right: solid 3px hsl(37,0%,80%);
+  border-top: solid 2px hsl(37,0%,79%);
+  background-color: white;
+  text-align: center;
+  width: 100% !important;
+}
+
+.mainDiv{
+  height: 82%;
+  overflow-y: scroll !important;
+  border-bottom: solid 1px hsl(37,0%,96%);
+  border-left: solid 3px hsl(37,0%,94%);
+  border-right: solid 3px hsl(37,0%,94%);
+  border-top: solid 1px hsl(37,0%,93%);
+  background-color: white;
+}
+
+#searchForm{
+/*  background-color: hsl(0,0%,90%);*/
+  margin-top: 0px;
+  margin-left: 0px;
+  width: 100%;
+  border: 1px solid hsl(0,0%,75%);
+  height: 32px;
+  background-color: white;
+}
+
+#searchForm input{
+  height: 20px;
+  padding-top: 10px;
+}
+
+.searchAndFavorites{
+  height: 82.5%;
+}
+
+#searchForm button{
+  margin-top: -5px;
+}
+
+.item-content{
+  width: 100%;
+}
+
+.searchDiv .list{
+  height: 105px;
+}
+
+.feedDiv{
+  background-color: white !important;
+}
+
+
+.mainFeedDiv{
+  background-color: white !important;
+}
+
+
+
+
 }
 
 /* Your app's CSS, go crazy, make it your own */
@@ -1198,7 +1382,7 @@ body div{
   #progressbar div{
 /*    position: absolute;
     top: 30%;*/
-    background: hsl(0,0%,15%);
+/*    background: hsl(0,0%,15%);*/
   }
 
   #playerButtons{
@@ -1348,15 +1532,6 @@ a.item:after, button.item:after{
   display: none;
 }
 
-.mainDiv{
-  height: 82%;
-  overflow-y: scroll !important;
-  border-bottom: solid 3px hsl(37,0%,96%);
-  border-left: solid 3px hsl(37,0%,94%);
-  border-right: solid 3px hsl(37,0%,94%);
-  border-top: solid 3px hsl(37,0%,93%);
-  background-color: white;
-}
 
 
 .mainFeedDiv{
@@ -1378,7 +1553,7 @@ a.item:after, button.item:after{
   margin-top: 120px;
   background: transparent;
   border: none;
-  padding: 0px 0px 0px 40px;
+  padding: 0px 0px 0px 16%;
   font-size: 20px;
   z-index: 10;
 }
@@ -1628,17 +1803,7 @@ a.item:after, button.item:after{
   margin-top: -50px;
 }
 
-#favoritesFilter{
-  font-size: 18px;
-/*  margin: 5px;*/
-  border-bottom: solid 3px hsl(37,0%,85%);
-  border-left: solid 3px hsl(37,0%,80%);
-  border-right: solid 3px hsl(37,0%,80%);
-  border-top: solid 2px hsl(37,0%,79%);
-  background-color: transparent;
-  text-align: center;
-  width: 100% !important;
-}
+
 
 .minusFriendButton{
   float: right;
@@ -1658,14 +1823,6 @@ a.item:after, button.item:after{
   border: none;
 }
 
-#searchForm{
-/*  background-color: hsl(0,0%,90%);*/
-  margin-top: -5px;
-  margin-left: 0px;
-  width: 100%;
-  border: 1px solid hsl(0,0%,75%);
-  height: 40px;
-}
 
 #searchForm input{
   margin-top: -5px;
@@ -1807,16 +1964,16 @@ a.item:after, button.item:after{
     border-bottom: 1px solid hsl(273,0%,70%);
     -moz-border-radius: 0px;
     -webkit-border-radius: 0px;
-    -webkit-box-shadow: inset 0px 0px 2px 2px hsla(273, 75%, 10%, 1), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
-    -moz-box-shadow: inset 0px 0px 2px 2px hsla(273, 75%, 10%, 1), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
-    box-shadow: inset 0px 2px 1px 0px hsla(254, 74%, 0%, .8), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
+/*    -webkit-box-shadow: inset 0px 0px 2px 2px hsla(273, 75%, 100%, 1), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
+    -moz-box-shadow: inset 0px 0px 2px 2px hsla(273, 75%, 100%, 1), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
+    box-shadow: inset 0px 2px 1px 0px hsla(254, 74%, 100%, .8), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);*/
     margin-bottom: 0px;
     width: 98.5%;
     left: 0px;
     right: 0px;
     margin-top: -280px;
     padding-top: 8px;
-    background-color: hsla(0,0%,100%,.5)
+    background-color: hsla(0,0%,100%,1)
 }
 
 #progressBar::-webkit-slider-thumb{
@@ -1826,7 +1983,8 @@ a.item:after, button.item:after{
    -webkit-appearance: none;
    border-right: solid 0px hsl(0,0%,25%);
    background-color: hsla(254, 74%, 27%, 1);
-   box-shadow: inset 0px 0px 2px 0px hsla(254, 74%, 100%, 1), 0px 5px 5px 0px hsla(254, 74%, 0%, 1);
+   border-radius: none !important;
+/*   box-shadow: inset 0px 0px 2px 0px hsla(254, 74%, 100%, 1), 0px 5px 5px 0px hsla(254, 74%, 0%, 1);*/
  }
 
  .mainDiv .item h2{
@@ -1847,7 +2005,7 @@ a.item:after, button.item:after{
 
  a:hover, a:focus{
   text-decoration: none !important;
-  color: hsl(0,0%,15%) !important;
+  color: hsl(0,0%,10%) !important;
 /*  color: #552bdf !important;
  }
 
@@ -1886,14 +2044,6 @@ a:hover .uploaderName , a:focus .uploaderName {
 
 
 
-
-
-.searchAndFavorites{
-  height: 82%;
-}
-
-
-
 .searchAndFavorites .list .item .item-content{
   padding-bottom: 0px;
 }
@@ -1918,18 +2068,21 @@ a:hover .uploaderName , a:focus .uploaderName {
   position: absolute;
   right: 20px;
   bottom: -10px;
-  width: 170px;
+  width: 60%;
 }
 
 
 .fandsButtonRow .searchButtons{
   margin-top: 50px;
   float: right;
+
 }
 
 .fandsButtonRow .searchButtons .playButton{
   margin-top: 0px !important;
   float: right;
+/*  padding-left:  !important;*/
+
 }
 
 #frontSoundCloudImg{
@@ -1948,7 +2101,7 @@ a:hover .uploaderName , a:focus .uploaderName {
 /*  z-index: 100;*/
   position: absolute;
 /*  right: -10px;*/
-  top: 5px;
+  top: 1px;
   right: 34%;
   width: 70px;
   background: transparent;
@@ -2029,23 +2182,23 @@ a:hover .uploaderName , a:focus .uploaderName {
 }
 
 .mainDivs{
-  background: hsla(0,0%,11%,.5);
+  background: hsla(0,0%,100%,.8);
   border-radius: 5px;
-  border-top: solid 4px hsla(254, 32%, 55%, .8);
-  border-left: solid 4px hsla(254, 32%, 45%, .8);
-  border-right: solid 4px hsla(254, 32%, 40%, .8);
-  border-bottom: solid 4px hsla(254, 32%, 34%, .8);
+  border-top: solid 1px hsla(254, 0%, 20%, 1);
+  border-left: solid 4px hsla(254, 0%, 15%, .95);
+  border-right: solid 4px hsla(254, 0%, 5%, .95);
+  border-bottom: solid 1px hsla(254, 0%, 12%, .8);
   -webkit-box-shadow: 0px -3px 99px -20px rgba(252,244,252,1);
   -moz-box-shadow: 0px -3px 99px -20px rgba(252,244,252,1);
   box-shadow: 0px -3px 99px -20px rgba(252,244,252,1);
   padding: 5px;
-  color: white;
+  color: hsl(0,0%,10%);
 /*text-align: center*/
 }
 
 #searchBar{
   width: 100%;
-  background-color: transparent;
+  background-color: white;
 }
 
 #favoritesDiv{
@@ -2175,14 +2328,13 @@ img.feedImgs{
   font-size: 15px !important;
   color: hsl(0,0%,10%) !important;
   font-size: 17px !important;
-
 }
 
 
 .feedDiv .item h2{
 /*  position: absolute !important;*/
   margin-left: 105px;
-  margin-top: 5px;
+  margin-top: 6px;
 /*  top: 100px;*/
   height: 60px !important;
   font-size: 18px;
@@ -2211,7 +2363,7 @@ div.list.feedDiv{
 }
 
 .feedMessages{
-  color: hsl(0,0%,5%) !important;
+  color: hsl(0,0%,10%) !important;
   margin-left: 105px;
   font-size: 20px !important;
   height: 48px;
@@ -2239,19 +2391,98 @@ div.list.feedDiv{
 }
 
 .newSongsPill{
-  background-color: hsla(254, 74%, 27%, 1);
+  background-color: hsla(254, 74%, 27%, .8);
   color: white;
   text-align: center;
   font-weight: bold;
-  width: 34px;
+  width: 65px;
   border-radius: 25px;
   height: 20px;
   line-height: 19px;
   position: absolute;
-  top: 18px;
-  left: 29.5%;
+  top: 12px;
+  left: 27%;
 /*  margin-top: 13px;
   margin-left: 14px;*/
+}
+
+.feedDiv .item{
+  background-color: white !important;
+}
+
+
+.feedDiv .item .item-content{
+  background-color: hsla(0,0%,100%,1);
+  color: hsl(0,0%,10%);
+}
+
+.mainDivs h4{
+/*  font-weight: bold;*/
+  font-size: 25px;
+  margin: 0px;
+  margin-bottom: 7px;
+  font-family: 'Lobster', cursive;
+}
+#favoritesFilter{
+  font-size: 18px;
+/*  margin: 5px;*/
+  border-bottom: solid 3px hsl(37,0%,85%);
+  border-left: solid 3px hsl(37,0%,80%);
+  border-right: solid 3px hsl(37,0%,80%);
+  border-top: solid 2px hsl(37,0%,79%);
+  background-color: white;
+  text-align: center;
+  width: 100% !important;
+}
+
+.mainDiv{
+  height: 82%;
+  overflow-y: scroll !important;
+  border-bottom: solid 1px hsl(37,0%,96%);
+  border-left: solid 3px hsl(37,0%,94%);
+  border-right: solid 3px hsl(37,0%,94%);
+  border-top: solid 1px hsl(37,0%,93%);
+  background-color: white;
+}
+
+#searchForm{
+/*  background-color: hsl(0,0%,90%);*/
+  margin-top: 0px;
+  margin-left: 0px;
+  width: 100%;
+  border: 1px solid hsl(0,0%,75%);
+  height: 32px;
+  background-color: white;
+}
+
+#searchForm input{
+  height: 20px;
+  padding-top: 10px;
+}
+
+.searchAndFavorites{
+  height: 82.5%;
+}
+
+#searchForm button{
+  margin-top: -5px;
+}
+
+.item-content{
+  width: 100%;
+}
+
+.searchDiv .list{
+  height: 105px;
+}
+
+.feedDiv{
+  background-color: white !important;
+}
+
+
+.mainFeedDiv{
+  background-color: white !important;
 }
 
 }

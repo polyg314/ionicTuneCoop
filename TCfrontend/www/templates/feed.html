@@ -8,7 +8,7 @@
         <img class="feedImgs" src={{feedSong.picurl}}>
 <!--         <div class="feedSongOverlay"> -->
         <div class="newSong" ng-hide="feedSong.isplayed">NEW</div>
-        <h2>{{feedSong.title}}<br><span class="uploaderName">{{feedSong.uploader}}</span></h2>
+        <span class="feedTitleAndUploader"> <h2>{{feedSong.title}}<br><span class="uploaderName">{{feedSong.uploader}}</span></h2></span>
 
         <p class="feedMessages">{{feedSong.messages}}</p>
         <p class="fromUsername">-&nbsp{{feedSong.username}}<br><span class="feedDate">{{feedSong.date | date : short}}</span></p>
