@@ -415,7 +415,9 @@ song-feed{
 .item-thumbnail-left, .item-thumbnail-left .item-content {
   padding-left: 100px;
   padding-top: 10px;
+  color: hsl(0,0%,10%);
 }
+
 
 .modal-open .modal, .modal-open .modal-backdrop {
     pointer-events: auto !important;
@@ -916,11 +918,7 @@ img.feedImgs{
 /*  padding-bottom: 10px !important;*/
 }
 
-/*.fandsButtonRow{
-  position: absolute !important;
-  bottom: 10px;
-  right: 15px;
-}*/
+
 
 
 .fandsButtonRow{
@@ -928,8 +926,9 @@ img.feedImgs{
   z-index: 100;
   position: absolute;
   right: 20px;
-  bottom: 0px;
+  bottom: -5px;
   width: 170px;
+  color: hsl(0,0%,10%);
 }
 
 
@@ -1148,8 +1147,6 @@ div.list.feedDiv{
   padding: 1px;
 }
 
-
-
 .feedDiv .item{
   background-color: white !important;
 }
@@ -1214,6 +1211,7 @@ div.list.feedDiv{
 
 .item-content{
   width: 100%;
+
 }
 
 .searchDiv .list{
@@ -1229,6 +1227,9 @@ div.list.feedDiv{
   background-color: white !important;
 }
 
+.searchDiv .list .item .item-content p{
+  color: hsl(0,0%,10%) !important;
+}
 
 
 
@@ -1583,6 +1584,7 @@ a.item:after, button.item:after{
 .item-thumbnail-left, .item-thumbnail-left .item-content {
   padding-left: 100px;
   padding-top: 10px;
+    color: hsl(0,0%,10%);
 }
 
 .modal-open .modal, .modal-open .modal-backdrop {
@@ -2067,8 +2069,9 @@ a:hover .uploaderName , a:focus .uploaderName {
   z-index: 100;
   position: absolute;
   right: 20px;
-  bottom: -10px;
+  bottom: -5px;
   width: 60%;
+  color: hsl(0,0%,10%);
 }
 
 
@@ -2476,6 +2479,8 @@ div.list.feedDiv{
   height: 105px;
 }
 
+
+
 .feedDiv{
   background-color: white !important;
 }
@@ -2483,6 +2488,15 @@ div.list.feedDiv{
 
 .mainFeedDiv{
   background-color: white !important;
+}
+
+.searchDiv .list .item .item-content p{
+  color: hsl(0,0%,10%) !important;
+}
+
+.favUploader{
+  margin-top: -5px;
+  color: hsl(0,0%,10%) !important;
 }
 
 }
