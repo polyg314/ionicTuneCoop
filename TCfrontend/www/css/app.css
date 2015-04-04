@@ -507,7 +507,7 @@ song-feed{
 .shareCheckboxes{
  position: relative !important;
  float: right !important;
- margin-top: -15px !important;
+ margin-top: -10px !important;
 }
 
 
@@ -1202,7 +1202,7 @@ div.list.feedDiv{
 }
 
 .searchAndFavorites{
-  height: 82.5%;
+  height: 150%;
 }
 
 #searchForm button{
@@ -1211,7 +1211,6 @@ div.list.feedDiv{
 
 .item-content{
   width: 100%;
-
 }
 
 .searchDiv .list{
@@ -1674,7 +1673,7 @@ a.item:after, button.item:after{
 .shareCheckboxes{
  position: relative !important;
  float: right !important;
- margin-top: -15px !important;
+ margin-top: -5px !important;
 }
 
 

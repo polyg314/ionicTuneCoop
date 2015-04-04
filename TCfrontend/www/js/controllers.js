@@ -2,7 +2,7 @@ angular.module('tunecoop.controllers', [])
 
   
   
-    .controller('AppCtrl', function ($scope, $state, OpenFB, $ionicModal, $timeout, $http, $rootScope, $ionicPopup) {
+    .controller('AppCtrl', function ($scope, $state, OpenFB, $ionicModal, $timeout, $http, $rootScope, $ionicPopup, $interval) {
 
 
       $rootScope.scFavorites = false;
@@ -134,7 +134,20 @@ angular.module('tunecoop.controllers', [])
       $scope.position = 0;
       $scope.duration = 100;
 
+      progressChecker = undefined;
+
       playSong = function(){
+
+
+          if(angular.isDefined(progressChecker)){
+            console.log('really?')
+            $scope.$on('$destroy', function (){
+              console.log("beGone")
+              $interval.cancel(progressChecker);
+              progressChecker = undefined;
+            });
+          }
+
           // console.log($rootScope.currentSong)
           jQuery('.artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
 
@@ -178,45 +191,62 @@ angular.module('tunecoop.controllers', [])
           widget = SC.Widget(document.getElementById('soundcloud_widget'));
 
           widget.load($rootScope.currentSong.url + '&auto_play=false') ;
-          widget.bind(SC.Widget.Events.READY, function(){
-              
+          widget.bind(SC.Widget.Events.READY, function(){              
               widget.setVolume($scope.volume)
-
               widget.play();
-              $rootScope.playing = true;
               $timeout(function(){
                 widget.getDuration(function(duration){
-                $scope.$apply(function(){
-                  $scope.duration = duration; 
-                })  
-                },1000)              
-              })
-              progressChecker = setInterval(function(){
-                    widget.getPosition(function(position){
-                      if(position < ($scope.duration - 1000)){
-                        $scope.$apply(function(){
-                          $scope.position = Math.floor(position)
-                          jQuery('#progressBar').val(Math.floor(position))
-                        })
-                      }
-                      else{
-                        clearInterval()
-                      }
-                    })
-              } , 1000)
-              progressChecker();
+                  $scope.$apply(function(){
+                    $scope.duration = duration;
+                    $rootScope.playing = true;
+                  })  
+                })              
+              },1000);             
+            if(angular.isUndefined(progressChecker)){
+              progressChecker = $interval(function(){
+                    console.log('betch')
+                    actualProgress();
+               }, 1000);           
+            }
           });
+
           widget.bind(SC.Widget.Events.PAUSE, function(){
             $rootScope.playing = false;
+            stopProgress();
           });
 
           widget.bind(SC.Widget.Events.FINISH, function(){
+              $rootScope.playing = false;
+              stopProgress();
               if($rootScope.currentSong.playlist === 'songFeed' || $rootScope.currentSong.playlist === 'favorites' || $rootScope.currentSong.playlist === "soundCloudFavorites"){
                 playNext();
               }
-              $rootScope.playing = false;
+
           });
       };
+
+      actualProgress =  function(){
+          widget.getPosition(function(position){
+              if(position < ($scope.duration - 1000)){
+                $scope.$apply(function(){
+                  $scope.position = Math.floor(position)
+                  jQuery('#progressBar').val(Math.floor(position))
+                })
+              }
+          })
+      }     
+
+      stopProgress = function(){
+        console.log("staaaapppp")
+        if(angular.isDefined(progressChecker)){
+            $scope.$on('$destroy', function (){
+            console.log('seriously')
+            $interval.cancel(progressChecker);
+            progressChecker = undefined;
+            });
+        };
+      };
+  
 
       playNext = function(){
         var nextTrack = findNextSong();
