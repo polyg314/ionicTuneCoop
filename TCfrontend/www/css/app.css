@@ -1470,14 +1470,14 @@ body div{
       font-family: 'PT Sans Narrow', sans-serif;
       position: absolute;
       bottom: 53%;
-      background-color: -webkit-radial-gradient(rgba(0, 0, 0, 0.45), rgba(0,0,0,.35)); 
-      background: -o-radial-gradient(rgba(0, 0, 0, 0.45), rgba(0,0,0,.35));
-      background: -moz-radial-gradient(rgba(0, 0, 0, 0.45), rgba(0,0,0,.35)); 
-      background: radial-gradient(rgba(0, 0, 0, 0.45), rgba(0,0,0,.35));
-      border-top: 2px solid hsl(0,0%,90%);
-      border-left: 4px solid hsl(0,0%,10%);
-      border-right: 4px solid hsl(0,0%,10%);
-      border-bottom: 1px solid hsl(0,0%,70%);
+      background-color: -webkit-radial-gradient(rgba(0, 0, 0, 0.35), rgba(0,0,0,.25)); 
+      background: -o-radial-gradient(rgba(0, 0, 0, 0.35), rgba(0,0,0,.25));
+      background: -moz-radial-gradient(rgba(0, 0, 0, 0.35), rgba(0,0,0,.25)); 
+      background: radial-gradient(rgba(0, 0, 0, 0.35), rgba(0,0,0,.25));
+      border-top: 1px solid hsl(0,0%,15%);
+      border-left: 4px solid hsl(0,0%,15%);
+      border-right: 4px solid hsl(0,0%,15%);
+      border-bottom: 2px solid hsl(0,0%,10%);
       width: 98.9%;
       left: .5%;
     }
@@ -1516,9 +1516,9 @@ a:active {
 
 .playerSongTitle{
   padding: 0px;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
-  margin-left: -3px;
+  margin-left: -1px;
   margin-top: 35px;
   position: absolute;
   color: white;
@@ -1526,7 +1526,7 @@ a:active {
 }
 
 #playerSongUploader{
-  font-size: 24px !important;
+  font-size: 20px !important;
   font-weight: normal;
 }
 
