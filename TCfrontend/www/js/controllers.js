@@ -142,7 +142,6 @@ angular.module('tunecoop.controllers', [])
           if(angular.isDefined(progressChecker)){
             console.log('really?')
             $scope.$on('$destroy', function (){
-              console.log("beGone")
               $interval.cancel(progressChecker);
               progressChecker = undefined;
             });
@@ -237,10 +236,8 @@ angular.module('tunecoop.controllers', [])
       }     
 
       stopProgress = function(){
-        console.log("staaaapppp")
         if(angular.isDefined(progressChecker)){
             $scope.$on('$destroy', function (){
-            console.log('seriously')
             $interval.cancel(progressChecker);
             progressChecker = undefined;
             });

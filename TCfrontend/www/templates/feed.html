@@ -11,7 +11,7 @@
         <span class="feedTitleAndUploader"> <h2>{{feedSong.title}}<br><span class="uploaderName">{{feedSong.uploader}}</span></h2></span>
 
         <p class="feedMessages">{{feedSong.messages}}</p>
-        <p class="fromUsername">-&nbsp{{feedSong.username}}<br><span class="feedDate">{{feedSong.date | date : short}}</span></p>
+        <p class="fromUsername"><span class="phoneHTML">-</span><span class="webHTML italicize"><i>from</i></span>&nbsp{{feedSong.username}}<br><span class="feedDate">{{feedSong.date | date : short}}</span></p>
         <div class="buttonRow">
           <share-button url="{{ feedSong.url }}" picUrl= "{{ feedSong.picurl }}"  uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></share-button>
           <play link="{{ feedSong.url }}" artUrl="{{ feedSong.picurl }}" uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}" playlist= "songFeed" id= "{{ feedSong.id }}" ><span class="glyphicon glyphicon-play" aria-hidden="true"></span></play>

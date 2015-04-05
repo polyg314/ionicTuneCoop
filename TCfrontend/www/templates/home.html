@@ -28,9 +28,10 @@
        </div>
    
     <div id="logo">TuneCoop</div>
+      <div class="playerSongTitle">{{currentSong.title}}<br><span id="playerSongUploader">{{currentSong.uploader}}</span></div>
       <div>
         <div class="col-sm-12" id="player">
-              <div><span class="playerSongTitle">{{currentSong.title}}</span><br><span id="playerSongUploader">{{currentSong.uploader}}</span></div>
+
               <div class="row" id="playerButtons">
                   <button id="officialReverseButton" class="col" ng-click="reverseButtonFunction()"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
                   <button id="officialPlayButton" ng-hide="playing" ng-click="playCurrentTrack()" class="col"><span id="playerPlayButtonGlyphicon" class="glyphicon glyphicon-play" aria-hidden="true"></span></button>

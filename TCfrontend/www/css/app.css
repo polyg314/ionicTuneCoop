@@ -256,6 +256,7 @@
       font-family: 'PT Sans Narrow', sans-serif;
       top: 5px;
       width: 100%;
+
     }
 
 #mainTabDiv{
@@ -383,6 +384,10 @@ song-feed{
   padding: 0px 0px 0px 40px;
   font-size: 20px;
   z-index: 10;
+}
+
+.buttonRow .searchButtons{
+  padding: 0px 10% 0px 10%;
 }
 
 /*.searchPlay{
@@ -786,6 +791,7 @@ song-feed{
   position: absolute !important;
   bottom: 15px;
   right: 15px;
+  width: 100% !important;
  }
 
  a:hover, a:focus{
@@ -926,8 +932,8 @@ img.feedImgs{
   z-index: 100;
   position: absolute;
   right: 20px;
-  bottom: -5px;
-  width: 170px;
+  bottom: 15px;
+  width: 50%;
   color: hsl(0,0%,10%);
 }
 
@@ -1003,7 +1009,7 @@ img.feedImgs{
 
 }
 
-.glyphicon-play:active{
+/*.glyphicon-play:active{
   color: #009900;
 }
 
@@ -1025,7 +1031,7 @@ img.feedImgs{
 
 .glyphicon-minus:active{
   color: red;
-}
+}*/
 
 .searchTitle{
      white-space: normal !important;
@@ -1230,6 +1236,11 @@ div.list.feedDiv{
   color: hsl(0,0%,10%) !important;
 }
 
+.favUploader{
+  color: hsl(0,0%,10%) !important;
+  font-size: 14px;
+  font-weight: normal;
+}
 
 
 }
@@ -1387,8 +1398,8 @@ body div{
 
   #playerButtons{
     position: absolute;
-    top: -180px;
-    left: 0px;
+    top: -40px;
+    left: 1.1%;
     padding: 0px;
     color: white;
     width: 40%;
@@ -1443,7 +1454,7 @@ body div{
       height: 0px;
       position: absolute;
       left: 60px;
-      top: -2px;
+      top: -4px;
 }
 
 .logoStyle{
@@ -1452,18 +1463,23 @@ body div{
 }
 
 #player{
-      height: 40%;
+      height: 100px;
       padding: 10px;
       padding-bottom: 0px;
       color: white;
       font-family: 'PT Sans Narrow', sans-serif;
-/*      margin-top: 50px;*/
       position: absolute;
-      top: 300px;
-/*      background-color: -webkit-radial-gradient(rgba(0, 0, 0, 0.35), rgba(0,0,0,.25)); 
-      background: -o-radial-gradient(rgba(0, 0, 0, 0.35), rgba(0,0,0,.25));
-      background: -moz-radial-gradient(rgba(0, 0, 0, 0.35), rgba(0,0,0,.25)); 
-      background: radial-gradient(rgba(0, 0, 0, 0.35), rgba(0,0,0,.25));*/
+      bottom: 53%;
+      background-color: -webkit-radial-gradient(rgba(0, 0, 0, 0.45), rgba(0,0,0,.35)); 
+      background: -o-radial-gradient(rgba(0, 0, 0, 0.45), rgba(0,0,0,.35));
+      background: -moz-radial-gradient(rgba(0, 0, 0, 0.45), rgba(0,0,0,.35)); 
+      background: radial-gradient(rgba(0, 0, 0, 0.45), rgba(0,0,0,.35));
+      border-top: 2px solid hsl(0,0%,90%);
+      border-left: 4px solid hsl(0,0%,10%);
+      border-right: 4px solid hsl(0,0%,10%);
+      border-bottom: 1px solid hsl(0,0%,70%);
+      width: 98.9%;
+      left: .5%;
     }
 
 
@@ -1500,21 +1516,18 @@ a:active {
 
 .playerSongTitle{
   padding: 0px;
-  padding-left: 2px;
   font-size: 28px;
   font-weight: bold;
-  margin-left: 3px;
-  margin-top: -250px;
+  margin-left: -3px;
+  margin-top: 35px;
   position: absolute;
+  color: white;
 /*  text-overflow: elipsis;*/
 }
 
-
 #playerSongUploader{
-  position: absolute;
   font-size: 24px !important;
-  margin-left: 4px;
-  margin-top: -220px;
+  font-weight: normal;
 }
 
 #frontOverlay{
@@ -1559,6 +1572,7 @@ a.item:after, button.item:after{
 }
 
 
+
 .favoriteButton{
   background: transparent;
   border: none;
@@ -1583,7 +1597,7 @@ a.item:after, button.item:after{
 .item-thumbnail-left, .item-thumbnail-left .item-content {
   padding-left: 100px;
   padding-top: 10px;
-    color: hsl(0,0%,10%);
+    color: hsl(0,0%,15%);
 }
 
 .modal-open .modal, .modal-open .modal-backdrop {
@@ -1899,9 +1913,8 @@ a.item:after, button.item:after{
 }
 
 #volumeSlider{
-/*  margin-top: 31%;*/
-  background-color: hsla(0,0%,100%,0.2);
-  height: 15px;
+  background-color: hsla(0,0%,100%,0);
+  height: 13px;
   border-radius: 3px;
   color: purple;
 }
@@ -1929,8 +1942,8 @@ a.item:after, button.item:after{
 
 #volumeDiv{
     position: absolute;
-    top: -10px;
-    right: 65px;
+    top: 15px;
+    right: 6.1%;
     padding: 0px;
     color: white;
     width: 15%;
@@ -1958,7 +1971,7 @@ a.item:after, button.item:after{
 
 #progressBar{
     position: absolute;
-    bottom: ;
+    bottom: 25px ;
     height: 9px;
     -webkit-appearance: none;
     border-radius: 0px;
@@ -1969,10 +1982,9 @@ a.item:after, button.item:after{
     -moz-box-shadow: inset 0px 0px 2px 2px hsla(273, 75%, 100%, 1), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
     box-shadow: inset 0px 2px 1px 0px hsla(254, 74%, 100%, .8), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);*/
     margin-bottom: 0px;
-    width: 98.5%;
-    left: 0px;
+    width: 88%;
+    left: 5.5%;
     right: 0px;
-    margin-top: -280px;
     padding-top: 8px;
     background-color: hsla(0,0%,100%,1)
 }
@@ -2070,7 +2082,7 @@ a:hover .uploaderName , a:focus .uploaderName {
   right: 20px;
   bottom: -5px;
   width: 60%;
-  color: hsl(0,0%,10%);
+  color: hsl(0,0%,15%);
 }
 
 
@@ -2175,6 +2187,7 @@ a:hover .uploaderName , a:focus .uploaderName {
   height: 50%;
   width: 97.25%;
   position: absolute;
+  top: 49%;
   margin-left: 0%!important;
   bottom: 10px;
   border-radius: 0px 0px 15px 15px;
@@ -2190,12 +2203,11 @@ a:hover .uploaderName , a:focus .uploaderName {
   border-left: solid 4px hsla(254, 0%, 15%, .95);
   border-right: solid 4px hsla(254, 0%, 5%, .95);
   border-bottom: solid 1px hsla(254, 0%, 12%, .8);
-  -webkit-box-shadow: 0px -3px 99px -20px rgba(252,244,252,1);
-  -moz-box-shadow: 0px -3px 99px -20px rgba(252,244,252,1);
-  box-shadow: 0px -3px 99px -20px rgba(252,244,252,1);
+  -webkit-box-shadow: 0px 0px 12px -2px rgba(255,255,255,1);
+  -moz-box-shadow: 0px 0px 12px -2px rgba(255,255,255,1);
+  box-shadow: 0px 0px 12px -2px rgba(255,255,255,1);
   padding: 5px;
   color: hsl(0,0%,10%);
-/*text-align: center*/
 }
 
 #searchBar{
@@ -2224,28 +2236,28 @@ div .modal-wrapper .scroll-content .scroll{
   margin: 0 auto;
 }
 
-.glyphicon-play:active{
-  color: #009900;
+.glyphicon-play:hover{
+  color: hsl(0,0%,25%);
 }
 
-.glyphicon-share-alt:active{
-  color: #0029A3;
+.glyphicon-share-alt:hover{
+  color: rgba(73,54,137,1);
 }
 
-.glyphicon-forward:active{
-  color: #730000;
+.glyphicon-forward:hover{
+  color: rgba(73,54,137,1);
 }
 
-.glyphicon-backward:active{
-  color: #730000;
+.glyphicon-backward:hover{
+  color: rgba(73,54,137,1);
 }
 
-.glyphicon-heart:active{
-  color: purple;
+.glyphicon-heart:hover{
+  color: rgba(73,54,137,1);
 }
 
-.glyphicon-minus:active{
-  color: red;
+.glyphicon-minus:hover{
+  color: rgba(73,54,137,1);
 }
 
 .playButton{
@@ -2415,7 +2427,7 @@ div.list.feedDiv{
 
 .feedDiv .item .item-content{
   background-color: hsla(0,0%,100%,1);
-  color: hsl(0,0%,10%);
+  color: hsl(0,0%,15%);
 }
 
 .mainDivs h4{
@@ -2494,8 +2506,13 @@ div.list.feedDiv{
 }
 
 .favUploader{
-  margin-top: -5px;
   color: hsl(0,0%,10%) !important;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.italicize{
+  font-style: italic;
 }
 
 }

@@ -11,8 +11,8 @@
   <div class="list" ng-repeat="favorite in favorites | filter:query">
       <ion-item class="item item-thumbnail-left">
         <img class="favoriteImgs" src={{favorite.picurl}}>
-        <h2>{{favorite.title}}</h2>
-        <p class="favUploader">{{favorite.uploader}}</p>
+        <h2>{{favorite.title}}<br>
+        <span class="favUploader">{{favorite.uploader}}</span></h2>
         <div class="fandsButtonRow row">
           <delete favid="{{ favorite.id }}" class="col"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></delete>
           <play link="{{ favorite.url }}" artUrl="{{ favorite.picurl }}" uploader="{{ favorite.uploader }}" title="{{ favorite.title }}" trackId="{{ favorite.trackid }}" playlist= "favorites" id = "{{ favorite.id }}" class="col"><span class="glyphicon glyphicon-play" aria-hidden="true" ></span></play>
@@ -36,11 +36,10 @@
   <div class="list" ng-repeat="soundCloudFavorite in soundCloudFavorites | filter:query">
       <ion-item class="item item-thumbnail-left">
         <img src={{soundCloudFavorite.artwork_url}}>
-        <h2>{{soundCloudFavorite.title}}</h2>
-        <p class="favUploader">{{soundCloudFavorite.user.username}}</p> 
-        <p class="favUploader">{{soundCloudFavorite.duration | millSecondsToTimeString}}  
+        <h2>{{soundCloudFavorite.title}}<br>
+        <span class="favUploader">{{soundCloudFavorite.user.username}}
+        <br>{{soundCloudFavorite.duration | millSecondsToTimeString}}</span></h2>
         <div class="fandsButtonRow row">    
-
           <heart url="{{ soundCloudFavorite.permalink_url }}" picUrl="{{ soundCloudFavorite.artwork_url }}" uploader="{{ soundCloudFavorite.user.username }}" title="{{ soundCloudFavorite.title }}" trackId="{{ soundCloudFavorite.id }}" tcid="{{ user.tcid }}" class="col"><span class="glyphicon glyphicon-heart" aria-hidden="true" ></span></heart>
           <play link="{{ soundCloudFavorite.permalink_url }}" artUrl="{{ soundCloudFavorite.artwork_url }}" uploader="{{ soundCloudFavorite.user.username }}" title="{{ soundCloudFavorite.title }}" trackId="{{ soundCloudFavorite.id }}" playlist= "soundCloudFavorites" id= "{{ soundCloudFavorite.id }}" class="col"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></play>
           <share-button url="{{ soundCloudFavorite.permalink_url  }}" picUrl= "{{ soundCloudFavorite.artwork_url }}"  uploader="{{ soundCloudFavorite.user.username }}" title="{{ soundCloudFavorite.title }}" trackId="{{ soundCloudFavorite.id }}" class="col"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></share-button>
