@@ -302,23 +302,21 @@ a:active {
 }
 
 
+
 .playerSongTitle{
-	padding: 0px;
-	padding-left: 2px;
-	font-size: 20px;
+  padding: 0px;
+  font-size: 18px;
   font-weight: bold;
-  margin-left: 3px;
+  margin-left: -1px;
+  margin-top: 35px;
   position: absolute;
-  top: 40px;
+  color: white;
 /*  text-overflow: elipsis;*/
 }
 
 #playerSongUploader{
-  position: absolute;
-  font-size: 18px;
-  margin-left: 5px;
-  top: 60px;
-
+  font-size: 14px !important;
+  font-weight: normal;
 }
 
 #frontOverlay{
