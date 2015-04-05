@@ -2236,30 +2236,30 @@ div .modal-wrapper .scroll-content .scroll{
   margin: 0 auto;
 }
 
-.glyphicon-play:hover{
+/*.glyphicon-play:hover{
   color: hsl(0,0%,25%);
-}
+}*/
 
 .glyphicon-share-alt:hover{
   color: rgba(73,54,137,1);
 }
-
+/*
 .glyphicon-forward:hover{
   color: rgba(73,54,137,1);
 }
 
 .glyphicon-backward:hover{
   color: rgba(73,54,137,1);
-}
+}*/
 
 .glyphicon-heart:hover{
   color: rgba(73,54,137,1);
 }
 
-.glyphicon-minus:hover{
+/*.glyphicon-minus:hover{
   color: rgba(73,54,137,1);
 }
-
+*/
 .playButton{
   font-size: 26px;
   margin-top: 115px;
