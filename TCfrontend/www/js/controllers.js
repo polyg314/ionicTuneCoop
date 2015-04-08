@@ -58,16 +58,19 @@ angular.module('tunecoop.controllers', [])
             // favorites = res.favorites;
             $timeout(function() {
               $scope.$apply(function() {
+                $rootScope.loaded = true;
                 $rootScope.feedSongs= res.songFeed;
                 $rootScope.favorites= res.favorites;
                 $rootScope.friends = res.friends;
                 $rootScope.friendRequests = res.friendRequests;
-                $rootScope.feedSongs[0].playlist = "songFeed"
-                $rootScope.currentSong = $rootScope.feedSongs[0];
-                widget = SC.Widget(document.getElementById('soundcloud_widget'));
-                widget.load($rootScope.currentSong.url + '&auto_play=false') 
-                jQuery('.artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
-                checkNew()   
+                if($rootScope.feedSongs[0]){
+                  $rootScope.feedSongs[0].playlist = "songFeed" 
+                  $rootScope.currentSong = $rootScope.feedSongs[0];
+                  widget = SC.Widget(document.getElementById('soundcloud_widget'));
+                  widget.load($rootScope.currentSong.url + '&auto_play=false') 
+                  jQuery('.artDiv').css({'background-image' : 'url(' + $rootScope.currentSong.picurl + ')'});
+                  checkNew()   
+                }
               })
             })
           })
@@ -94,7 +97,6 @@ angular.module('tunecoop.controllers', [])
              },
              data: { fbid: $rootScope.user.fbid, fullName: $rootScope.user.full_name },
             }
-            console.log(req);
           $http(req).success(function(res){
               var username = res.username;
               if(username){
@@ -119,7 +121,7 @@ angular.module('tunecoop.controllers', [])
                 $rootScope.newSongs ++
               }
             }
-            $rootScope.loaded = true;
+            
           }; 
 
       //playing around with window.open:

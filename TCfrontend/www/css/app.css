@@ -775,6 +775,8 @@ song-feed{
    box-shadow: inset 0px 0px 2px 0px hsla(254, 74%, 100%, 1), 0px 5px 5px 0px hsla(254, 74%, 0%, 1);
  }
 
+
+
  .mainDiv .item h2{
   height: 50px !important;
   white-space: normal !important;
@@ -1205,9 +1207,9 @@ div.list.feedDiv{
   padding-top: 10px;
 }
 
-.searchAndFavorites{
-  height: 150%;
-}
+/*.searchAndFavorites{
+  height: 140%;
+}*/
 
 #searchForm button{
   margin-top: -5px;
@@ -1912,7 +1914,7 @@ a.item:after, button.item:after{
 
 #volumeSlider{
   background-color: hsla(0,0%,100%,0);
-  height: 13px;
+  height: 20px;
   border-radius: 3px;
   color: purple;
 }
@@ -1941,7 +1943,7 @@ a.item:after, button.item:after{
 #volumeDiv{
     position: absolute;
     top: 15px;
-    right: 6.1%;
+    right: 9.5%;
     padding: 0px;
     color: white;
     width: 15%;
@@ -1969,34 +1971,65 @@ a.item:after, button.item:after{
 
 #progressBar{
     position: absolute;
-    bottom: 25px ;
-    height: 9px;
+    bottom: 8px ;
+    z-index: 200;
+/*    height: 9px;
     -webkit-appearance: none;
     border-radius: 0px;
-    border-bottom: 1px solid hsl(273,0%,70%);
-    -moz-border-radius: 0px;
+    border-bottom: 1px solid hsl(273,0%,70%);*/
+/*    -moz-border-radius: 0px;
     -webkit-border-radius: 0px;
-/*    -webkit-box-shadow: inset 0px 0px 2px 2px hsla(273, 75%, 100%, 1), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
+    -webkit-box-shadow: inset 0px 0px 2px 2px hsla(273, 75%, 100%, 1), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
     -moz-box-shadow: inset 0px 0px 2px 2px hsla(273, 75%, 100%, 1), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
-    box-shadow: inset 0px 2px 1px 0px hsla(254, 74%, 100%, .8), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);*/
-    margin-bottom: 0px;
+    box-shadow: inset 0px 2px 1px 0px hsla(254, 74%, 100%, .8), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
+    margin-bottom: 0px;*/
     width: 88%;
     left: 5.5%;
     right: 0px;
-    padding-top: 8px;
-    background-color: hsla(0,0%,100%,1)
+/*    padding-top: 8px;*/
+/*    background-color: hsla(0,0%,100%,1)*/
 }
 
-#progressBar::-webkit-slider-thumb{
+/*#progressBar::-webkit-slider-thumb{
    -webkit-appearance:none !important;  
    width: 17px;
    height: 26px;
    -webkit-appearance: none;
    border-right: solid 0px hsl(0,0%,25%);
    background-color: hsla(254, 74%, 27%, 1);
-   border-radius: none !important;
-/*   box-shadow: inset 0px 0px 2px 0px hsla(254, 74%, 100%, 1), 0px 5px 5px 0px hsla(254, 74%, 0%, 1);*/
- }
+   border-radius: none !important;*/
+/*   box-shadow: inset 0px 0px 2px 0px hsla(254, 74%, 100%, 1), 0px 5px 5px 0px hsla(254, 74%, 0%, 1);
+ }*/
+input[type=range]{
+    -webkit-appearance: none;
+    scale-color: purple;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: hsla(0,0%,100%,.8);
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #5C4B94;
+    margin-top: -4px;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
 
  .mainDiv .item h2{
   height: 50px !important;
