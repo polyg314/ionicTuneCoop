@@ -11,9 +11,6 @@ angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers', 'directiv
                 controller: "AppCtrl"
             })
 
-
-
-
             .state('app.login', {
                 url: "/login",
                 views: {
