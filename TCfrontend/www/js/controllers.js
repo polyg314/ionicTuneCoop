@@ -768,15 +768,14 @@ angular.module('tunecoop.controllers', [])
       // $scope.master = {};
 
       $scope.update = function(username) {
-
-        console.log(username)
+        var usernameLowercase = username.toLowerCase();
             var req = {
                method: 'POST',
                url: 'http://localhost:8000/updateUsername',
                headers: {
                  'Content-Type': "application/json"
                },
-               data: { fbid: $rootScope.user.fbid, username: username },
+               data: { fbid: $rootScope.user.fbid, username: usernameLowercase },
               }
               $http(req).success(function(res){
                 console.log(res);
@@ -787,9 +786,8 @@ angular.module('tunecoop.controllers', [])
                 $scope.hideUpdateUsername();
                 $rootScope.loaded = true;
               })
-      };
-
-    })
+        }
+      })
 
 
     .controller('HomeCtrl', function ($scope, $stateParams, OpenFB, $ionicLoading) {
