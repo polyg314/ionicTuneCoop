@@ -160,7 +160,7 @@
 
   #playerButtons{
     position: absolute;
-    bottom: 60px;
+    bottom: 40px;
     padding: 0px;
     color: white;
     width: 100%;
@@ -334,7 +334,7 @@ a.item:after, button.item:after{
 }
 
 .mainDiv{
-  height: 150%;
+  height: 120%;
   background-color: white;
   overflow-y: scroll !important;
   border-bottom: solid 3px hsl(37,0%,96%);
@@ -790,8 +790,8 @@ song-feed{
   z-index: 10;
   position: absolute !important;
   bottom: 15px;
-  right: 15px;
-  width: 100% !important;
+  right: 0px;
+  width: 70% !important;
  }
 
  a:hover, a:focus{
@@ -905,7 +905,7 @@ img.feedImgs{
   height: 20px;
   line-height: 19px;
   position: absolute;
-  top: 10px;
+  top: 5px;
   right: 10px;
 /*  margin-top: 13px;
   margin-left: 14px;*/
@@ -956,12 +956,13 @@ img.feedImgs{
 /*  z-index: 100;*/
   position: absolute;
   right: -10px;
-  top: -5px;
+  top: -10px;
   width: 70px;
+  height: 100px;
   background: transparent;
   border: none;
   border-radius: 0px !important;
-  z-index: 100;
+/*  z-index: 1000;*/
 }
 
 
@@ -970,8 +971,9 @@ img.feedImgs{
   width: 50px;
   border: none ;
   background-color: hsla(254, 74%, 27%, .7);
-  height: 20px;
+  height: 25px;
   margin-top: 5px;
+
 /*  height: 20px;*/
 }
 
@@ -984,13 +986,18 @@ img.feedImgs{
 .tcsc .toggle div .handle{
   border-radius: none !important;
   margin-top: 5px;
-  height: 15px;
+  height: 20px;
 }
 
 
 #favoriteTab select{
   background: transparent !important;
   border: none;
+}
+
+#favoriteTab p{
+  width: 50%;
+  margin-right: 0px !important;
 }
 
 #tcToggle{
@@ -1038,19 +1045,72 @@ img.feedImgs{
 }
 
 .timerRow{
-  font-size: 15px;
+  font-size: 12px !important;
   font-weight: bold; 
   position: absolute;
-  bottom: 10px;
+  bottom: 18px;
+  font-size: 21px;
   font-weight: bold; 
-  margin-left: 0px !important;
+  margin-left: -5px !important;
   padding-right: 0px;
   width: 100%;
 }
 
+#progressBar{
+    position: absolute;
+    bottom: 28px ;
+    z-index: 200;
+/*    height: 9px;
+    -webkit-appearance: none;
+    border-radius: 0px;
+    border-bottom: 1px solid hsl(273,0%,70%);*/
+/*    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -webkit-box-shadow: inset 0px 0px 2px 2px hsla(273, 75%, 100%, 1), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
+    -moz-box-shadow: inset 0px 0px 2px 2px hsla(273, 75%, 100%, 1), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
+    box-shadow: inset 0px 2px 1px 0px hsla(254, 74%, 100%, .8), 0px 1px 1px 0px rgba(255, 255, 255, 0.13);
+    margin-bottom: 0px;*/
+    width: 82%;
+    left: 6%;
+    right: 0px;
+/*    padding-top: 8px;*/
+/*    background-color: hsla(0,0%,100%,1)*/
+}
+
+input[type=range]{
+    -webkit-appearance: none;
+    scale-color: purple;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: hsla(0,0%,100%,.8);
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #5C4B94;
+    margin-top: -4px;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
 #progressBarTime{
   position: absolute;
-  right: 10px;
+  left: 92%;
 }
 
 /* heeerrrre */
@@ -1183,7 +1243,7 @@ div.list.feedDiv{
 }
 
 .mainDiv{
-  height: 82%;
+  height: 160%;
   overflow-y: scroll !important;
   border-bottom: solid 1px hsl(37,0%,96%);
   border-left: solid 3px hsl(37,0%,94%);
