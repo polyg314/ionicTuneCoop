@@ -2317,8 +2317,8 @@ a:hover .uploaderName , a:focus .uploaderName {
   right: 20px;
   background: hsla(0,0%,10%, .5);
   color: white;
-  height: 500px;
-  width: 500px;
+  height: 400px;
+  width: 30%;
   z-index: 100;
 }
 
