@@ -20,16 +20,24 @@ angular.module('tunecoop.controllers', [])
 
           // initiate auth popup
           SC.connect(function() {
-            SC.get('/me', function(me) { 
-              $rootScope.user = {};
+            SC.get('/me', function(me) {
               $scope.$apply(function(){
-                $rootScope.user.fbid = me.id; 
-                $rootScope.user.uri = me.uri;
+                $rootScope.user.scid = me.id; 
               })
-              if($rootScope.user.fbid){
-                console.log($rootScope.user.fbid)
-                getUsername();
-              }                 
+              var req = {
+               method: 'POST',
+               url: 'http://localhost:8000/addSoundCloudId',
+               headers: {
+                 'Content-Type': "application/json"
+               },
+               data: { scid: $rootScope.user.scid },
+              }
+              $http(req).success(function(res){
+                console.log(res);
+                console.log('yup')
+                getSoundCloudFavorites();
+
+              }) 
             });
           });
       };
@@ -44,14 +52,13 @@ angular.module('tunecoop.controllers', [])
       // });
 
 
-      getSongFeedAndFavorites= function(){
+      getSongFeedAndFavorites = function(){
         var req = {
              method: 'POST',
              url: 'http://localhost:8000/songFeedAndFavorites',
              headers: {
                'Content-Type': "application/json"
-             },
-             data: { tcid: $rootScope.user.tcid },
+             }
             }                     
           $http(req).success(function(res){
             // songFeed = res.songFeed;
@@ -75,44 +82,50 @@ angular.module('tunecoop.controllers', [])
             })
           })
         .error(function(res){console.log(res)}) 
-        var reqTwo = {
+        if($rootScope.user.scid){
+          getSoundCloudFavorites();
+        }                              
+      };
+
+
+      function getSoundCloudFavorites(){
+        var req = {
              method: 'GET',
-             url: $rootScope.user.uri + '/favorites.json?client_id=9c6c34a18ce4704b429202afd4f5675f',
+             url: 'https://api.soundcloud.com/users/' + $rootScope.user.scid + '/favorites.json?client_id=9c6c34a18ce4704b429202afd4f5675f',
              headers: {
                'Content-Type': "application/json"
              },
           }                     
-          $http(reqTwo).success(function(res){
-            $rootScope.soundCloudFavorites = res;
-          }).error(function(res){console.log(res)})                                
-      };
-
-
-        getUsername= function(){
-            var req = {
-             method: 'POST',
-             url: 'http://localhost:8000/login',
-             headers: {
-               'Content-Type': "application/json"
-             },
-             data: { fbid: $rootScope.user.fbid, fullName: $rootScope.user.full_name },
-            }
           $http(req).success(function(res){
-              var username = res.username;
-              if(username){
-                $rootScope.user.username = res.username;
-              }
-              $rootScope.user.tcid = res.id;
-              $rootScope.user.fullName = res.name;
-              // console.log(res);
-              var tcid = res.id;
-              if(!username){
-                $scope.showUpdateUsername();
-              }
-              getSongFeedAndFavorites();
-            })
-            .error(function(res){console.log(res)});
-          }
+            $rootScope.soundCloudFavorites = res;
+          }).error(function(res){console.log(res)}) 
+      }
+
+        // getUsername= function(){
+        //     var req = {
+        //      method: 'POST',
+        //      url: 'http://localhost:8000/login',
+        //      headers: {
+        //        'Content-Type': "application/json"
+        //      },
+        //      data: { fbid: $rootScope.user.fbid, fullName: $rootScope.user.full_name },
+        //     }
+        //   $http(req).success(function(res){
+        //       var username = res.username;
+        //       if(username){
+        //         $rootScope.user.username = res.username;
+        //       }
+        //       $rootScope.user.tcid = res.id;
+        //       $rootScope.user.fullName = res.name;
+        //       // console.log(res);
+        //       var tcid = res.id;
+        //       if(!username){
+        //         $scope.showUpdateUsername();
+        //       }
+        //       getSongFeedAndFavorites();
+        //     })
+        //     .error(function(res){console.log(res)});
+        //   }
 
           checkNew = function(){
             $rootScope.newSongs = 0;
@@ -480,7 +493,8 @@ angular.module('tunecoop.controllers', [])
       });
 
       $ionicModal.fromTemplateUrl('templates/login.html', {
-        scope: $scope
+        scope: $scope,
+        animation: 'slide-in-up'
       }).then(function(modal) {
         $scope.loginModal = modal;
       });
@@ -580,7 +594,6 @@ angular.module('tunecoop.controllers', [])
 
      $rootScope.confirmDeleteFriend = function(){
         var friendId = $rootScope.friendDelete.friendshipid;
-        var tcid = $rootScope.user.tcid;
         var deleteFromFriends= function(){
 
                   var req = {
@@ -589,7 +602,7 @@ angular.module('tunecoop.controllers', [])
                        headers: {
                          'Content-Type': "application/json"
                        },
-                       data: { friendId: friendId, tcid: tcid },
+                       data: { friendId: friendId },
                       } 
                     $http(req).success(function(res){
                       // console.log(res);
@@ -622,11 +635,12 @@ angular.module('tunecoop.controllers', [])
         }
       };
 
-        $scope.logout = function () {
-          widget = SC.Widget(document.getElementById('soundcloud_widget'));
-            widget.pause();
-            $rootScope.user = null;
-        };
+        // $scope.logout2 = function () {
+        //     logout();
+        //     // widget = SC.Widget(document.getElementById('soundcloud_widget'));
+        //     // widget.pause();
+        //     // $rootScope.user = null;
+        // };
 
         $scope.revokePermissions = function () {
             OpenFB.revokePermissions().then(
@@ -658,14 +672,14 @@ angular.module('tunecoop.controllers', [])
 
 
         $rootScope.findFriends = function(){
-          var searchString = $('#friendSearchForm').find('input[name="searchString"]').val()
+          var searchString = $('#friendSearchForm').find('input[name="searchString"]').val().toLowerCase();
           var req = {
                method: 'POST',
                url: 'http://localhost:8000/friendSearch',
                headers: {
                  'Content-Type': "application/json"
                },
-               data: { searchString: searchString, tcid: $rootScope.user.tcid },
+               data: { searchString: searchString },
               }                    
             $http(req).success(function(res){
                 // console.log(res)
@@ -713,7 +727,7 @@ angular.module('tunecoop.controllers', [])
 
        $scope.favoriteCurrentSong = function(){
       
-        var newTrack = { trackid: $rootScope.currentSong.trackid, url: $rootScope.currentSong.url, picurl: $rootScope.currentSong.picurl, title: $rootScope.currentSong.title, uploader: $rootScope.currentSong.uploader, tcid: $rootScope.currentSong.tcid  };
+        var newTrack = { trackid: $rootScope.currentSong.trackid, url: $rootScope.currentSong.url, picurl: $rootScope.currentSong.picurl, title: $rootScope.currentSong.title, uploader: $rootScope.currentSong.uploader };
 
         var req = {
          method: 'POST',
@@ -721,7 +735,7 @@ angular.module('tunecoop.controllers', [])
          headers: {
            'Content-Type': "application/json"
          },
-         data: { trackid: $rootScope.currentSong.trackid, url: $rootScope.currentSong.url, picurl: $rootScope.currentSong.picurl, title: $rootScope.currentSong.title, uploader: $rootScope.currentSong.uploader, tcid: $rootScope.currentSong.tcid  },
+         data: { trackid: $rootScope.currentSong.trackid, url: $rootScope.currentSong.url, picurl: $rootScope.currentSong.picurl, title: $rootScope.currentSong.title, uploader: $rootScope.currentSong.uploader },
         } 
                   // console.log($rootScope.favorites);
           $http(req).success(function(res){
@@ -751,7 +765,7 @@ angular.module('tunecoop.controllers', [])
                headers: {
                  'Content-Type': "application/json"
                },
-               data: { message: message, friendSelection: friendSelection, tcid: $rootScope.user.tcid, trackid: $rootScope.currentShareTrack },
+               data: { message: message, friendSelection: friendSelection, trackid: $rootScope.currentShareTrack },
               }
             $http(req).success(function(res){
               // console.log(res)
@@ -792,30 +806,29 @@ angular.module('tunecoop.controllers', [])
 
 
 
-    .controller('UsernameController', function($scope, $rootScope, $http) {
-      // $scope.master = {};
+    // .controller('UsernameController', function($scope, $rootScope, $http) {
+    //   // $scope.master = {};
 
-      $scope.update = function(username) {
-        var usernameLowercase = username.toLowerCase();
-            var req = {
-               method: 'POST',
-               url: 'http://localhost:8000/updateUsername',
-               headers: {
-                 'Content-Type': "application/json"
-               },
-               data: { fbid: $rootScope.user.fbid, username: usernameLowercase },
-              }
-              $http(req).success(function(res){
-                console.log(res);
-                $rootScope.user.username = res.username;
-                $rootScope.user.tcid = res.id;
-                console.log($rootScope.user.username);
-                console.log($rootScope.user.tcid);
-                $scope.hideUpdateUsername();
-                $rootScope.loaded = true;
-              })
-        }
-      })
+    //   $scope.update = function(username) {
+    //     var usernameLowercase = username.toLowerCase();
+    //         var req = {
+    //            method: 'POST',
+    //            url: 'http://localhost:8000/updateUsername',
+    //            headers: {
+    //              'Content-Type': "application/json"
+    //            },
+    //            data: { fbid: $rootScope.user.fbid, username: usernameLowercase },
+    //           }
+    //           $http(req).success(function(res){
+    //             console.log(res);
+    //             $rootScope.user.username = res.username;
+    //             console.log($rootScope.user.username);
+    //             console.log($rootScope.user.tcid);
+    //             $scope.hideUpdateUsername();
+    //             $rootScope.loaded = true;
+    //           })
+    //     }
+    //   })
 
 
     .controller('HomeCtrl', function ($scope, $stateParams, OpenFB, $ionicLoading) {

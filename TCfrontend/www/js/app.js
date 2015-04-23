@@ -26,17 +26,17 @@ var app = angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers',
 
   app.constant('API_URL', 'http://localhost:8000');
 
-  app.controller('MainCtrl', function MainCtrl(RandomUserFactory, UserFactory) {
+  app.controller('MainCtrl', function MainCtrl(RandomUserFactory, UserFactory, $rootScope) {
     'use strict';
     var vm = this;
     vm.getRandomUser = getRandomUser;
     vm.login = login;
     vm.signup = signup;
-    vm.logout = logout;
+    vm.logout = $rootScope.logout;
 
     // initialization
     UserFactory.getUser().then(function success(response) {
-      vm.user = response.data;
+      // vm.user = response.data;
     });
 
     function getRandomUser() {
@@ -57,7 +57,7 @@ var app = angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers',
       }, handleError);
     }
 
-    function logout() {
+    $rootScope.logout = function() {
       UserFactory.logout();
       vm.user = null;
     }
@@ -84,7 +84,8 @@ var app = angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers',
       login: login,
       signup: signup,
       logout: logout,
-      getUser: getUser
+      getUser: getUser,
+      again: again
     };
 
     function login(username, password) {
@@ -94,13 +95,15 @@ var app = angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers',
         password: password
       }).then(function success(response) {
         AuthTokenFactory.setToken(response.data.token);
-        $rootScope.user = response.user;
+        $rootScope.closeLogin()
+        $rootScope.user = response.data.user;
+        getSongFeedAndFavorites();
         return response;
       });
     }
 
     function signup(username, password, email, name) {
-        console.log('hi')
+      console.log('hi')
       username = username.toLowerCase();
       email= email.toLowerCase();
       var nameArr= name.split(' ');
@@ -130,22 +133,43 @@ var app = angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers',
         name: temp
       }).then(function success(response) {
         AuthTokenFactory.setToken(response.data.token);
-        $rootScope.user= response.user;
+        $rootScope.loaded = true;
+        $rootScope.closeSignup();
+        $rootScope.user= response.data.user;
         return response;
       });
     }
 
-    function logout() {
+    function logout () {
       AuthTokenFactory.setToken();
+      var widget = SC.Widget(document.getElementById('soundcloud_widget'));
+      widget.pause();
+      $rootScope.user = null;
     }
 
     function getUser() {
       if (AuthTokenFactory.getToken()) {
-        return $http.get(API_URL + '/me');
+        return $http.get(API_URL + '/me').then(function success(response) {
+                $rootScope.user= response.data.user;
+                getSongFeedAndFavorites();
+      });
       } else {
         return $q.reject({ data: 'client has no auth token' });
       }
     }
+
+    function again(){
+    console.log('hi')
+    setTimeout(function() {
+            if(!$rootScope.user){
+                console.log('hi')
+                return $http.get(API_URL + '/me').then(function success(response) {
+                $rootScope.user= response.data.user;
+                })
+            }
+        }, 1000);
+    }
+
   });
 
   app.factory('AuthTokenFactory', function AuthTokenFactory($window) {

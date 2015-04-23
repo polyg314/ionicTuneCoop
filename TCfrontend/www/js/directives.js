@@ -1,13 +1,14 @@
 (function(){
     var app = angular.module('directives', []);
 
-    app.directive("usernameForm", function() {
-      return {
-        restrict: 'E',
-        templateUrl: "templates/username.html",
-        controller: 'AppCtrl'
-      };
-    })
+    
+    // app.directive("usernameForm", function() {
+    //   return {
+    //     restrict: 'E',
+    //     templateUrl: "templates/username.html",
+    //     controller: 'AppCtrl'
+    //   };
+    // })
 
     app.directive("songFeed", function() {
       return {
@@ -129,8 +130,7 @@
           url: '@',
           picUrl: '@',
           title: '@',
-          uploader: '@',
-          tcid: '@'
+          uploader: '@'
         },
         link: function($scope, element, attrs) {
           element.bind('click', function() {
@@ -144,7 +144,7 @@
                        headers: {
                          'Content-Type': "application/json"
                        },
-                       data: { trackid: attrs.trackid, url: attrs.url, picurl: attrs.picurl, title: attrs.title, uploader: attrs.uploader, tcid: attrs.tcid  },
+                       data: { trackid: attrs.trackid, url: attrs.url, picurl: attrs.picurl, title: attrs.title, uploader: attrs.uploader },
                       } 
                   // console.log($rootScope.favorites);
                     $http(req).success(function(res){
@@ -233,7 +233,7 @@
                        headers: {
                          'Content-Type': "application/json"
                        },
-                       data: { trackid: attrs.trackid, url: attrs.url, picurl: attrs.picurl, title: attrs.title, uploader: attrs.uploader, tcid: attrs.tcid  },
+                       data: { trackid: attrs.trackid, url: attrs.url, picurl: attrs.picurl, title: attrs.title, uploader: attrs.uploader },
                       } 
                   // console.log($rootScope.favorites);
                     $http(req).success(function(res){
@@ -260,8 +260,7 @@
         restrict: 'E',
         templateUrl: 'templates/add-friend.html',
         scope: {
-          ftcid: '@',
-          tcid: '@'
+          ftcid: '@'
         },
         link: function($rootScope, element, attrs) {
           element.bind('click', function() {
@@ -275,7 +274,7 @@
                        headers: {
                          'Content-Type': "application/json"
                        },
-                       data: { ftcid: attrs.ftcid, tcid: attrs.tcid },
+                       data: { ftcid: attrs.ftcid },
                       } 
                     $http(req).success(function(res){
                       // console.log(res);
@@ -301,7 +300,6 @@
         },
         link: function($scope, element, attrs) {
           element.bind('click', function() {
-            var tcid = $rootScope.user.tcid;
             var ftcid = attrs.ftcid;
             var friendRequestId = attrs.friendrequestid;
             var username = attrs.username;
@@ -312,7 +310,7 @@
                        headers: {
                          'Content-Type': "application/json"
                        },
-                       data: { ftcid: ftcid, tcid: tcid, friendRequestId: friendRequestId },
+                       data: { ftcid: ftcid, friendRequestId: friendRequestId },
                       } 
                   // console.log($rootScope.favorites);
               $http(req).success(function(res){

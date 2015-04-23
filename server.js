@@ -68,6 +68,9 @@ app.post('/login', function(req, res){
     var username2 = dbRes.rows[0].username;
     var email2 = dbRes.rows[0].email;
     var name = dbRes.rows[0].name;
+    if(dbRes.rows[0].soundcloudid){
+      var soundcloudid = dbRes.rows[0].soundcloudid;
+    }
     //compare the stored hash against the given
       if(bcrypt.compareSync(password, hash)){
         // console.log('correct username and password, time to give you that token.')
@@ -80,6 +83,10 @@ app.post('/login', function(req, res){
           email: email2,
           name: name
         }
+
+        if(soundcloudid){
+          user.scid = soundcloudid;
+        };
 
         //encrypt
         var token = jwt.encode(
@@ -104,6 +111,9 @@ app.post('/login', function(req, res){
     var username2 = dbRes.rows[0].username;
     var email2 = dbRes.rows[0].email;
     var name = dbRes.rows[0].name;
+    if(dbRes.rows[0].soundcloudid){
+      var soundcloudid = dbRes.rows[0].soundcloudid;
+    }
     //compare the stored hash against the given
       if(bcrypt.compareSync(password, hash)){
         var user = {
@@ -111,6 +121,11 @@ app.post('/login', function(req, res){
           email: email2,
           name: name
         }
+
+        if(soundcloudid){
+          user.scid = soundcloudid;
+        };
+
         //encrypt
         var token = jwt.encode(
           {
@@ -161,6 +176,7 @@ app.post('/signup', function(req, res){
         // var email2 = dbRes.rows[0].email;
         // var expires = moment().add(7, 'days').valueOf()    
         // exp: expires
+
         var user = {
           username: username,
           email: email,
@@ -216,14 +232,31 @@ app.post('/checkusername', function(req, res){
 app.get('/me', function (req, res) {
   db.query('SELECT * FROM users WHERE id = $1', [req.user.id], function(err, dbRes){        
     var user = {
+      name : dbRes.rows[0].name,
       username: dbRes.rows[0].username,
       email: dbRes.rows[0].email
     }
-    res.send(user);
+    if(dbRes.rows[0].soundcloudid){
+      user.scid = dbRes.rows[0].soundcloudid;
+    }
+    res.send({user : user});
   })
-
 });
 
+
+app.post('/addSoundCloudId', function(req, res){
+  console.log('hit')
+  var id = req.user.id;
+  var scid = req.body.scid;
+  // console.log(scid);
+  db.query('UPDATE users SET soundcloudid = $1 WHERE id = $2', [scid, id], function(err, dbRes){
+    console.log(err);
+    console.log(dbRes);
+    if(!err){
+      res.send('success!')
+    }
+  })
+});
 
 // app.use(function (req, res, next) {
 
@@ -309,7 +342,7 @@ app.post('/soundCloudSearch', function(req, resp){
 
 
 app.post('/songFeedAndFavorites', function(req, res){
-  var tcid= req.body.tcid;
+  var tcid= req.user.id;
   console.log(tcid);
   db.query('SELECT DISTINCT songs.trackid, songs.url, songs.title, songs.picurl, songs.uploader, shares.date, shares.isplayed, shares.messages, users.username, shares.id FROM shares INNER JOIN songs ON songs.trackid = shares.trackid INNER JOIN users ON shares.fromuserid = users.id WHERE shares.touserid = $1 ORDER BY date DESC', [tcid], function(err, dbRes){
     if(!err){      
@@ -334,7 +367,7 @@ app.post('/songFeedAndFavorites', function(req, res){
 
 
 app.post('/favorites', function(req, res){
-  var tcid = req.body.tcid;
+  var tcid = req.user.id;
   var trackid = req.body.trackid;
   var url = req.body.url;
   var picurl = req.body.picurl;
@@ -371,7 +404,7 @@ app.delete('/deleteFromFavorites', function(req, res){
 
 
 app.delete('/deleteFromFriends', function(req, res){
-  var tcid = req.body.tcid;
+  var tcid = req.user.id;
   var friendId = req.body.friendId;
   db.query('DELETE FROM friends WHERE user1id = $1 AND user2id = $2', [tcid, friendId], function(err, dbRes){
     console.log(dbRes);
@@ -405,7 +438,7 @@ app.post('/addToShares', function(req, res){
     var touserid = req.body.friendSelection;
     var trackid = req.body.trackid;
     var message = req.body.message;
-    var tcid = req.body.tcid;
+    var tcid = req.user.id;
     var date= new Date();
     for (i=0; i<touserid.length; i++){
       db.query('INSERT INTO shares (fromuserid, touserid, trackid, date, isplayed, messages) VALUES ($1, $2, $3, $4, $5, $6)', [tcid, touserid[i], trackid, date, false, message], function(err, dbRes){    
@@ -415,7 +448,7 @@ app.post('/addToShares', function(req, res){
 
 app.post('/friendSearch', function(req, res){
     var searchString = req.body.searchString;
-    var tcid = req.body.tcid;
+    var tcid = req.user.id;
     db.query('SELECT * FROM users WHERE username = $1', [searchString], function(err, dbRes){
     if(!err){
         //exist? 
@@ -449,7 +482,7 @@ app.post('/friendSearch', function(req, res){
 });
 
 app.post('/addFriend', function(req, res){
-  var userOne= req.body.tcid; 
+  var userOne= req.user.id; 
   var userTwo= req.body.ftcid;
   console.log(userTwo);
   db.query('INSERT INTO friendRequests (user1id, user2id, viewed) VALUES ($1, $2, $3)',[userOne, userTwo, false], function(err, dbRes){  
@@ -469,7 +502,7 @@ app.post('/addFriend', function(req, res){
 
 
 app.post('/acceptRequest', function(req, res){
-  var userOne= req.body.tcid; 
+  var userOne= req.user.id;
   var userTwo= req.body.ftcid;
   var friendRequestId= req.body.friendRequestId;
   console.log(friendRequestId);

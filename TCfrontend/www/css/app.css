@@ -1350,11 +1350,6 @@ body div{
   border-radius: 15px;
 }
 
-#soundCloudConnectButton{
-  margin-top: 110px;
-  width: 250px;
-  z-index: 100;
-}
 
 #frontLogo{
       font-family: 'Lobster', cursive;
@@ -1397,7 +1392,7 @@ body div{
   background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/a/af/Squarepusher_Enstrobia.jpg/220px-Squarepusher_Enstrobia.jpg');
   background-size: 9%;
   z-index: -10;
-  margin-top: 20px;
+  margin-top: 10px;
   border-radius: 15px 15px 15px 15px;
   border-top: 2px solid white;
   margin-right: 10px;
@@ -1409,7 +1404,7 @@ body div{
 #overlay{
       padding: 10px;
       position: absolute;
-      top: 20px;
+      top: 10px;
       height: 97%;
       width: 98%;
       z-index: 0;
@@ -1423,7 +1418,7 @@ body div{
       border-radius: 15px;
       right: 10px;
       left: 10px;
-      border-radius: 15px 15px 0px 0px;
+      border-radius: 15px 15px 15px 15px;
       border-top: 2px solid white;
       border-right: 1px solid hsl(0,0%,90%);
       border-left: 1px solid hsl(0,0%,60%);
@@ -2253,7 +2248,7 @@ a:hover .uploaderName , a:focus .uploaderName {
 
 #headerBar{
   height: 41px;
-  margin-top: 20px; 
+  margin-top: 10px; 
   right: 10px;
   left: 10px;
   width: 98% ;
@@ -2278,7 +2273,7 @@ a:hover .uploaderName , a:focus .uploaderName {
   height: 50%;
   width: 97.25%;
   position: absolute;
-  top: 49%;
+  top: 47%;
   margin-left: 0%!important;
   bottom: 10px;
   border-radius: 0px 0px 15px 15px;
@@ -2479,8 +2474,8 @@ img.feedImgs{
   margin-top: 6px;
 /*  top: 100px;*/
   height: 60px !important;
-  font-size: 18px;
-  width: 78%;
+  font-size: 17px;
+  width: 76.5%;
   white-space: normal !important;
 }
 
@@ -2659,9 +2654,11 @@ div.list.feedDiv{
 } 
 
 #login {
-  -webkit-border-radius: 5;
-  -moz-border-radius: 5;
-  border-radius: 5px;
+
+  border-left: 60px solid green;
+  -webkit-border-radius: 1;
+  -moz-border-radius: 1;
+  border-radius: 1px;
   text-shadow: 1px 1px 3px #666666;
   font-family: Arial;
   color: #ffffff;
@@ -2669,18 +2666,23 @@ div.list.feedDiv{
   padding: 5px 52px 5px 52px;
   border: solid #ffffff 2px;
   text-decoration: none;
-  background-color: transparent;
+  background-color: hsla(263, 100%, 98%, .15);
+  -webkit-box-shadow: 0px 0px 5px 1px hsla(263, 100%, 48%, .3);
+  -moz-box-shadow: 0px 0px 5px 1px hsla(263, 100%, 48%, .3);
+  box-shadow: 0px 0px 5px 1px hsla(263, 100%, 48%, .3);
+
 }
 
 #login:hover {
-  background: hsla(263, 100%, 48%, .3);
+  background: hsla(263, 100%, 48%, .2);
+  box-shadow: 0px 0px 20px 5px hsla(263, 100%, 58%, .3);
   text-decoration: none;
 }
 
 #signup {
-  -webkit-border-radius: 5;
-  -moz-border-radius: 5;
-  border-radius: 5px;
+  -webkit-border-radius: 1;
+  -moz-border-radius: 1;
+  border-radius: 1px;
   text-shadow: 1px 1px 3px #666666;
   font-family: Arial;
   color: #ffffff;
@@ -2688,12 +2690,16 @@ div.list.feedDiv{
   padding: 5px 40px 5px 40px;
   border: solid #ffffff 2px;
   text-decoration: none;
-  background-color: transparent;
+  background-color: hsla(263, 100%, 98%, .15);
+  -webkit-box-shadow: 0px 0px 5px 1px hsla(263, 100%, 48%, .3);
+  -moz-box-shadow: 0px 0px 5px 1px hsla(263, 100%, 48%, .3);
+  box-shadow: 0px 0px 5px 1px hsla(263, 100%, 48%, .3);
 }
 
 #signup:hover {
-  background: hsla(263, 100%, 48%, .3);
+  background: hsla(263, 100%, 48%, .2);
   text-decoration: none;
+  box-shadow: 0px 0px 20px 5px hsla(263, 100%, 58%, .3);
 }
 
 #loginModal{
@@ -2797,6 +2803,41 @@ div.list.feedDiv{
   -moz-box-shadow: 0px 0px 4px 0px red;
   box-shadow: 0px 0px 4px 0px red;
 }
+
+#emailSingup{
+  border-color: red;
+  -webkit-box-shadow: 0px 0px 4px 0px red;
+  -moz-box-shadow: 0px 0px 4px 0px red;
+  box-shadow: 0px 0px 4px 0px red;
+
+}
+
+.feedDiv .item h2{
+/*  position: absolute !important;*/
+  margin-left: 105px;
+  margin-top: 6px;
+/*  top: 100px;*/
+  height: 60px !important;
+  font-size: 17px;
+  width: 76.5%;
+  white-space: normal !important;
+}
+
+
+#soundCloudConnectButton{
+  margin-left: 20%;
+  margin-top: 10px;
+  width: 60%;
+  z-index: 100;
+}
+
+#access{
+  margin-top: 10px;
+  font-family: Arial;
+  font-size: 150%;
+  margin-left: 15px;
+}
+
 
 }
 

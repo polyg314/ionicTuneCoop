@@ -33,6 +33,12 @@
 
 
 <div class="mainDiv searchAndFavorites" ng-show="scFavorites">
+ 
+  <h4 ng-hide="user.scid" id="access">To have access to your soundcloud favorites:</h4> 
+  <div ng-hide="user.scid" id="soundCloudConnectDiv">
+   <a ng-click="soundCloudConnect()"><img id="soundCloudConnectButton" src="http://connect.soundcloud.com/2/btn-connect-sc-m.png"></a>
+  </div>
+
   <div class="list" ng-repeat="soundCloudFavorite in soundCloudFavorites | filter:query">
       <ion-item class="item item-thumbnail-left">
         <img src={{soundCloudFavorite.artwork_url}}>
