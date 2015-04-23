@@ -145,6 +145,11 @@ var app = angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers',
       var widget = SC.Widget(document.getElementById('soundcloud_widget'));
       widget.pause();
       $rootScope.user = null;
+      $rootScope.feedSongs = null;
+      $rootScope.soundCloudFavorites = null;
+      $rootScope.favorites= null;
+      $rootScope.friends = null;
+      $rootScope.friendRequests = null;
     }
 
     function getUser() {
