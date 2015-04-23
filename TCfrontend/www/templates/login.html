@@ -1,17 +1,15 @@
-<!-- <ion-view title="TuneCoop" id="loginPage" hide-back-button="true" hide-nav-bar="true">
-	<div id="frontOverlay">
-
-    <div id="frontLogo">TuneCoop</div>
-             <img id="frontSoundCloudImg" src="https://developers.soundcloud.com/assets/powered_by_white-7ee4327cfbe5d678897edf6b6c5dd30f.png">
-             <br>
-             <br>
-
-            <button id="loginButton" class="button button-large button-positive" ng-click="facebookLogin()">
-                <i class="icon ion-social-facebook"></i>
-                &nbsp;Login with Facebook
-            </button>
+<ion-modal-view>
+<ion-content id="loginModal">
+<h1 id="closeLogin" ng-click="closeLogin()">X</h1>
+<h1>Sign in</h1>
 
 
-    </ion-content>
-    </div>
-</ion-view> -->
+<form ng-submit="vm.login(vm.username, vm.password)">
+    <label>Username or email: 
+    <input class="form-control loginInputs" type="text" ng-model="vm.username"/></label><br/>
+    <label>Password: 
+    <input class="form-control loginInputs" type="password" ng-model="vm.password"/></label><br/>
+    <button id="finalLogin" type="submit">Login</button>
+</form>
+</ion-content>
+</ion-modal-view>

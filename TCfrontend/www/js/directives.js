@@ -414,6 +414,98 @@
         }
     });
 
+  app.directive("passwordVerify", function() {
+   return {
+      require: "ngModel",
+      scope: {
+        passwordVerify: '='
+      },
+      link: function(scope, element, attrs, ctrl) {
+        scope.$watch(function() {
+            var combined;
+
+            if (scope.passwordVerify || ctrl.$viewValue) {
+               combined = scope.passwordVerify + '_' + ctrl.$viewValue; 
+            }                    
+            return combined;
+        }, function(value) {
+            if (value) {
+                ctrl.$parsers.unshift(function(viewValue) {
+                    var origin = scope.passwordVerify;
+                    if (origin !== viewValue) {
+                        ctrl.$setValidity("passwordVerify", false);
+                        return undefined;
+                    } else {
+                      // console.log(element)
+                        ctrl.$setValidity("passwordVerify", true);
+                        // ctrl.$validate();
+                        return viewValue;
+                    }
+                });
+            }
+        });
+     }
+   };
+  });
+
+  app.directive('uniqueUsername', function($http) {
+      return {
+           restrict: 'A',
+           require: 'ngModel',
+           link: function (scope, element, attrs, ngModel) {
+                element.bind('blur', function (e) {
+                   ngModel.$setValidity('unique', true);
+                     // ngModel.$loading = true;
+
+                    var req = {
+                   method: 'POST',
+                   url: 'http://localhost:8000/checkusername',
+                   headers: {
+                     'Content-Type': "application/json"
+                   },
+                   data: { username: element.val() },
+                  }                     
+                $http(req).success(function(res){
+                  // ngModel.$loading = false;
+                        ngModel.$setValidity('unique', false);
+                })
+
+                });
+           }
+      };
+  })
+
+
+  app.directive('uniqueEmail', function($http) {
+      return {
+           restrict: 'A',
+           require: 'ngModel',
+           link: function (scope, element, attrs, ngModel) {
+                   element.bind('blur', function (e) {
+                   // ngModel.$setValidity('unique', true);
+                     // ngModel.$loading = true;
+
+                    var req = {
+                   method: 'POST',
+                   url: 'http://localhost:8000/checkemail',
+                   headers: {
+                     'Content-Type': "application/json"
+                   },
+                   data: { email: element.val() },
+                  }                     
+                $http(req).success(function(res){
+                  // console.log(res);
+                  // ngModel.$loading = false;
+                  if(res.email){ngModel.$setValidity('unique', false)};
+                  if(res.unique){ngModel.$setValidity('unique', true)};
+                })
+
+                });
+           }
+      };
+  })
+
+
 
 
 })();

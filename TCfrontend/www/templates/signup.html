@@ -1,0 +1,40 @@
+<ion-modal-view>
+<ion-content id="signupModal">
+
+<h1 id="closeSignup"  ng-click="closeSignup()">X</h1>
+<h1>Sign up</h1>
+
+<form id="signupForm" name="userForm" ng-submit="vm.signup(vm.username, vm.password, vm.email, vm.name)" novalidate>
+      <!-- NAME -->
+    <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+        <label>Name</label>
+        <input placeholder="First and Last" type="text" name="name" class="form-control" ng-model="vm.name" required>
+        <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+    </div>
+    
+    <!-- USERNAME -->
+    <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
+      <label>Username</label>
+      <input type="text" name="username" class="form-control" ng-model="vm.username" ng-minlength="3" ng-maxlength="15" required placeholder="min char = 3, no spaces" unique-username="">
+<!--         <span ng-show="userForm.username.$loading">Loading...</span> -->
+      <span class="hide-while-in-focus" ng-show="userForm.username.$error.unique">Username taken!</span>
+      <p ng-show="userForm.username.$error.maxlength" class="help-block">Username is too long.</p>
+    </div>
+      
+      <!-- EMAIL -->
+    <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+        <label>Email</label>
+        <input placeholder="can use to login" type="email" name="email" class="form-control" ng-model="vm.email" required unique-email="">
+<!--           <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p> -->
+        <span class="hide-while-in-focus" ng-show="userForm.email.$error.unique">Email already in use!</span>
+    </div>
+  <label>Password</label>
+  <input class="form-control passwords" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }" ng-model='vm.password' type="password" name='password' placeholder='password'required ng-minlength="5"><br>
+  <label>Confirm Password</label>
+  <input class="form-control passwords" ng-class="{ 'has-error' : userForm.confirm_password.$invalid && !userForm.confirm_password.$pristine }" ng-model='userForm.password_verify' type="password" name='confirm_password' placeholder='confirm password' required data-password-verify="vm.password" minlength="5">
+  <div ng-show="userForm.confirm_password.$error.passwordVerify">
+    Passwords don't match</div>
+  <button id="finalSignup" class="form-control" type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Sign Up</button>   
+</form>
+</ion-content>
+</ion-modal-view>

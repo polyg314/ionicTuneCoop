@@ -2644,6 +2644,160 @@ div.list.feedDiv{
   font-style: italic;
 }
 
+#login{
+  margin-top: 8%;
+}
+
+
+#login{
+
+}
+
+#signup{
+  margin-top: 2%;
+  margin-left: 1%;
+} 
+
+#login {
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 5px;
+  text-shadow: 1px 1px 3px #666666;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 19px;
+  padding: 5px 52px 5px 52px;
+  border: solid #ffffff 2px;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+#login:hover {
+  background: hsla(263, 100%, 48%, .3);
+  text-decoration: none;
+}
+
+#signup {
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 5px;
+  text-shadow: 1px 1px 3px #666666;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 19px;
+  padding: 5px 40px 5px 40px;
+  border: solid #ffffff 2px;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+#signup:hover {
+  background: hsla(263, 100%, 48%, .3);
+  text-decoration: none;
+}
+
+#loginModal{
+  background-color: hsla(0,0%,100%,.9);
+  height: 300px;
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 15%;
+  padding: 30px;
+  border-radius: 5px;
+}
+
+#closeLogin{
+  position: absolute;
+  top: -30px;
+  left: 345px;
+  font-size: 20px
+}
+
+.loginInputs{
+  width: 300px !important;
+  font-size: 16px !important;
+  padding-top: 5px !important;
+}
+
+#finalLogin {
+  margin-top: 5px;
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 5px;
+  text-shadow: 1px 1px 3px #666666;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 19px;
+  padding: 5px 52px 5px 52px;
+  border: solid #ffffff 1px;
+  text-decoration: none;
+  background: hsl(263, 100%, 38%);
+}
+
+#finalLogin:hover {
+  background: hsl(263, 100%, 48%);
+  text-decoration: none;
+}
+
+#signupModal{
+  background-color: hsla(0,0%,100%,.9);
+  height: 550px;
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 5%;
+  padding: 30px;
+  border-radius: 5px;
+}
+
+#signupModal input{
+  width: 300px;
+}
+
+#closeSignup{
+  position: absolute;
+  top: -30px;
+  left: 345px;
+  font-size: 20px
+}
+
+
+#finalSignup {
+  margin-top: 20px;
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 5px;
+  text-shadow: 1px 1px 3px #666666;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 19px;
+  padding: 5px 52px 5px 52px;
+  border: solid #ffffff 1px;
+  text-decoration: none;
+  background: hsl(263, 100%, 38%);
+  width: 300px;
+  height: 40px;
+}
+
+#finalSignup:hover {
+  background: hsl(263, 100%, 48%);
+  text-decoration: none;
+}
+
+#signupForm .ng-valid {
+    border-color: green;
+    outline-color: green;
+    -webkit-box-shadow: 0px 0px 4px 0px green;
+    -moz-box-shadow: 0px 0px 4px 0px green;
+    box-shadow: 0px 0px 4px 0px green;
+}
+
+.passwords.ng-dirty.ng-invalid{
+  border-color: red;
+  -webkit-box-shadow: 0px 0px 4px 0px red;
+  -moz-box-shadow: 0px 0px 4px 0px red;
+  box-shadow: 0px 0px 4px 0px red;
+}
+
 }
 
 

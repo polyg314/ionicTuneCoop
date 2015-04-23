@@ -479,6 +479,34 @@ angular.module('tunecoop.controllers', [])
         $scope.confirmDeleteModal = modal;
       });
 
+      $ionicModal.fromTemplateUrl('templates/login.html', {
+        scope: $scope
+      }).then(function(modal) {
+        $scope.loginModal = modal;
+      });
+
+      $ionicModal.fromTemplateUrl('templates/signup.html', {
+        scope: $scope
+      }).then(function(modal) {
+        $scope.signupModal = modal;
+      });
+
+     $rootScope.showLogin = function() {
+      $scope.loginModal.show();
+     };
+
+     $rootScope.closeLogin = function() {
+      $scope.loginModal.hide();
+     };
+
+     $rootScope.showSignup = function() {
+      $scope.signupModal.show();
+     };
+ 
+     $rootScope.closeSignup = function() {
+      $scope.signupModal.hide();
+     };
+
       $rootScope.showFriendRequests = function() {
         $scope.friendRequestModal.show();
       };
@@ -658,7 +686,7 @@ angular.module('tunecoop.controllers', [])
 
 
         $scope.searchSoundCloud = function(searchText){
-          console.log(searchText);
+          // console.log(searchText);
           var searchString = searchText;
           var req = {
                method: 'POST',

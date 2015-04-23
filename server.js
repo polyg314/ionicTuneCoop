@@ -11,15 +11,28 @@ var express        = require('express'),
     soundcloud     = require('soundcloud'),
     http           = require('http-get'),
     db             = {};
+var cors = require('cors');
+var bcrypt = require('bcrypt');
+var jwt = require('jwt-simple');
+// var moment = require('moment');
+var expressJwt = require('express-jwt');
 
-
-app.set('view engine', 'ejs');
+var secret = "Ieaticecreamforbreakfast";
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   // res.header('Access-Control-Allow-Credentials', true);
+//   next();
+// });
+app.use(cors());
+// app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':true}));
-app.use(express.static('../TCfrontend/www'));
+// app.use(express.static('../TCfrontend/www'));
+app.use(expressJwt({ secret: secret }).unless({ path: [ '/login', '/signup', '/checkusername', '/checkemail' ]}));
 
-// var db = {};
+var db = {};
 
 db.config = {
   database: "tunepractice",
@@ -43,24 +56,193 @@ db.query = function(statement, params, callback){
   });
 };
 
-app.use(function (req, res, next) {
 
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', '*');
+app.post('/login', function(req, res){
+  username = req.body.username;
+  password = req.body.password;
+  //username exists?
+  db.query('SELECT * FROM users WHERE username = $1', [username], function(err, dbRes){
+    if(dbRes.rows[0]){
+    
+    var hash = dbRes.rows[0].password;
+    var username2 = dbRes.rows[0].username;
+    var email2 = dbRes.rows[0].email;
+    var name = dbRes.rows[0].name;
+    //compare the stored hash against the given
+      if(bcrypt.compareSync(password, hash)){
+        // console.log('correct username and password, time to give you that token.')
 
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+        // var expires = moment().add(7, 'days').valueOf()    
+        // exp: expires
+        
+        var user = {
+          username: username2,
+          email: email2,
+          name: name
+        }
 
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+        //encrypt
+        var token = jwt.encode(
+          {
+            id: dbRes.rows[0].id
+          }, 
+          secret
+        );   
 
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-    // Pass to next layer of middleware
-    next();
+        res.send({
+            token: token,
+            user: user
+        });
+        return;
+      };
+      console.log('incorrect password')
+      return;
+    }
+    db.query('SELECT * FROM users WHERE email = $1', [username], function(err, dbRes){
+    if(dbRes.rows[0]){  
+    var hash = dbRes.rows[0].password;
+    var username2 = dbRes.rows[0].username;
+    var email2 = dbRes.rows[0].email;
+    var name = dbRes.rows[0].name;
+    //compare the stored hash against the given
+      if(bcrypt.compareSync(password, hash)){
+        var user = {
+          username: username2,
+          email: email2,
+          name: name
+        }
+        //encrypt
+        var token = jwt.encode(
+          {
+            id: dbRes.rows[0].id
+          }, 
+          secret
+        );   
+        res.send({
+            token: token,
+            user: user
+        });
+        return;
+      };      
+      console.log('incorrect password')
+      return;
+    }
+    console.log('no such user')
+    });
+  });
 });
+
+app.post('/signup', function(req, res){
+  // console.log(req.body.username);
+  // console.log(req.body.password);
+  username = req.body.username;
+  password = req.body.password;
+  email = req.body.email;
+  name = req.body.name;
+
+
+  //check to see if username exists
+  db.query('SELECT * FROM users WHERE username = $1', [username], function(err, dbRes){
+      if(dbRes.rows[0] && username === dbRes.rows[0].username){
+            console.log('username already exists')
+            return;
+      };
+      //Not already a username, so time to insert...
+
+      // First, generate a salt
+      var salt = bcrypt.genSaltSync(10);
+      // Hash the password with the salt
+      var hash = bcrypt.hashSync(password, salt);
+
+      db.query('INSERT INTO users (username, password, email, name) VALUES ($1, $2, $3, $4) RETURNING id', [username, hash, email, name], function(err, dbRes){
+        console.log(err);
+        console.log(dbRes);
+        // var username2 = dbRes.rows[0].username;
+        // var email2 = dbRes.rows[0].email;
+        // var expires = moment().add(7, 'days').valueOf()    
+        // exp: expires
+        var user = {
+          username: username,
+          email: email,
+          name: name
+        }
+        //encrypt
+        var token = jwt.encode(
+          {
+            id: dbRes.rows[0].id
+          }, 
+          secret
+        );   
+        res.send({
+            token: token,
+            user: user
+        });
+        //decode
+        return;
+      });
+
+  });
+
+
+});
+
+app.post('/checkemail', function(req, res){
+  email = req.body.email;
+  //check to see if username exists
+  db.query('SELECT * FROM users WHERE email = $1', [email], function(err, dbRes){
+      if(dbRes.rows[0]){
+            console.log('email already exists')
+            res.send({ email: dbRes.rows[0].email })
+            return;
+      };
+      res.send({ unique: 'unique'});
+    });
+});
+
+app.post('/checkusername', function(req, res){
+
+  username = req.body.username;
+
+  //check to see if username exists
+  db.query('SELECT * FROM users WHERE username = $1', [username], function(err, dbRes){
+      if(dbRes.rows[0]){
+            console.log('username already exists')
+            res.send({ username: dbRes.rows[0].username })
+            return;
+      };
+    });
+});
+
+app.get('/me', function (req, res) {
+  db.query('SELECT * FROM users WHERE id = $1', [req.user.id], function(err, dbRes){        
+    var user = {
+      username: dbRes.rows[0].username,
+      email: dbRes.rows[0].email
+    }
+    res.send(user);
+  })
+
+});
+
+
+// app.use(function (req, res, next) {
+
+//     // Website you wish to allow to connect
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+
+//     // Request methods you wish to allow
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+//     // Request headers you wish to allow
+//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+//     // Set to true if you need the website to include cookies in the requests sent
+//     // to the API (e.g. in case you use sessions)
+//     res.setHeader('Access-Control-Allow-Credentials', true);
+
+//     // Pass to next layer of middleware
+//     next();
+// });
 
 
 app.post('/soundCloudSearch', function(req, resp){
@@ -80,49 +262,49 @@ app.post('/soundCloudSearch', function(req, resp){
 
 
 
-app.post('/login', function(req, res){
-  var fullname= req.body.fullName;
-  if(!req.body.fullName){
-    var fullname = "unknown"
-  }
-  var fbid= req.body.fbid;
-  console.log('facebook id is: ' + fbid);
-  db.query('SELECT * FROM users WHERE facebookid = $1', [fbid], function(err, user) {
-    if (err){
-        return done(err);
-    }
-    // if the user is found, then send their info
-    console.log(user.rows[0])
-    if (user.rows[0]) {
-        console.log('found')
-        res.send(user.rows[0])
-    } 
-    else {
-      console.log('new')
-      //or add them to the database
-      db.query('INSERT INTO users (name, facebookid) VALUES ($1, $2)', [fullname, fbid], function(err, dbRes){
-        console.log(dbRes)
-        if(!err){
-          res.send({response: dbRes})
-        }
-      });
-    }
-  });
-});
+// app.post('/login', function(req, res){
+//   var fullname= req.body.fullName;
+//   if(!req.body.fullName){
+//     var fullname = "unknown"
+//   }
+//   var fbid= req.body.fbid;
+//   console.log('facebook id is: ' + fbid);
+//   db.query('SELECT * FROM users WHERE facebookid = $1', [fbid], function(err, user) {
+//     if (err){
+//         return done(err);
+//     }
+//     // if the user is found, then send their info
+//     console.log(user.rows[0])
+//     if (user.rows[0]) {
+//         console.log('found')
+//         res.send(user.rows[0])
+//     } 
+//     else {
+//       console.log('new')
+//       //or add them to the database
+//       db.query('INSERT INTO users (name, facebookid) VALUES ($1, $2)', [fullname, fbid], function(err, dbRes){
+//         console.log(dbRes)
+//         if(!err){
+//           res.send({response: dbRes})
+//         }
+//       });
+//     }
+//   });
+// });
 
-app.post('/updateUsername', function(req, res){
-  var scid= req.body.fbid;
-  var username = req.body.username;
-  db.query('UPDATE users SET username = $1 WHERE facebookid = $2', [username, scid], function(err, dbRes){
-    if(!err){
-        db.query('SELECT * FROM users WHERE facebookid = $1', [scid], function(err, user) {
-          if (user.rows[0]) {
-            res.send(user.rows[0])
-          } 
-      })
-    }
-  })
-});
+// app.post('/updateUsername', function(req, res){
+//   var scid= req.body.fbid;
+//   var username = req.body.username;
+//   db.query('UPDATE users SET username = $1 WHERE facebookid = $2', [username, scid], function(err, dbRes){
+//     if(!err){
+//         db.query('SELECT * FROM users WHERE facebookid = $1', [scid], function(err, user) {
+//           if (user.rows[0]) {
+//             res.send(user.rows[0])
+//           } 
+//       })
+//     }
+//   })
+// });
 
 
 

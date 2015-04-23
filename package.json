@@ -29,6 +29,10 @@
     "path": "^0.4.9",
     "pg": "^4.1.0",
     "soundcloud": "^0.2.0",
-    "static-favicon": "1.0.0"
+    "static-favicon": "1.0.0",
+    "bcrypt": "^0.8.2",
+    "cors": "^2.5.3",
+    "express-jwt": "^3.0.0",
+    "jwt-simple": "^0.3.0"
   }
 }
