@@ -11,7 +11,7 @@ var express        = require('express'),
     soundcloud     = require('soundcloud'),
     http           = require('http-get'),
     db             = {};
-var cors = require('cors');
+// var cors = require('cors');
 var bcrypt = require('bcrypt');
 var jwt = require('jwt-simple');
 // var moment = require('moment');
@@ -24,15 +24,40 @@ var secret = "Ieaticecreamforbreakfast";
 //   // res.header('Access-Control-Allow-Credentials', true);
 //   next();
 // });
-app.use(cors());
-// app.set('view engine', 'ejs');
+// app.use(cors());
+
 app.use(methodOverride('_method'));
+
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept'); // Accept, Origin, X-CLIENT-ID, X-CLIENT_SECRET
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+};
+app.use(allowCrossDomain);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':true}));
 // app.use(express.static('../TCfrontend/www'));
 app.use(expressJwt({ secret: secret }).unless({ path: [ '/login', '/signup', '/checkusername', '/checkemail' ]}));
 
-var db = {};
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   // res.header('Access-Control-Allow-Credentials', true);
+//   next();
+// });
+
+app.set('view engine', 'ejs');
+
+
 
 db.config = {
   database: "tunepractice",
@@ -55,6 +80,7 @@ db.query = function(statement, params, callback){
     client.query(statement, params, callback);
   });
 };
+
 
 
 app.post('/login', function(req, res){
@@ -102,6 +128,7 @@ app.post('/login', function(req, res){
         });
         return;
       };
+      res.send({password: "not correct"})
       console.log('incorrect password')
       return;
     }
@@ -139,17 +166,23 @@ app.post('/login', function(req, res){
         });
         return;
       };      
+      res.send({password: 'not correct'})
       console.log('incorrect password')
       return;
     }
-    console.log('no such user')
+    res.send({data: 'no such user'})
+    return
+    // console.log('no such user')
     });
+    // res.send({data: 'just incorrect'})
   });
 });
 
 app.post('/signup', function(req, res){
-  // console.log(req.body.username);
-  // console.log(req.body.password);
+    // console.log(req.body.username);
+    // console.log(req.body.password);
+    // console.log(req.body.email);
+    // console.log(req.body.name);
   username = req.body.username;
   password = req.body.password;
   email = req.body.email;
@@ -226,6 +259,7 @@ app.post('/checkusername', function(req, res){
             res.send({ username: dbRes.rows[0].username })
             return;
       };
+      res.send({unique: 'unique'});
     });
 });
 
@@ -254,7 +288,9 @@ app.post('/addSoundCloudId', function(req, res){
     console.log(dbRes);
     if(!err){
       res.send('success!')
+      return
     }
+    res.send(err);
   })
 });
 
@@ -279,19 +315,23 @@ app.post('/addSoundCloudId', function(req, res){
 
 
 app.post('/soundCloudSearch', function(req, resp){
+
     var searchString = req.body.searchString;
-    http.get("https://api.soundcloud.com/tracks.json?client_id=db523f5c45b7bf73b211240583378c16&q=" + searchString + "&limit=25", function (err, res) {
+    console.log("search string isssss: " + searchString)
+    url = "https://api.soundcloud.com/tracks.json?client_id=db523f5c45b7bf73b211240583378c16&q=" + searchString + "&limit=25";
+    http.get({url: url, bufferType: 'buffer', timeout:1000}, function (err, res) {
       if (err) {
         console.error(err);
+        resp.send(err);
         return;
       }
-      if(!err){
+      if(res){
+      console.log(res);
        var tracks = res.buffer;
        resp.send(tracks);
       }
     });   
 });
-
 
 
 
@@ -414,6 +454,9 @@ app.delete('/deleteFromFriends', function(req, res){
           if(!err){
             res.send('friend be gone!')
           }
+          if(err){
+            res.send(err);
+          }
         })
     }
   });
@@ -426,9 +469,7 @@ app.post('/songs', function(req, res){
   var title = req.body.title; 
   var uploader = req.body.uploader;
   db.query('INSERT INTO songs (trackid, url, picurl, title, uploader) (SELECT $1, $2, $3, $4, $5 WHERE NOT EXISTS (SELECT 1 FROM songs WHERE trackid= $1))', [trackid, url, picurl, title, uploader], function(err, dbRes){   
-    if(!err){
-      // console.log('heyooo')
-    }
+    res.send({info: 'ok'})
   })
 });
 
@@ -441,8 +482,10 @@ app.post('/addToShares', function(req, res){
     var tcid = req.user.id;
     var date= new Date();
     for (i=0; i<touserid.length; i++){
+      if(touserid[i] !== tcid){
       db.query('INSERT INTO shares (fromuserid, touserid, trackid, date, isplayed, messages) VALUES ($1, $2, $3, $4, $5, $6)', [tcid, touserid[i], trackid, date, false, message], function(err, dbRes){    
-    })};
+      })
+    }};
     res.send('did it');
 });
 
@@ -512,6 +555,7 @@ app.post('/acceptRequest', function(req, res){
           res.send('success!')
         });
       }
+      res.send(err)
   });
 });
 

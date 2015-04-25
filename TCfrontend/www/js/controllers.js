@@ -6,7 +6,7 @@ angular.module('tunecoop.controllers', [])
 
 
       $rootScope.scFavorites = false;
-
+      $rootScope.incorrectLogin = false;
 
       $rootScope.soundCloudConnect = function(){
 
@@ -218,7 +218,7 @@ angular.module('tunecoop.controllers', [])
               },1000);             
             if(angular.isUndefined(progressChecker)){
               progressChecker = $interval(function(){
-                    console.log('betch')
+
                     actualProgress();
                }, 1000);           
             }
@@ -507,18 +507,22 @@ angular.module('tunecoop.controllers', [])
 
      $rootScope.showLogin = function() {
       $scope.loginModal.show();
+      $rootScope.loginOpen = true;
      };
 
      $rootScope.closeLogin = function() {
       $scope.loginModal.hide();
+      $rootScope.loginOpen = false;
      };
 
      $rootScope.showSignup = function() {
       $scope.signupModal.show();
+      $rootScope.signUpOpen = true;
      };
  
      $rootScope.closeSignup = function() {
       $scope.signupModal.hide();
+      $rootScope.signUpOpen = false;
      };
 
       $rootScope.showFriendRequests = function() {
@@ -758,6 +762,7 @@ angular.module('tunecoop.controllers', [])
           var postToShares = function(){
           message = $('#shareMessageBox').val();
           var friendSelection = $scope.selection;
+
           // console.log(friendSelection);
               var req = {
                method: 'POST',
@@ -774,10 +779,10 @@ angular.module('tunecoop.controllers', [])
               $scope.shareModal.hide();
               })
               .error(function(res){console.log(res)});
+            
             }
 
           postToShares()
-
         }
 
         $scope.selection = [];
@@ -806,29 +811,29 @@ angular.module('tunecoop.controllers', [])
 
 
 
-    // .controller('UsernameController', function($scope, $rootScope, $http) {
-    //   // $scope.master = {};
+    .controller('UsernameController', function($scope, $rootScope, $http) {
+      // $scope.master = {};
 
-    //   $scope.update = function(username) {
-    //     var usernameLowercase = username.toLowerCase();
-    //         var req = {
-    //            method: 'POST',
-    //            url: 'http://localhost:8000/updateUsername',
-    //            headers: {
-    //              'Content-Type': "application/json"
-    //            },
-    //            data: { fbid: $rootScope.user.fbid, username: usernameLowercase },
-    //           }
-    //           $http(req).success(function(res){
-    //             console.log(res);
-    //             $rootScope.user.username = res.username;
-    //             console.log($rootScope.user.username);
-    //             console.log($rootScope.user.tcid);
-    //             $scope.hideUpdateUsername();
-    //             $rootScope.loaded = true;
-    //           })
-    //     }
-    //   })
+      // $scope.update = function(username) {
+      //   var usernameLowercase = username.toLowerCase();
+      //       var req = {
+      //          method: 'POST',
+      //          url: 'http://localhost:8000/updateUsername',
+      //          headers: {
+      //            'Content-Type': "application/json"
+      //          },
+      //          data: { fbid: $rootScope.user.fbid, username: usernameLowercase },
+      //         }
+      //         $http(req).success(function(res){
+      //           console.log(res);
+      //           $rootScope.user.username = res.username;
+      //           console.log($rootScope.user.username);
+      //           console.log($rootScope.user.tcid);
+      //           $scope.hideUpdateUsername();
+      //           $rootScope.loaded = true;
+      //         })
+      //   }
+      })
 
 
     .controller('HomeCtrl', function ($scope, $stateParams, OpenFB, $ionicLoading) {

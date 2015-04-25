@@ -1,7 +1,15 @@
 (function () {
 
 var app = angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers', 'directives'], function config($stateProvider, $urlRouterProvider, $httpProvider) {
+    // $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
     $httpProvider.interceptors.push('AuthInterceptor');
+    // $httpProvider.defaults.useXDomain = true;
+    // $httpProvider.defaults.useXDomain = true;
+
+    // delete $httpProvider.defaults.headers.common["X-Requested-With"];
+    // $httpProvider.defaults.headers.common["Accept"] = "application/json";
+    // $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
     $stateProvider
         .state('app', {
             url: "/app",
@@ -48,6 +56,8 @@ var app = angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers',
     function login(username, password) {
       UserFactory.login(username, password).then(function success(response) {
         vm.user = response.data.user;
+        $rootScope.incorrectLogin = false;
+        $rootScope.closeLogin()
       }, handleError);
     }
 
@@ -63,7 +73,7 @@ var app = angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers',
     }
 
     function handleError(response) {
-      // alert('Error: ' + response.data);
+      $rootScope.incorrectLogin = true;
     }
   });
 
@@ -95,7 +105,7 @@ var app = angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers',
         password: password
       }).then(function success(response) {
         AuthTokenFactory.setToken(response.data.token);
-        $rootScope.closeLogin()
+
         $rootScope.user = response.data.user;
         getSongFeedAndFavorites();
         return response;
@@ -156,6 +166,12 @@ var app = angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers',
       if (AuthTokenFactory.getToken()) {
         return $http.get(API_URL + '/me').then(function success(response) {
                 $rootScope.user= response.data.user;
+                if($rootScope.signUpOpen){
+                  closeSignup()
+                }
+                if($rootScope.loginOpen){
+                  closeLogin();
+                }
                 getSongFeedAndFavorites();
       });
       } else {

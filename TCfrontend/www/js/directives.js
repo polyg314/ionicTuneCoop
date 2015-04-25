@@ -465,7 +465,10 @@
                   }                     
                 $http(req).success(function(res){
                   // ngModel.$loading = false;
-                        ngModel.$setValidity('unique', false);
+                        console.log(res);
+                        if(!res.unique){
+                          ngModel.$setValidity('unique', false);
+                        }
                 })
 
                 });
