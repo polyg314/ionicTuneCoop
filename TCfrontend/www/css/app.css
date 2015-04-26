@@ -3013,7 +3013,12 @@ div.list.feedDiv{
   margin-left: 15px;
 }
 
-
+.usernameSignup.ng-invalid.ng-invalid-valid-username{
+    border-color: red;
+  -webkit-box-shadow: 0px 0px 4px 0px red;
+  -moz-box-shadow: 0px 0px 4px 0px red;
+  box-shadow: 0px 0px 4px 0px red;
+}
 }
 
 

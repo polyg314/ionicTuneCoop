@@ -13,10 +13,10 @@
     </div>
     
     <!-- USERNAME -->
-    <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine || !validUsername}">
+    <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
       <label>Username</label>
-      <input type="text" name="username" class="form-control" ng-model="vm.username" ng-minlength="3" ng-maxlength="15" required placeholder="min char = 3, no spaces" unique-username="">
-      <span ng-hide="validUsername">username not valid, please only use numbers and letters</span>
+      <input type="text" name="username" class="form-control usernameSignup" ng-model="vm.username" ng-minlength="3" ng-maxlength="15" required placeholder="min char = 3, no spaces" unique-username="">
+      <span ng-show="userForm.username.$error.validUsername">username not valid, please only use numbers and letters</span>
       <span class="hide-while-in-focus" ng-show="userForm.username.$error.unique">Username taken!</span>
       <p ng-show="userForm.username.$error.maxlength" class="help-block">Username is too long.</p>
     </div>

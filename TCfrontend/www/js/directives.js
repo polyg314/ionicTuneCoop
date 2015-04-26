@@ -455,13 +455,12 @@
                    ngModel.$setValidity('unique', true);
                   if(element.val().replace(/[^0-9A-Za-z]/g, "").length !== element.val().length){
                     $rootScope.validUsername = false;
-                    ngModel.$invalid = true;
-                    ngModel.$error = true;
+                    ngModel.$setValidity('validUsername', false);
                   }
                   else{
                     $rootScope.validUsername = true;
                     ngModel.$invalid = false;
-                    ngModel.$error = false;
+                    ngModel.$setValidity('validUsername', true);
                   }
                     var req = {
                    method: 'POST',
@@ -473,7 +472,6 @@
                   }                     
                 $http(req).success(function(res){
                   // ngModel.$loading = false;
-                        console.log(res);
                         if(!res.unique){
                           ngModel.$setValidity('unique', false);
                         }
