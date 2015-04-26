@@ -446,15 +446,23 @@
    };
   });
 
-  app.directive('uniqueUsername', function($http) {
+  app.directive('uniqueUsername', function($http, $rootScope) {
       return {
            restrict: 'A',
            require: 'ngModel',
            link: function (scope, element, attrs, ngModel) {
                 element.bind('blur', function (e) {
                    ngModel.$setValidity('unique', true);
-                     // ngModel.$loading = true;
-
+                  if(element.val().replace(/[^0-9A-Za-z]/g, "").length !== element.val().length){
+                    $rootScope.validUsername = false;
+                    ngModel.$invalid = true;
+                    ngModel.$error = true;
+                  }
+                  else{
+                    $rootScope.validUsername = true;
+                    ngModel.$invalid = false;
+                    ngModel.$error = false;
+                  }
                     var req = {
                    method: 'POST',
                    url: 'http://localhost:8000/checkusername',

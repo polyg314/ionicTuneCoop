@@ -29,9 +29,9 @@
   
   <div ng-show="user">
      <div class="artDiv">
+     
      <div id="overlay">
-        <div class="col-sm-1" id="soundCloudImageLinkDiv">  <a id="soundCloudImageLink" href="" target="_blank"> <img src="https://developers.soundcloud.com/assets/logo_white-8bf7615eb575eeb114fc65323068e1e4.png"></a>
-       </div>
+
    
     <div id="logo">TuneCoop</div>
       <div class="playerSongTitle">{{currentSong.title}}<br><span id="playerSongUploader">{{currentSong.uploader}}</span></div>
@@ -76,16 +76,16 @@
 <iframe id="soundcloud_widget" width="0" height="0" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/9394924&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
 
   <div class="row mainDivRow webHTML">
-    <div class="mainDivs col" id="songFeedDiv"><h4>Feed</h4><div class="newSongsPill" ng-show="newSongs">{{newSongs}} new</div>
+    <div class="mainDivs col" id="songFeedDiv"><h4 id="songFeedTab">Feed</h4><div class="newSongsPill" ng-show="newSongs">{{newSongs}} new</div>
       <song-feed></song-feed>
     </div>
 
-    <div class="mainDivs col" id="favoritesDiv"><h4>Favorites</h4> 
+    <div class="mainDivs col" id="favoritesDiv"><h4 id="favoriteTab">Favorites</h4> 
       <ion-toggle class="tcsc" ng-model="scFavorites" toggle-class="toggle-energized"><span id="tcToggle" ng-hide="scFavorites">TC</span><span id="scToggle" ng-show="scFavorites">SC</span></ion-toggle>
       <favorites></favorites>
     </div>
 
-    <div class="mainDivs col" id="searchesDiv"><h4>Search</h4>
+    <div class="mainDivs col" id="searchesDiv"><h4 id="searchTab">Search</h4>
       <search></search>
     </div>
   </div>

@@ -1,5 +1,5 @@
 /* Your app's CSS, go crazy, make it your own */
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
  .webHTML{
   display: none;
  } 
@@ -887,13 +887,7 @@ img.feedImgs{
   line-height: 20px;
 }
 
-.newSong{
-  position: absolute !important;
-  right: 3px;
-  background-color: hsla(254, 74%, 27%, 1);
-  color: white;
-  border-radius: 5px;
-}
+
 
 .newSongsPill{
   background-color: hsla(254, 74%, 27%, 1);
@@ -1501,7 +1495,7 @@ div.list.feedDiv{
 /* Website */
 
 
-@media (min-width: 1000px) {
+@media (min-width: 900px) {
 
 .phoneHTML{
   display: none;
@@ -1689,7 +1683,8 @@ body div{
 #soundCloudImageLinkDiv{
   position: absolute;
   right: 4%;
-  margin-top: 0px;
+  margin-top: 20px;
+  z-index: 100;
 }
 
 #logo{
@@ -2659,17 +2654,6 @@ img.feedImgs{
 }
 
 
-.feedDiv .item h2{
-/*  position: absolute !important;*/
-  margin-left: 105px;
-  margin-top: 6px;
-/*  top: 100px;*/
-  height: 60px !important;
-  font-size: 17px;
-  width: 76.5%;
-  white-space: normal !important;
-}
-
 .feedDiv .item p{
    white-space: normal !important;
 
@@ -2693,7 +2677,7 @@ div.list.feedDiv{
 .feedMessages{
   color: hsl(0,0%,10%) !important;
   margin-left: 105px;
-  font-size: 20px !important;
+  font-size: 16px !important;
   height: 48px;
   font-family: 'Shadows Into Light', cursive;
   line-height: 20px;
@@ -2707,8 +2691,8 @@ div.list.feedDiv{
 
  .newSong{
   position: absolute !important;
-  left: 34px;
-  top: 70px;
+  right: 5px;
+  top: 5px;
   background-color: hsla(254, 74%, 27%, 1);
   color: white;
   border-radius: 5px;
@@ -3008,9 +2992,9 @@ div.list.feedDiv{
   margin-left: 105px;
   margin-top: 6px;
 /*  top: 100px;*/
-  height: 60px !important;
-  font-size: 17px;
-  width: 76.5%;
+  height: 70px !important;
+  font-size: 15px;
+  width: 62.5%;
   white-space: normal !important;
 }
 

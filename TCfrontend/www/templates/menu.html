@@ -4,9 +4,13 @@
 
 
     <ion-pane ion-side-menu-content>
+            <div class="col-sm-1" id="soundCloudImageLinkDiv">  <a id="soundCloudImageLink" href={{currentSong.url}} target="_blank"> <img src="https://developers.soundcloud.com/assets/logo_white-8bf7615eb575eeb114fc65323068e1e4.png"></a>
+       </div>
+
        <ion-nav-bar ng-show="user" class="bar-light" id="headerBar">
                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
+
         <ion-nav-back-button>
       </ion-nav-back-button>
         </ion-nav-bar>

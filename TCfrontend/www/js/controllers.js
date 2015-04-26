@@ -7,6 +7,7 @@ angular.module('tunecoop.controllers', [])
 
       $rootScope.scFavorites = false;
       $rootScope.incorrectLogin = false;
+      $rootScope.validUsername = true;
 
       $rootScope.soundCloudConnect = function(){
 
@@ -467,12 +468,6 @@ angular.module('tunecoop.controllers', [])
         $scope.shareModal = modal;
       });
 
-      $ionicModal.fromTemplateUrl('templates/username.html', {
-        scope: $scope
-      }).then(function(modal) {
-        $scope.usernameModal = modal;
-      });
-
       $ionicModal.fromTemplateUrl('templates/song-info.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -575,14 +570,6 @@ angular.module('tunecoop.controllers', [])
 
       $scope.closeAccount = function() {
         $scope.modal3.hide();
-      };
-
-      $scope.showUpdateUsername = function(){
-        $scope.usernameModal.show();
-      };
-
-      $scope.hideUpdateUsername = function(){
-        $scope.usernameModal.hide();
       };
 
       $rootScope.friendDelete = {};
@@ -808,32 +795,6 @@ angular.module('tunecoop.controllers', [])
         };
 
     })
-
-
-
-    .controller('UsernameController', function($scope, $rootScope, $http) {
-      // $scope.master = {};
-
-      // $scope.update = function(username) {
-      //   var usernameLowercase = username.toLowerCase();
-      //       var req = {
-      //          method: 'POST',
-      //          url: 'http://localhost:8000/updateUsername',
-      //          headers: {
-      //            'Content-Type': "application/json"
-      //          },
-      //          data: { fbid: $rootScope.user.fbid, username: usernameLowercase },
-      //         }
-      //         $http(req).success(function(res){
-      //           console.log(res);
-      //           $rootScope.user.username = res.username;
-      //           console.log($rootScope.user.username);
-      //           console.log($rootScope.user.tcid);
-      //           $scope.hideUpdateUsername();
-      //           $rootScope.loaded = true;
-      //         })
-      //   }
-      })
 
 
     .controller('HomeCtrl', function ($scope, $stateParams, OpenFB, $ionicLoading) {

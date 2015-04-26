@@ -114,7 +114,7 @@ var app = angular.module('tunecoop', ['ionic', 'openfb', 'tunecoop.controllers',
 
     function signup(username, password, email, name) {
       console.log('hi')
-      username = username.toLowerCase();
+      username = username.toLowerCase().replace(/[ ]/g, "");
       email= email.toLowerCase();
       var nameArr= name.split(' ');
       if(nameArr[0]){
