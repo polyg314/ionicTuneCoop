@@ -2723,11 +2723,12 @@ div.list.feedDiv{
 }
 
 .mainDivs h4{
-/*  font-weight: bold;*/
-  font-size: 25px;
+  font-weight: bold;
+  font-size: 19px;
   margin: 0px;
   margin-bottom: 7px;
-  font-family: 'Lobster', cursive;
+  font-family: Helvetica;
+
 }
 #favoritesFilter{
   font-size: 18px;
@@ -3021,7 +3022,7 @@ div.list.feedDiv{
   margin-left: 20%;
   margin-top: 10px;
   width: 60%;
-  height: 100px;
+/*  height: 100px;*/
 /*  z-index: 100;*/
 }
 
