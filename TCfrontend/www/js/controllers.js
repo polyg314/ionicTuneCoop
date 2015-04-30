@@ -718,7 +718,7 @@ angular.module('tunecoop.controllers', [])
 
        $scope.favoriteCurrentSong = function(){
       
-        var newTrack = { trackid: $rootScope.currentSong.trackid, url: $rootScope.currentSong.url, picurl: $rootScope.currentSong.picurl, title: $rootScope.currentSong.title, uploader: $rootScope.currentSong.uploader };
+        var newTrack = { trackid: $rootScope.currentSong.trackid, url: $rootScope.currentSong.url, picurl: $rootScope.currentSong.picurl, title: $rootScope.currentSong.title, uploader: $rootScope.currentSong.uploader, duration: $rootScope.currentSong.duration };
 
         var req = {
          method: 'POST',
@@ -726,7 +726,7 @@ angular.module('tunecoop.controllers', [])
          headers: {
            'Content-Type': "application/json"
          },
-         data: { trackid: $rootScope.currentSong.trackid, url: $rootScope.currentSong.url, picurl: $rootScope.currentSong.picurl, title: $rootScope.currentSong.title, uploader: $rootScope.currentSong.uploader },
+         data: { trackid: $rootScope.currentSong.trackid, url: $rootScope.currentSong.url, picurl: $rootScope.currentSong.picurl, title: $rootScope.currentSong.title, uploader: $rootScope.currentSong.uploader, duration: $rootScope.currentSong.duration },
         } 
                   // console.log($rootScope.favorites);
           $http(req).success(function(res){

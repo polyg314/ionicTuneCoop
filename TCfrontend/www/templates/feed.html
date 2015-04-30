@@ -8,14 +8,14 @@
         <img class="feedImgs" src={{feedSong.picurl}}>
 <!--         <div class="feedSongOverlay"> -->
         <div class="newSong" ng-hide="feedSong.isplayed">NEW</div>
-        <span class="feedTitleAndUploader"> <h2>{{feedSong.title}}<br><span class="uploaderName">{{feedSong.uploader}}</span></h2></span>
+        <span class="feedTitleAndUploader"> <h2>{{feedSong.title}}<br><span class="uploaderName">{{feedSong.uploader}}<br><span ng-if="feedSong.duration" class="feedSongTime">{{ feedSong.duration | millSecondsToTimeString }}</span><span class="feedMessages"><br>{{feedSong.messages}}</span></span></h2></span><br>
 
-        <p class="feedMessages">{{feedSong.messages}}</p>
+
         <p class="fromUsername"><span class="phoneHTML">-</span><span class="webHTML italicize"><i>from</i></span>&nbsp{{feedSong.username}}<br><span class="feedDate">{{feedSong.date | date : short}}</span></p>
         <div class="buttonRow">
-          <share-button url="{{ feedSong.url }}" picUrl= "{{ feedSong.picurl }}"  uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></share-button>
-          <play link="{{ feedSong.url }}" artUrl="{{ feedSong.picurl }}" uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}" playlist= "songFeed" id= "{{ feedSong.id }}" ><span class="glyphicon glyphicon-play" aria-hidden="true"></span></play>
-          <heart url="{{ feedSong.url }}" picUrl= "{{ feedSong.picurl }}"  uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
+          <share-button url="{{ feedSong.url }}" picUrl= "{{ feedSong.picurl }}"  uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}" duration="{{ feedSong.duration }}"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></share-button>
+          <play link="{{ feedSong.url }}" artUrl="{{ feedSong.picurl }}" uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}" playlist= "songFeed" id= "{{ feedSong.id }}" duration="{{ feedSong.duration }}"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></play>
+          <heart url="{{ feedSong.url }}" picUrl= "{{ feedSong.picurl }}"  uploader="{{ feedSong.uploader }}" title="{{ feedSong.title }}" trackId="{{ feedSong.trackid }}" duration="{{ feedSong.duration }}"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
 
         </div>
 <!--       </div> -->

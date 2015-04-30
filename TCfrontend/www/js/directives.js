@@ -94,6 +94,7 @@
           title: '@',
           trackid: '@',
           playlist: '@',
+          duration: '@',
           id: '@'
         },
         link: function(scope, element, attrs) {
@@ -105,6 +106,7 @@
                 playlist : attrs.playlist,
                 id : attrs.id,
                 picurl: attrs.arturl,
+                duration: attrs.duration,
                 trackid: attrs.trackid
               }
 
@@ -130,12 +132,16 @@
           url: '@',
           picUrl: '@',
           title: '@',
-          uploader: '@'
+          uploader: '@',
+          duration: '@'
         },
         link: function($scope, element, attrs) {
+
           element.bind('click', function() {
+
             // console.log(attrs);
             var newTrack = attrs;
+
 
               var postToFavorites= function(){
                   var req = {
@@ -144,10 +150,11 @@
                        headers: {
                          'Content-Type': "application/json"
                        },
-                       data: { trackid: attrs.trackid, url: attrs.url, picurl: attrs.picurl, title: attrs.title, uploader: attrs.uploader },
+                       data: { trackid: attrs.trackid, url: attrs.url, picurl: attrs.picurl, title: attrs.title, uploader: attrs.uploader, duration: attrs.duration },
                       } 
                   // console.log($rootScope.favorites);
                     $http(req).success(function(res){
+                        console.log(res)
                         // console.log(res.id);
                         newTrack.id = res.id;
 
@@ -216,7 +223,8 @@
           url: '@',
           picUrl: '@',
           title: '@',
-          uploader: '@'
+          uploader: '@', 
+          duration: '@'
         },
         link: function($scope, element, attrs) {
           element.bind('click', function() {
@@ -233,7 +241,7 @@
                        headers: {
                          'Content-Type': "application/json"
                        },
-                       data: { trackid: attrs.trackid, url: attrs.url, picurl: attrs.picurl, title: attrs.title, uploader: attrs.uploader },
+                       data: { trackid: attrs.trackid, url: attrs.url, picurl: attrs.picurl, title: attrs.title, uploader: attrs.uploader, duration: attrs.duration },
                       } 
                   // console.log($rootScope.favorites);
                     $http(req).success(function(res){

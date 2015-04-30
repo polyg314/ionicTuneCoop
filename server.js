@@ -384,10 +384,10 @@ app.post('/soundCloudSearch', function(req, resp){
 app.post('/songFeedAndFavorites', function(req, res){
   var tcid= req.user.id;
   console.log(tcid);
-  db.query('SELECT DISTINCT songs.trackid, songs.url, songs.title, songs.picurl, songs.uploader, shares.date, shares.isplayed, shares.messages, users.username, shares.id FROM shares INNER JOIN songs ON songs.trackid = shares.trackid INNER JOIN users ON shares.fromuserid = users.id WHERE shares.touserid = $1 ORDER BY date DESC', [tcid], function(err, dbRes){
+  db.query('SELECT DISTINCT songs.trackid, songs.url, songs.title, songs.picurl, songs.uploader, songs.duration, shares.date, shares.isplayed, shares.messages, users.username, shares.id FROM shares INNER JOIN songs ON songs.trackid = shares.trackid INNER JOIN users ON shares.fromuserid = users.id WHERE shares.touserid = $1 ORDER BY date DESC', [tcid], function(err, dbRes){
     if(!err){      
-      var songFeed = dbRes.rows;     
-      db.query('SELECT DISTINCT songs.trackid, songs.url, songs.title, songs.picurl, songs.uploader, favorites.date, favorites.id FROM favorites INNER JOIN songs ON songs.trackid = favorites.favorite_trackid WHERE favorites.userid = $1 ORDER BY date DESC', [tcid], function(err, dbRes){
+      var songFeed = dbRes.rows;   
+      db.query('SELECT DISTINCT songs.trackid, songs.url, songs.title, songs.picurl, songs.uploader, songs.duration, favorites.date, favorites.id FROM favorites INNER JOIN songs ON songs.trackid = favorites.favorite_trackid WHERE favorites.userid = $1 ORDER BY date DESC', [tcid], function(err, dbRes){
         var favorites = dbRes.rows;
           if(!err){
               db.query('SELECT users.username, users.id FROM users INNER JOIN friends ON friends.user1id = users.id AND friends.user2id = $1 UNION SELECT users.username, users.id FROM users INNER JOIN friends ON friends.user1id = $2 AND friends.user2id = users.id', [tcid, tcid], function(err, dbRes){
@@ -413,14 +413,15 @@ app.post('/favorites', function(req, res){
   var picurl = req.body.picurl;
   var title = req.body.title; 
   var uploader = req.body.uploader;
-  console.log(tcid);
-  console.log(trackid);
-  console.log(url);
-  console.log(picurl);
-  console.log(title);
-  console.log(uploader);
+  var duration = req.body.duration;
+  // console.log(tcid);
+  // console.log(trackid);
+  // console.log(url);
+  // console.log(picurl);
+  // console.log(title);
+  // console.log(uploader);
   var date= new Date();
-  db.query('INSERT INTO songs (trackid, url, picurl, title, uploader) (SELECT $1, $2, $3, $4, $5 WHERE NOT EXISTS (SELECT 1 FROM songs WHERE trackid= $1))', [trackid, url, picurl, title, uploader], function(err, dbRes){   
+  db.query('INSERT INTO songs (trackid, url, picurl, title, uploader, duration) (SELECT $1, $2, $3, $4, $5, $6 WHERE NOT EXISTS (SELECT 1 FROM songs WHERE trackid= $1))', [trackid, url, picurl, title, uploader, duration], function(err, dbRes){   
     if(!err){
         db.query('INSERT INTO favorites (userid, favorite_trackid, date) VALUES ($1, $2, $3)', [tcid, trackid, date], function(err, dbRes){   
         if(!err){
@@ -468,7 +469,8 @@ app.post('/songs', function(req, res){
   var picurl = req.body.picurl;
   var title = req.body.title; 
   var uploader = req.body.uploader;
-  db.query('INSERT INTO songs (trackid, url, picurl, title, uploader) (SELECT $1, $2, $3, $4, $5 WHERE NOT EXISTS (SELECT 1 FROM songs WHERE trackid= $1))', [trackid, url, picurl, title, uploader], function(err, dbRes){   
+  var duration = req.body.duration;
+  db.query('INSERT INTO songs (trackid, url, picurl, title, uploader, duration) (SELECT $1, $2, $3, $4, $5, $6 WHERE NOT EXISTS (SELECT 1 FROM songs WHERE trackid= $1))', [trackid, url, picurl, title, uploader, duration], function(err, dbRes){   
     res.send({info: 'ok'})
   })
 });
@@ -498,6 +500,11 @@ app.post('/friendSearch', function(req, res){
         if(dbRes.rowCount > 0){
             var friendId = dbRes.rows[0].id
             var friendUsername = dbRes.rows[0].username;
+            if(friendId === tcid){
+              res.send({username: friendUsername + ' is you dawg'})
+              return
+            }
+            
             console.log(friendId);
               //friends?
               db.query('SELECT * from friends WHERE  friends.user1id = $2 AND friends.user2id = $1 OR friends.user1id = $1 AND friends.user2id = $2', [tcid, friendId], function(err, dbRes){                  

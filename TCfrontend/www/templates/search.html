@@ -11,9 +11,9 @@
         <p><span class="searchTitle"><strong>{{track.title}}</strong></span><br>{{track.user.username}} <br>{{track.duration | millSecondsToTimeString}}<br>{{track.playback_count | number}} plays</p> 
         <div class="fandsButtonRow row">    
 
-          <heart url="{{ track.permalink_url }}" picUrl="{{ track.artwork_url }}" uploader="{{ track.user.username }}" title="{{ track.title }}" trackId="{{ track.id }}" tcid="{{ user.tcid }}" class="col"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
-          <play link="{{ track.permalink_url }}" artUrl="{{ track.artwork_url }}" uploader="{{ track.user.username }}" title="{{ track.title }}" trackId="{{ track.id }}" playlist= "songSearch" class="col"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></play>
-          <share-button url="{{ track.permalink_url  }}" picUrl= "{{ track.artwork_url }}"  uploader="{{ track.user.username }}" title="{{ track.title }}" trackId="{{ track.id }}" class="col"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></share-button>
+          <heart url="{{ track.permalink_url }}" picUrl="{{ track.artwork_url }}" uploader="{{ track.user.username }}" title="{{ track.title }}" trackId="{{ track.id }}" tcid="{{ user.tcid }}" class="col" duration="{{track.duration}}"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></heart>
+          <play link="{{ track.permalink_url }}" artUrl="{{ track.artwork_url }}" uploader="{{ track.user.username }}" title="{{ track.title }}" trackId="{{ track.id }}" playlist= "songSearch" duration="{{track.duration}}" class="col"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></play>
+          <share-button url="{{ track.permalink_url  }}" picUrl= "{{ track.artwork_url }}"  uploader="{{ track.user.username }}" title="{{ track.title }}" trackId="{{ track.id }}" class="col" duration="{{track.duration}}"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></share-button>
         </div>
       </ion-item>
   </div>
