@@ -1244,6 +1244,7 @@ div.list.feedDiv{
   border-right: solid 3px hsl(37,0%,94%);
   border-top: solid 1px hsl(37,0%,93%);
   background-color: white;
+  max-width: 33%;
 }
 
 #searchForm{
