@@ -33,7 +33,7 @@
     "pg": "^4.1.0",
     "soundcloud": "^0.2.0",
     "static-favicon": "1.0.0",
-    "bcrypt": "^0.8.2",
+    "bcrypt": "^5.0.0",
     "cors": "^2.5.3",
     "express-jwt": "^3.0.0",
     "jwt-simple": "^0.3.0"
